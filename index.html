@@ -1,0 +1,622 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模型展示 · 鲁班新声</title>
+<style>
+/* ========== Reset & Base ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "SimSun", "STSong", "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  background: #EFE2CA;
+  color: #525252;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* ========== Navbar ========== */
+.navbar {
+  background: linear-gradient(135deg, #5D4037 0%, #7E4317 60%, #5D4037 100%);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  height: 64px;
+  box-shadow: 0 2px 12px rgba(93,64,55,0.3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-brand {
+  font-size: 22px;
+  font-weight: bold;
+  color: #EEC492;
+  margin-right: 48px;
+  letter-spacing: 3px;
+}
+.nav-tabs {
+  display: flex;
+  gap: 4px;
+  height: 100%;
+  align-items: stretch;
+}
+.nav-tab {
+  padding: 0 28px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #EFE2CA;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: none;
+  background: transparent;
+  border-bottom: 3px solid transparent;
+  transition: all 0.25s;
+  font-family: inherit;
+}
+.nav-tab:hover { color: #FFC000; border-bottom-color: #A3561D; }
+.nav-tab.active { color: #FFC000; border-bottom-color: #EEC492; }
+
+/* ========== Main Container ========== */
+.main-container {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+#modelView, #databaseView {
+  display: flex;
+  width: 100%;
+}
+#databaseView { display: none; }
+
+/* ========== Sidebar ========== */
+.sidebar {
+  width: 200px;
+  background: linear-gradient(180deg, #F2ECE5 0%, #EFE2CA 100%);
+  border-right: 1px solid #D7C4A8;
+  padding: 16px 0;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+.sidebar-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #5D4037;
+  padding: 0 16px 12px;
+  border-bottom: 1px solid #D7C4A8;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.cat-item {
+  padding: 13px 16px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #7E4317;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-left: 4px solid transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cat-item:hover { background: rgba(163,86,29,0.1); }
+.cat-item.active {
+  background: rgba(163,86,29,0.15);
+  border-left-color: #A3561D;
+  color: #5D4037;
+}
+.cat-count {
+  font-size: 12px;
+  color: #A67B5B;
+  background: #EFE2CA;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+/* ========== Content Area ========== */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 32px;
+  overflow-y: auto;
+}
+.model-display {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.model-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(93,64,55,0.12);
+  padding: 36px 40px;
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeSlideIn 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+.model-card::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, #EEC49233 0%, #A3561D22 100%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.model-visual {
+  width: 320px;
+  height: 240px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: #F2ECE5;
+  border-radius: 12px;
+}
+.model-visual img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+.model-visual img:hover { transform: scale(1.05); }
+
+/* Model info */
+.model-name {
+  font-size: 26px;
+  font-weight: bold;
+  color: #5D4037;
+  margin-bottom: 6px;
+  text-align: center;
+}
+.model-id {
+  font-size: 14px;
+  color: #A3561D;
+  margin-bottom: 16px;
+  background: #F5DCBE;
+  padding: 4px 16px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+.model-desc {
+  font-size: 15px;
+  color: #525252;
+  line-height: 1.8;
+  text-align: center;
+  max-width: 440px;
+  font-weight: bold;
+}
+
+/* ========== Nav Arrows ========== */
+.arrow-nav {
+  display: flex;
+  gap: 20px;
+  margin-top: 16px;
+}
+.arrow-btn {
+  width: 44px; height: 44px;
+  border: 2px solid #A3561D;
+  background: #F5DCBE;
+  color: #5D4037;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.arrow-btn:hover { background: #A3561D; color: #EFE2CA; }
+.arrow-btn:active { transform: scale(0.92); }
+.arrow-btn:disabled { opacity: 0.35; cursor: default; }
+
+/* ========== Thumbnail Strip ========== */
+.thumbnail-strip {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.thumb-list {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 6px 4px;
+  max-width: 580px;
+  scroll-behavior: smooth;
+}
+.thumb-list::-webkit-scrollbar { height: 4px; }
+.thumb-list::-webkit-scrollbar-thumb { background: #C9A87C; border-radius: 2px; }
+.thumb-item {
+  min-width: 72px; height: 72px;
+  border-radius: 10px;
+  background: #F5DCBE;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  color: #7E4317;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+  text-align: center;
+  flex-shrink: 0;
+}
+.thumb-item.active { border-color: #A3561D; background: #EEC492; }
+.thumb-item:hover { border-color: #C9A87C; }
+.thumb-img {
+  width: 48px; height: 48px;
+  object-fit: contain;
+  margin-bottom: 3px;
+  border-radius: 6px;
+  background: #F2ECE5;
+}
+.thumb-label { line-height: 1.2; max-width: 60px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ========== Database View ========== */
+.db-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 32px;
+  flex: 1;
+}
+.db-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 28px 24px;
+  box-shadow: 0 3px 16px rgba(93,64,55,0.1);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+  border: 1px solid #E8D5C0;
+}
+.db-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(93,64,55,0.18); }
+.db-card::before {
+  content: '';
+  position: absolute;
+  top: -16px; right: -16px;
+  width: 80px; height: 80px;
+  background: linear-gradient(135deg, #EEC49244 0%, #A3561D33 100%);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+.db-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: #5D4037;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.db-source {
+  font-size: 13px;
+  color: #A3561D;
+  font-weight: bold;
+  margin-bottom: 12px;
+  background: #F5DCBE;
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 12px;
+}
+.db-desc {
+  font-size: 14px;
+  color: #525252;
+  line-height: 1.7;
+}
+
+/* ========== Footer ========== */
+.footer {
+  background: linear-gradient(135deg, #5D4037 0%, #7E4317 100%);
+  padding: 20px 32px;
+  text-align: center;
+  color: #EEC492;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 900px) {
+  .sidebar { width: 140px; }
+  .cat-item { font-size: 13px; padding: 10px 12px; }
+  .content { padding: 16px; }
+  .model-card { padding: 20px 16px; }
+  .model-visual { width: 220px; height: 170px; }
+  .db-grid { grid-template-columns: repeat(2, 1fr); padding: 16px; }
+}
+@media (max-width: 600px) {
+  .navbar { padding: 0 12px; height: 52px; }
+  .nav-brand { font-size: 16px; margin-right: 16px; }
+  .nav-tab { padding: 0 14px; font-size: 14px; }
+  .main-container { flex-direction: column; }
+  .sidebar {
+    width: 100%; border-right: none; border-bottom: 1px solid #D7C4A8;
+    display: flex; overflow-x: auto; padding: 8px;
+  }
+  .sidebar-title { display: none; }
+  .cat-item { border-left: none; border-bottom: 3px solid transparent; white-space: nowrap; flex-shrink: 0; padding: 8px 12px; }
+  .cat-item.active { border-left: none; border-bottom-color: #A3561D; }
+  .db-grid { grid-template-columns: 1fr; }
+}
+
+/* ========== Tab extra style ========== */
+.tab-content { display: none; width: 100%; }
+.tab-content.active { display: flex; }
+#databaseView { flex-direction: column; }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <span class="nav-brand">模型展示 · 鲁班新声</span>
+  <div class="nav-tabs">
+    <button class="nav-tab active" data-tab="model">模型展示</button>
+    <button class="nav-tab" data-tab="database">数据库</button>
+  </div>
+</nav>
+
+<!-- Model View -->
+<div class="main-container">
+  <div id="modelView" class="tab-content active">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <!-- Content -->
+    <section class="content">
+      <div class="model-display">
+        <div class="model-card" id="modelCard">
+          <div class="model-visual" id="modelVisual"></div>
+          <div class="model-name" id="modelName"></div>
+          <div class="model-id" id="modelId"></div>
+          <div class="model-desc" id="modelDesc"></div>
+        </div>
+        <div class="arrow-nav">
+          <button class="arrow-btn" id="prevBtn" title="上一个 (←)">◀</button>
+          <button class="arrow-btn" id="nextBtn" title="下一个 (→)">▶</button>
+        </div>
+        <div class="thumbnail-strip">
+          <div class="thumb-list" id="thumbList"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Database View -->
+  <div id="databaseView" class="tab-content">
+    <div class="db-grid" id="dbGrid"></div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  鲁班新声 · 文化传承 科技赋能
+</footer>
+
+<script>
+/* ========== DATA ========== */
+const categories = [
+  { id: 'airplane', name: '飞机模型', count: 8, icon: '✈' },
+  { id: 'table',    name: '木制桌子', count: 5, icon: '◆' },
+  { id: 'animal',   name: '动物模型', count: 8, icon: '♞' },
+  { id: 'ship',     name: '船只模型', count: 6, icon: '⚓' },
+  { id: 'character',name: '卡通人物', count: 8, icon: '☺' }
+];
+
+const models = {
+  airplane: [
+    { name:'红色螺旋桨飞机', image:'images/plane_01.png', desc:'鲜红色机身，白色机翼尾翼，单引擎螺旋桨，复古二战风格' },
+    { name:'黄白相间客机',   image:'images/plane_02.png', desc:'米黄色机身，绿色条纹装饰，早期民航客机DC-3风格' },
+    { name:'蓝白涂装喷气客机', image:'images/plane_03.png', desc:'白色机身蓝色条纹，后掠翼，1960-70年代商用喷气客机' },
+    { name:'银灰轻型飞机',   image:'images/plane_04.png', desc:'哑光银灰色，通体简洁，通用航空小飞机' },
+    { name:'纯白喷气客机',   image:'images/plane_05.png', desc:'全白机身，双发喷气引擎，现代支线客机CRJ/ERJ风格' },
+    { name:'红白涂装客机',   image:'images/plane_06.png', desc:'白色机身红色机头尾翼，类似澳洲航空经典涂装' },
+    { name:'小型灰色螺旋桨飞机', image:'images/plane_07.png', desc:'灰色高翼单引擎，农用/侦察机Cessna风格' },
+    { name:'深灰军用运输机', image:'images/plane_08.png', desc:'深灰四引擎，大型机翼，C-130/C-47风格' }
+  ],
+  table: [
+    { name:'深棕书桌',   image:'images/table_01.png', desc:'胡桃木色，一侧带抽屉，简约实用' },
+    { name:'浅原木小方桌', image:'images/table_02.png', desc:'浅色原木，四角直立，小巧轻便' },
+    { name:'深棕会议桌', image:'images/table_03.png', desc:'宽大桌面，厚重桌腿，多人会议设计' },
+    { name:'浅木色矮桌', image:'images/table_04.png', desc:'浅橡木色，带两个小抽屉，适合做边桌' },
+    { name:'暖棕餐桌',   image:'images/table_05.png', desc:'暖棕色，四腿稳固，现代简约，4人用餐' }
+  ],
+  animal: [
+    { name:'狐狸',   image:'images/animal_01.png', desc:'橙黄毛发，蓬松尾巴，耳朵竖立' },
+    { name:'羚羊',   image:'images/animal_02.png', desc:'浅米色，长颈修长，姿态优雅' },
+    { name:'长颈鹿', image:'images/animal_03.png', desc:'经典斑点，长颈高耸，四肢纤细' },
+    { name:'跳羚',   image:'images/animal_04.png', desc:'棕灰色，角弯曲向上，蓄势奔跑姿态' },
+    { name:'马',     image:'images/animal_05.png', desc:'深棕鬃毛，体型健壮，站立姿态' },
+    { name:'海鸥',   image:'images/animal_06.png', desc:'灰白羽毛，短喙尖嘴，静止站立' },
+    { name:'棕熊',   image:'images/animal_07.png', desc:'深棕厚毛，圆耳短尾，憨态可掬' },
+    { name:'白鹤',   image:'images/animal_08.png', desc:'黄褐羽毛，长颈长腿，优雅站立' }
+  ],
+  ship: [
+    { name:'小型拖船',   image:'images/ship_01.png', desc:'深灰船体，白色上层带红顶，配起重机臂' },
+    { name:'中型货轮',   image:'images/ship_02.png', desc:'深蓝船体，白色驾驶室，远洋运输' },
+    { name:'科考船',     image:'images/ship_03.png', desc:'灰白配色，雷达桅杆，船尾起吊设备' },
+    { name:'巡逻艇',     image:'images/ship_04.png', desc:'红白相间船体，舰桥紧凑，近海巡逻' },
+    { name:'大型货轮',   image:'images/ship_05.png', desc:'深灰船体，白色多层甲板，集装箱运输' },
+    { name:'绿色渔船',   image:'images/ship_06.png', desc:'绿色船体，白色上层，配渔网卷筒钓竿' }
+  ],
+  character: [
+    { name:'黑衣侦探',     image:'images/figure_01.png', desc:'深灰西装黑帽，表情严肃，侦探特工风' },
+    { name:'黄衣绿叶男孩', image:'images/figure_02.png', desc:'亮黄外套，帽顶绿叶装饰，活泼可爱' },
+    { name:'墨镜酷哥',     image:'images/figure_03.png', desc:'黑夹克棕帽墨镜，红棕靴，酷飒风格' },
+    { name:'红衣安全帽男孩', image:'images/figure_04.png', desc:'鲜红棉服，黄色安全帽，蓝色围巾' },
+    { name:'灰衣绅士',     image:'images/figure_05.png', desc:'灰大衣黑礼帽，戴眼镜，绅士风度' },
+    { name:'黄衣工装男孩', image:'images/figure_06.png', desc:'明黄工装，红色围巾，黄色安全帽' },
+    { name:'蓝衣休闲男孩', image:'images/figure_07.png', desc:'深蓝夹克灰帽，日常休闲风' },
+    { name:'绿衣户外男孩', image:'images/figure_08.png', desc:'军绿外套黑针织帽，户外探险风' }
+  ]
+};
+
+const databases = [
+  { name:'木作技艺数字化标准数据库', source:'政策背景', desc:'传统木作全流程影像、工具、口述史料采集存储归档标准化；对高龄匠人优先影像记录，杜绝木作技艺资料断代失传。' },
+  { name:'文化遗产研究院数据库', source:'突破：更潮流', desc:'依托文化遗产研究院数据库，团队解析各大古建筑颜色数百种，支撑色卡开发。' },
+  { name:'中国木艺传统色卡集', source:'突破：更潮流', desc:'首创数百种色卡集，从古建筑中解析颜色，包含基底材质同源/上色工艺互通/颜料用料相通/防护原理一致四维体系。' },
+  { name:'木构匠人构件参数库', source:'突破：更高速', desc:'支撑自研APP的榫卯构件参数库，包含榫头卯槽装配结构锁定标记、拼接逻辑、尺寸公差，解析错误率＜1%。' },
+  { name:'标准课程包 — 153D 动画库', source:'突破：新创意', desc:'三大系列153D动画库，含教案、PPT、教具清单等标准化内容，助力木作技艺传承教学。' },
+  { name:'在地匠人合作手册', source:'突破：新创意', desc:'筛选标准、培训流程、劳务协议模板、知识产权约定，激活在地匠人资源。' }
+];
+
+/* ========== STATE ========== */
+let currentCat = 'airplane';
+let currentIdx = 0;
+
+/* ========== DOM REFS ========== */
+const sidebar     = document.getElementById('sidebar');
+const modelVisual = document.getElementById('modelVisual');
+const modelName   = document.getElementById('modelName');
+const modelId     = document.getElementById('modelId');
+const modelDesc   = document.getElementById('modelDesc');
+const thumbList   = document.getElementById('thumbList');
+const prevBtn     = document.getElementById('prevBtn');
+const nextBtn     = document.getElementById('nextBtn');
+const modelView   = document.getElementById('modelView');
+const dbView      = document.getElementById('databaseView');
+const dbGrid      = document.getElementById('dbGrid');
+const modelCard   = document.getElementById('modelCard');
+
+/* ========== RENDER SIDEBAR ========== */
+function renderSidebar() {
+  sidebar.innerHTML = '<div class="sidebar-title">模型分类</div>' +
+    categories.map(c => `
+      <div class="cat-item${c.id === currentCat ? ' active' : ''}" data-cat="${c.id}">
+        <span>${c.name}</span><span class="cat-count">${c.count}</span>
+      </div>
+    `).join('');
+}
+
+/* ========== RENDER MODEL ========== */
+function renderModel() {
+  const list = models[currentCat];
+  const m = list[currentIdx];
+  modelVisual.innerHTML = `<img src="${m.image}" alt="${m.name}" loading="lazy">`;
+  modelName.textContent = m.name;
+  const catLabel = categories.find(c => c.id === currentCat).name;
+  modelId.textContent = catLabel + ' · 第' + (currentIdx + 1) + '/' + list.length + '件';
+  modelDesc.textContent = m.desc;
+  // animate
+  modelCard.style.animation = 'none';
+  modelCard.offsetHeight;
+  modelCard.style.animation = 'fadeSlideIn 0.35s ease';
+
+  renderThumbs();
+  updateArrows();
+}
+
+/* ========== RENDER THUMBNAILS ========== */
+function renderThumbs() {
+  const list = models[currentCat];
+  thumbList.innerHTML = list.map((m,i) => `
+    <div class="thumb-item${i === currentIdx ? ' active' : ''}" data-idx="${i}">
+      <img class="thumb-img" src="${m.image}" alt="${m.name}" loading="lazy">
+      <span class="thumb-label">${m.name.replace(/模型|飞机|桌子|动物|船只|人物/g,'')}</span>
+    </div>
+  `).join('');
+  // scroll active into view
+  const activeThumb = thumbList.querySelector('.thumb-item.active');
+  if (activeThumb) activeThumb.scrollIntoView({ behavior:'smooth', block:'nearest', inline:'center' });
+}
+
+function updateArrows() {
+  const list = models[currentCat];
+  prevBtn.disabled = currentIdx === 0;
+  nextBtn.disabled = currentIdx >= list.length - 1;
+}
+
+/* ========== RENDER DB VIEW ========== */
+function renderDB() {
+  dbGrid.innerHTML = databases.map(d => `
+    <div class="db-card">
+      <div class="db-name">${d.name}</div>
+      <span class="db-source">${d.source}</span>
+      <div class="db-desc">${d.desc}</div>
+    </div>
+  `).join('');
+}
+
+/* ========== NAVIGATE ========== */
+function selectCat(catId) {
+  currentCat = catId;
+  currentIdx = 0;
+  renderSidebar();
+  renderModel();
+}
+
+function prevModel() {
+  if (currentIdx > 0) { currentIdx--; renderModel(); }
+}
+function nextModel() {
+  const list = models[currentCat];
+  if (currentIdx < list.length - 1) { currentIdx++; renderModel(); }
+}
+
+function selectModel(idx) {
+  currentIdx = idx;
+  renderModel();
+}
+
+/* ========== TAB SWITCH ========== */
+function switchTab(tabId) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+  if (tabId === 'model') {
+    modelView.style.display = 'flex';
+    dbView.style.display = 'none';
+  } else {
+    modelView.style.display = 'none';
+    dbView.style.display = 'flex';
+    renderDB();
+  }
+}
+
+/* ========== EVENT LISTENERS ========== */
+sidebar.addEventListener('click', e => {
+  const catItem = e.target.closest('.cat-item');
+  if (catItem) selectCat(catItem.dataset.cat);
+});
+
+thumbList.addEventListener('click', e => {
+  const thumbItem = e.target.closest('.thumb-item');
+  if (thumbItem) selectModel(parseInt(thumbItem.dataset.idx));
+});
+
+prevBtn.addEventListener('click', prevModel);
+nextBtn.addEventListener('click', nextModel);
+
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft') prevModel();
+  if (e.key === 'ArrowRight') nextModel();
+});
+
+/* ========== INIT ========== */
+renderSidebar();
+renderModel();
+</script>
+
+</body>
+</html>
