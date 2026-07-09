@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -289,6 +288,8 @@ body {
   overflow: hidden;
   transition: transform 0.25s, box-shadow 0.25s;
   border: 1px solid #E8D5C0;
+  display: flex;
+  flex-direction: column;
 }
 .db-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(93,64,55,0.18); }
 .db-card::before {
@@ -315,12 +316,35 @@ body {
   display: inline-block;
   padding: 3px 12px;
   border-radius: 12px;
+  align-self: flex-start;
 }
 .db-desc {
   font-size: 14px;
   color: #525252;
   line-height: 1.7;
+  flex: 1;
 }
+.db-detail-btn {
+  margin-top: 16px;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #DEA200;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  align-self: center;
+  transition: all 0.25s;
+  font-family: inherit;
+  letter-spacing: 1px;
+}
+.db-detail-btn:hover {
+  background: #C58B00;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(222,162,0,0.35);
+}
+.db-detail-btn:active { transform: scale(0.96); }
 
 /* ========== Footer ========== */
 .footer {
@@ -333,6 +357,173 @@ body {
   letter-spacing: 2px;
 }
 
+/* ========== Video Modal ========== */
+.video-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 20, 10, 0.72);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.video-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+.video-modal {
+  background: #F2ECE5;
+  border-radius: 16px;
+  width: min(960px, 92vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.35);
+  animation: modalSlideIn 0.35s ease;
+  display: flex;
+  flex-direction: column;
+}
+@keyframes modalSlideIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.video-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px;
+  border-bottom: 1px solid #D7C4A8;
+  flex-shrink: 0;
+}
+.video-modal-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #5D4037;
+  letter-spacing: 1px;
+}
+.video-modal-close {
+  width: 36px; height: 36px;
+  border: 2px solid #A3561D;
+  background: #F5DCBE;
+  color: #5D4037;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  line-height: 1;
+}
+.video-modal-close:hover {
+  background: #A3561D;
+  color: #EFE2CA;
+}
+.video-modal-body {
+  padding: 28px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Video Player Area */
+.video-player-area {
+  display: none;
+  margin-bottom: 24px;
+}
+.video-player-area.active { display: block; }
+.video-player-area video {
+  width: 100%;
+  max-height: 480px;
+  border-radius: 12px;
+  background: #000;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+.video-back-btn {
+  margin-top: 12px;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #5D4037;
+  background: #EFE2CA;
+  border: 2px solid #A3561D;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.video-back-btn:hover {
+  background: #A3561D;
+  color: #EFE2CA;
+}
+
+/* Video Grid */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.video-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(93,64,55,0.1);
+  cursor: pointer;
+  transition: transform 0.25s, box-shadow 0.25s;
+  border: 1px solid #E8D5C0;
+}
+.video-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 28px rgba(93,64,55,0.22);
+}
+.video-card-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #3A2A1A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.video-card-thumb video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.video-card-thumb .play-icon {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  background: rgba(222,162,0,0.88);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFF;
+  font-size: 22px;
+  pointer-events: none;
+  transition: transform 0.25s;
+}
+.video-card:hover .play-icon {
+  transform: scale(1.15);
+}
+.video-card-info {
+  padding: 12px 14px;
+}
+.video-card-name {
+  font-size: 13px;
+  font-weight: bold;
+  color: #5D4037;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* ========== Responsive ========== */
 /* Tablet / Small Desktop (≤900px) */
 @media (max-width: 900px) {
@@ -343,6 +534,7 @@ body {
   .model-visual { width: 240px; height: 180px; }
   .db-grid { grid-template-columns: repeat(2, 1fr); padding: 20px; gap: 16px; }
   .thumb-list { max-width: 460px; }
+  .video-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* Mobile (≤768px) */
@@ -514,6 +706,46 @@ body {
     font-size: 12px;
     letter-spacing: 1px;
   }
+
+  /* Video Modal Mobile */
+  .video-modal {
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    max-width: 100vw;
+    border-radius: 0;
+    overflow-y: auto;
+  }
+  .video-modal-header {
+    padding: 14px 16px;
+  }
+  .video-modal-title {
+    font-size: 17px;
+  }
+  .video-modal-body {
+    padding: 16px;
+  }
+  .video-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .video-card {
+    border-radius: 10px;
+  }
+  .video-card-thumb .play-icon {
+    width: 56px; height: 56px;
+    font-size: 26px;
+  }
+  .video-card-name {
+    font-size: 14px;
+  }
+  .video-back-btn {
+    padding: 10px 24px;
+    font-size: 15px;
+  }
+  .video-player-area video {
+    max-height: 240px;
+  }
 }
 
 /* ========== Tab extra style ========== */
@@ -569,6 +801,23 @@ body {
 <footer class="footer">
   鲁班新声 · 文化传承 科技赋能
 </footer>
+
+<!-- ========== Video Modal ========== -->
+<div class="video-modal-overlay" id="videoModalOverlay">
+  <div class="video-modal" id="videoModal">
+    <div class="video-modal-header">
+      <span class="video-modal-title">大师精选课程 · 视频资源</span>
+      <button class="video-modal-close" id="videoModalClose">&times;</button>
+    </div>
+    <div class="video-modal-body">
+      <div class="video-player-area" id="videoPlayerArea">
+        <video id="videoPlayer" controls playsinline></video>
+        <button class="video-back-btn" id="videoBackBtn">返回列表</button>
+      </div>
+      <div class="video-grid" id="videoGrid"></div>
+    </div>
+  </div>
+</div>
 
 <script>
 /* ========== DATA ========== */
@@ -629,12 +878,38 @@ const models = {
 };
 
 const databases = [
+  { name:'标准课程包 — 大师精选课程', source:'突破：新创意', desc:'三大系列大师精选课程，含教案、PPT、教具清单等标准化内容，助力木作技艺传承教学。', hasDetail: true },
   { name:'木作技艺数字化标准数据库', source:'政策背景', desc:'传统木作全流程影像、工具、口述史料采集存储归档标准化；对高龄匠人优先影像记录，杜绝木作技艺资料断代失传。' },
   { name:'文化遗产研究院数据库', source:'突破：更潮流', desc:'依托文化遗产研究院数据库，团队解析各大古建筑颜色数百种，支撑色卡开发。' },
   { name:'中国木艺传统色卡集', source:'突破：更潮流', desc:'首创数百种色卡集，从古建筑中解析颜色，包含基底材质同源/上色工艺互通/颜料用料相通/防护原理一致四维体系。' },
   { name:'木构匠人构件参数库', source:'突破：更高速', desc:'支撑自研APP的榫卯构件参数库，包含榫头卯槽装配结构锁定标记、拼接逻辑、尺寸公差，解析错误率＜1%。' },
-  { name:'标准课程包 — 153D 动画库', source:'突破：新创意', desc:'三大系列153D动画库，含教案、PPT、教具清单等标准化内容，助力木作技艺传承教学。' },
   { name:'在地匠人合作手册', source:'突破：新创意', desc:'筛选标准、培训流程、劳务协议模板、知识产权约定，激活在地匠人资源。' }
+];
+
+const videos = [
+  { name:'1605753843380', src:'videos/1605753843380.mp4' },
+  { name:'1605753858682', src:'videos/1605753858682.mp4' },
+  { name:'1605754774597', src:'videos/1605754774597.mp4' },
+  { name:'1605754836408', src:'videos/1605754836408.mp4' },
+  { name:'1605754915550', src:'videos/1605754915550.mp4' },
+  { name:'1605755081626', src:'videos/1605755081626.mp4' },
+  { name:'1605755088929', src:'videos/1605755088929.mp4' },
+  { name:'1605756779524', src:'videos/1605756779524.mp4' },
+  { name:'1605757185521', src:'videos/1605757185521.mp4' },
+  { name:'1605757274553', src:'videos/1605757274553.mp4' },
+  { name:'1605757698934', src:'videos/1605757698934.mp4' },
+  { name:'1605758250852', src:'videos/1605758250852.mp4' },
+  { name:'1605758977544', src:'videos/1605758977544.mp4' },
+  { name:'1605759105570', src:'videos/1605759105570.mp4' },
+  { name:'1605759115485', src:'videos/1605759115485.mp4' },
+  { name:'1605759131538', src:'videos/1605759131538.mp4' },
+  { name:'1605759149439', src:'videos/1605759149439.mp4' },
+  { name:'1605759482027', src:'videos/1605759482027.mp4' },
+  { name:'1605759753760', src:'videos/1605759753760.mp4' },
+  { name:'1605759795471', src:'videos/1605759795471.mp4' },
+  { name:'1605759885601', src:'videos/1605759885601.mp4' },
+  { name:'1605759924897', src:'videos/1605759924897.mp4' },
+  { name:'1605759940530', src:'videos/1605759940530.mp4' }
 ];
 
 /* ========== STATE ========== */
@@ -710,6 +985,7 @@ function renderDB() {
       <div class="db-name">${d.name}</div>
       <span class="db-source">${d.source}</span>
       <div class="db-desc">${d.desc}</div>
+      ${d.hasDetail ? '<button class="db-detail-btn" onclick="openVideoModal()">查看详情</button>' : ''}
     </div>
   `).join('');
 }
@@ -748,6 +1024,80 @@ function switchTab(tabId) {
     renderDB();
   }
 }
+
+/* ========== VIDEO MODAL ========== */
+const videoModalOverlay = document.getElementById('videoModalOverlay');
+const videoModalClose   = document.getElementById('videoModalClose');
+const videoGrid         = document.getElementById('videoGrid');
+const videoPlayerArea   = document.getElementById('videoPlayerArea');
+const videoPlayer       = document.getElementById('videoPlayer');
+const videoBackBtn      = document.getElementById('videoBackBtn');
+
+function openVideoModal() {
+  videoModalOverlay.classList.add('active');
+  renderVideoGrid();
+  videoPlayerArea.classList.remove('active');
+  // stop any playing video
+  videoPlayer.pause();
+  videoPlayer.src = '';
+  videoPlayer.load();
+}
+
+function closeVideoModal() {
+  videoModalOverlay.classList.remove('active');
+  videoPlayer.pause();
+  videoPlayer.src = '';
+  videoPlayer.load();
+  videoPlayerArea.classList.remove('active');
+}
+
+function renderVideoGrid() {
+  videoGrid.style.display = 'grid';
+  videoGrid.innerHTML = videos.map(v => `
+    <div class="video-card" onclick="playVideo('${v.src}', '${v.name}')">
+      <div class="video-card-thumb">
+        <video src="${v.src}" preload="metadata" muted></video>
+        <div class="play-icon">▶</div>
+      </div>
+      <div class="video-card-info">
+        <div class="video-card-name">${v.name}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function playVideo(src, name) {
+  videoGrid.style.display = 'none';
+  videoPlayerArea.classList.add('active');
+  videoPlayer.src = src;
+  videoPlayer.load();
+  videoPlayer.play().catch(function(){});
+}
+
+function backToGrid() {
+  videoPlayer.pause();
+  videoPlayer.src = '';
+  videoPlayer.load();
+  videoPlayerArea.classList.remove('active');
+  videoGrid.style.display = 'grid';
+}
+
+videoModalClose.addEventListener('click', closeVideoModal);
+videoBackBtn.addEventListener('click', backToGrid);
+
+// Click overlay background to close
+videoModalOverlay.addEventListener('click', function(e) {
+  if (e.target === videoModalOverlay) {
+    closeVideoModal();
+  }
+});
+
+// Escape key to close
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && videoModalOverlay.classList.contains('active')) {
+    closeVideoModal();
+  }
+});
 
 /* ========== EVENT LISTENERS ========== */
 sidebar.addEventListener('click', e => {
