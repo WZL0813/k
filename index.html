@@ -822,11 +822,6 @@ body {
 <script>
 /* ========== DATA ========== */
 const categories = [
-  { id: 'airplane', name: '飞机模型', count: 8, icon: '✈' },
-  { id: 'table',    name: '木制桌子', count: 5, icon: '◆' },
-  { id: 'animal',   name: '动物模型', count: 8, icon: '♞' },
-  { id: 'ship',     name: '船只模型', count: 6, icon: '⚓' },
-  { id: 'character',name: '卡通人物', count: 8, icon: '☺' },
   { id: 'nancheng_nuo_mask', name: '南城傩面具木刻', count: 5, icon: '🎭' },
   { id: 'nanchang_dougong', name: '南昌古建筑斗拱与楼阁木作技艺', count: 5, icon: '🏯' },
   { id: 'wuyuan_huizhou', name: '婺源徽派建筑木作技艺', count: 5, icon: '🏠' },
@@ -836,51 +831,7 @@ const categories = [
 ];
 
 const models = {
-  airplane: [
-    { name:'红色螺旋桨飞机', image:'images/plane_01.png', desc:'鲜红色机身，白色机翼尾翼，单引擎螺旋桨，复古二战风格' },
-    { name:'黄白相间客机',   image:'images/plane_02.png', desc:'米黄色机身，绿色条纹装饰，早期民航客机DC-3风格' },
-    { name:'蓝白涂装喷气客机', image:'images/plane_03.png', desc:'白色机身蓝色条纹，后掠翼，1960-70年代商用喷气客机' },
-    { name:'银灰轻型飞机',   image:'images/plane_04.png', desc:'哑光银灰色，通体简洁，通用航空小飞机' },
-    { name:'纯白喷气客机',   image:'images/plane_05.png', desc:'全白机身，双发喷气引擎，现代支线客机CRJ/ERJ风格' },
-    { name:'红白涂装客机',   image:'images/plane_06.png', desc:'白色机身红色机头尾翼，类似澳洲航空经典涂装' },
-    { name:'小型灰色螺旋桨飞机', image:'images/plane_07.png', desc:'灰色高翼单引擎，农用/侦察机Cessna风格' },
-    { name:'深灰军用运输机', image:'images/plane_08.png', desc:'深灰四引擎，大型机翼，C-130/C-47风格' }
-  ],
-  table: [
-    { name:'深棕书桌',   image:'images/table_01.png', desc:'胡桃木色，一侧带抽屉，简约实用' },
-    { name:'浅原木小方桌', image:'images/table_02.png', desc:'浅色原木，四角直立，小巧轻便' },
-    { name:'深棕会议桌', image:'images/table_03.png', desc:'宽大桌面，厚重桌腿，多人会议设计' },
-    { name:'浅木色矮桌', image:'images/table_04.png', desc:'浅橡木色，带两个小抽屉，适合做边桌' },
-    { name:'暖棕餐桌',   image:'images/table_05.png', desc:'暖棕色，四腿稳固，现代简约，4人用餐' }
-  ],
-  animal: [
-    { name:'狐狸',   image:'images/animal_01.png', desc:'橙黄毛发，蓬松尾巴，耳朵竖立' },
-    { name:'羚羊',   image:'images/animal_02.png', desc:'浅米色，长颈修长，姿态优雅' },
-    { name:'长颈鹿', image:'images/animal_03.png', desc:'经典斑点，长颈高耸，四肢纤细' },
-    { name:'跳羚',   image:'images/animal_04.png', desc:'棕灰色，角弯曲向上，蓄势奔跑姿态' },
-    { name:'马',     image:'images/animal_05.png', desc:'深棕鬃毛，体型健壮，站立姿态' },
-    { name:'海鸥',   image:'images/animal_06.png', desc:'灰白羽毛，短喙尖嘴，静止站立' },
-    { name:'棕熊',   image:'images/animal_07.png', desc:'深棕厚毛，圆耳短尾，憨态可掬' },
-    { name:'白鹤',   image:'images/animal_08.png', desc:'黄褐羽毛，长颈长腿，优雅站立' }
-  ],
-  ship: [
-    { name:'小型拖船',   image:'images/ship_01.png', desc:'深灰船体，白色上层带红顶，配起重机臂' },
-    { name:'中型货轮',   image:'images/ship_02.png', desc:'深蓝船体，白色驾驶室，远洋运输' },
-    { name:'科考船',     image:'images/ship_03.png', desc:'灰白配色，雷达桅杆，船尾起吊设备' },
-    { name:'巡逻艇',     image:'images/ship_04.png', desc:'红白相间船体，舰桥紧凑，近海巡逻' },
-    { name:'大型货轮',   image:'images/ship_05.png', desc:'深灰船体，白色多层甲板，集装箱运输' },
-    { name:'绿色渔船',   image:'images/ship_06.png', desc:'绿色船体，白色上层，配渔网卷筒钓竿' }
-  ],
-  character: [
-    { name:'黑衣侦探',     image:'images/figure_01.png', desc:'深灰西装黑帽，表情严肃，侦探特工风' },
-    { name:'黄衣绿叶男孩', image:'images/figure_02.png', desc:'亮黄外套，帽顶绿叶装饰，活泼可爱' },
-    { name:'墨镜酷哥',     image:'images/figure_03.png', desc:'黑夹克棕帽墨镜，红棕靴，酷飒风格' },
-    { name:'红衣安全帽男孩', image:'images/figure_04.png', desc:'鲜红棉服，黄色安全帽，蓝色围巾' },
-    { name:'灰衣绅士',     image:'images/figure_05.png', desc:'灰大衣黑礼帽，戴眼镜，绅士风度' },
-    { name:'黄衣工装男孩', image:'images/figure_06.png', desc:'明黄工装，红色围巾，黄色安全帽' },
-    { name:'蓝衣休闲男孩', image:'images/figure_07.png', desc:'深蓝夹克灰帽，日常休闲风' },
-    { name:'绿衣户外男孩', image:'images/figure_08.png', desc:'军绿外套黑针织帽，户外探险风' }
-  ],
+
   nancheng_nuo_mask: [
     { name:'傩面具木刻 一', image:'images2/木作技艺/南城傩面具木刻/屏幕截图 2026-07-11 154124.png', desc:'南城傩面具木刻技艺展示，传统雕刻工艺' },
     { name:'傩面具木刻 二', image:'images2/木作技艺/南城傩面具木刻/屏幕截图 2026-07-11 154129.png', desc:'傩面具细节特写，繁复纹样雕刻' },
@@ -958,7 +909,7 @@ const videos = [
 ];
 
 /* ========== STATE ========== */
-let currentCat = 'airplane';
+let currentCat = 'nancheng_nuo_mask';
 let currentIdx = 0;
 
 /* ========== DOM REFS ========== */
