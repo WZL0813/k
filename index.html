@@ -826,7 +826,13 @@ const categories = [
   { id: 'table',    name: '木制桌子', count: 5, icon: '◆' },
   { id: 'animal',   name: '动物模型', count: 8, icon: '♞' },
   { id: 'ship',     name: '船只模型', count: 6, icon: '⚓' },
-  { id: 'character',name: '卡通人物', count: 8, icon: '☺' }
+  { id: 'character',name: '卡通人物', count: 8, icon: '☺' },
+  { id: 'nancheng_nuo_mask', name: '南城傩面具木刻', count: 5, icon: '🎭' },
+  { id: 'nanchang_dougong', name: '南昌古建筑斗拱与楼阁木作技艺', count: 5, icon: '🏯' },
+  { id: 'wuyuan_huizhou', name: '婺源徽派建筑木作技艺', count: 5, icon: '🏠' },
+  { id: 'ganzhong_bamboo', name: '赣中竹木雕与匾额制作', count: 4, icon: '🪵' },
+  { id: 'gannan_boat', name: '赣南传统木船技艺', count: 3, icon: '⛵' },
+  { id: 'gannan_ancestral', name: '赣南客家宗祠营造技艺', count: 5, icon: '🏛️' }
 ];
 
 const models = {
@@ -874,6 +880,45 @@ const models = {
     { name:'黄衣工装男孩', image:'images/figure_06.png', desc:'明黄工装，红色围巾，黄色安全帽' },
     { name:'蓝衣休闲男孩', image:'images/figure_07.png', desc:'深蓝夹克灰帽，日常休闲风' },
     { name:'绿衣户外男孩', image:'images/figure_08.png', desc:'军绿外套黑针织帽，户外探险风' }
+  ],
+  nancheng_nuo_mask: [
+    { name:'傩面具木刻 一', image:'images2/木作技艺/南城傩面具木刻/屏幕截图 2026-07-11 154124.png', desc:'南城傩面具木刻技艺展示，传统雕刻工艺' },
+    { name:'傩面具木刻 二', image:'images2/木作技艺/南城傩面具木刻/屏幕截图 2026-07-11 154129.png', desc:'傩面具细节特写，繁复纹样雕刻' },
+    { name:'傩面具木刻 三', image:'images2/木作技艺/南城傩面具木刻/屏幕截图 2026-07-11 154136.png', desc:'傩面具侧面角度，立体层次感' },
+    { name:'傩面具木刻 四', image:'images2/木作技艺/南城傩面具木刻/屏幕截图 2026-07-11 154145.png', desc:'傩面具整体造型，色彩与纹理' },
+    { name:'傩面具木刻 五', image:'images2/木作技艺/南城傩面具木刻/屏幕截图 2026-07-11 154518.png', desc:'傩面具成品展示，传统非遗工艺' }
+  ],
+  nanchang_dougong: [
+    { name:'斗拱与楼阁木作 一', image:'images2/木作技艺/南昌古建筑斗拱与楼阁木作技艺/屏幕截图 2026-07-11 153826.png', desc:'南昌古建筑斗拱结构展示，传统木构工艺' },
+    { name:'斗拱与楼阁木作 二', image:'images2/木作技艺/南昌古建筑斗拱与楼阁木作技艺/屏幕截图 2026-07-11 153839.png', desc:'楼阁木作局部细节，榫卯咬合' },
+    { name:'斗拱与楼阁木作 三', image:'images2/木作技艺/南昌古建筑斗拱与楼阁木作技艺/屏幕截图 2026-07-11 153914.png', desc:'多层斗拱叠合，力学与美学统一' },
+    { name:'斗拱与楼阁木作 四', image:'images2/木作技艺/南昌古建筑斗拱与楼阁木作技艺/屏幕截图 2026-07-11 153926.png', desc:'斗拱仰视角度，展示承重结构' },
+    { name:'斗拱与楼阁木作 五', image:'images2/木作技艺/南昌古建筑斗拱与楼阁木作技艺/屏幕截图 2026-07-11 153936.png', desc:'楼阁整体木作，飞檐翘角传统' }
+  ],
+  wuyuan_huizhou: [
+    { name:'徽派建筑木作 一', image:'images2/木作技艺/婺源徽派建筑木作技艺/屏幕截图 2026-07-11 153143.png', desc:'婺源徽派建筑木雕门楼，精美繁复' },
+    { name:'徽派建筑木作 二', image:'images2/木作技艺/婺源徽派建筑木作技艺/屏幕截图 2026-07-11 153152.png', desc:'徽派梁柱木雕，人物故事题材' },
+    { name:'徽派建筑木作 三', image:'images2/木作技艺/婺源徽派建筑木作技艺/屏幕截图 2026-07-11 153204.png', desc:'窗棂木雕，几何纹样与花鸟图案' },
+    { name:'徽派建筑木作 四', image:'images2/木作技艺/婺源徽派建筑木作技艺/屏幕截图 2026-07-11 153212.png', desc:'雀替木雕特写，龙凤瑞兽题材' },
+    { name:'徽派建筑木作 五', image:'images2/木作技艺/婺源徽派建筑木作技艺/屏幕截图 2026-07-11 153236.png', desc:'徽派民居整体木构，粉墙黛瓦' }
+  ],
+  ganzhong_bamboo: [
+    { name:'竹木雕与匾额 一', image:'images2/木作技艺/赣中竹木雕与匾额制作/屏幕截图 2026-07-11 154725.png', desc:'赣中竹木雕工艺展示，刀法细腻' },
+    { name:'竹木雕与匾额 二', image:'images2/木作技艺/赣中竹木雕与匾额制作/屏幕截图 2026-07-11 154730.png', desc:'竹雕人物摆件，栩栩如生' },
+    { name:'竹木雕与匾额 三', image:'images2/木作技艺/赣中竹木雕与匾额制作/屏幕截图 2026-07-11 154737.png', desc:'传统匾额制作，书法与木刻结合' },
+    { name:'竹木雕与匾额 四', image:'images2/木作技艺/赣中竹木雕与匾额制作/屏幕截图 2026-07-11 154754.png', desc:'竹木雕成品展示，地方特色浓郁' }
+  ],
+  gannan_boat: [
+    { name:'传统木船 一', image:'images2/木作技艺/赣南传统木船技艺/屏幕截图 2026-07-11 155831.png', desc:'赣南传统木船结构展示，龙骨与船肋' },
+    { name:'传统木船 二', image:'images2/木作技艺/赣南传统木船技艺/屏幕截图 2026-07-11 155850.png', desc:'木船船体细节，传统捻缝工艺' },
+    { name:'传统木船 三', image:'images2/木作技艺/赣南传统木船技艺/屏幕截图 2026-07-11 155901.png', desc:'木船成品，赣南水系传统渔船' }
+  ],
+  gannan_ancestral: [
+    { name:'客家宗祠营造 一', image:'images2/木作技艺/赣南客家宗祠营造技艺/屏幕截图 2026-07-11 151614.png', desc:'赣南客家宗祠木构架，中轴对称布局' },
+    { name:'客家宗祠营造 二', image:'images2/木作技艺/赣南客家宗祠营造技艺/屏幕截图 2026-07-11 152647.png', desc:'宗祠梁架结构，穿斗与抬梁混合' },
+    { name:'客家宗祠营造 三', image:'images2/木作技艺/赣南客家宗祠营造技艺/屏幕截图 2026-07-11 152655.png', desc:'宗祠藻井木作，层层收束精美' },
+    { name:'客家宗祠营造 四', image:'images2/木作技艺/赣南客家宗祠营造技艺/屏幕截图 2026-07-11 152841.png', desc:'宗祠门楼木雕，客家文化符号' },
+    { name:'客家宗祠营造 五', image:'images2/木作技艺/赣南客家宗祠营造技艺/屏幕截图 2026-07-11 152848.png', desc:'宗祠整体外观，客家传统营造' }
   ]
 };
 
