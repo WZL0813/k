@@ -12,7 +12,7 @@
 **方式 A(推荐)**:本机已启动预览服务,浏览器访问:
 
 ```
-http://localhost:8899/demo/index.html
+http://localhost:4444/demo/index.html
 ```
 
 **方式 B(免服务器,离线)**:直接双击打开
