@@ -1,1127 +1,160 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>模型展示 · 鲁班新声</title>
-<style>
-/* ========== Reset & Base ========== */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: "SimSun", "STSong", "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
-  background: #EFE2CA;
-  color: #525252;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
-}
-
-/* ========== Navbar ========== */
-.navbar {
-  background: linear-gradient(135deg, #5D4037 0%, #7E4317 60%, #5D4037 100%);
-  padding: 0 24px;
-  display: flex;
-  align-items: center;
-  height: 64px;
-  box-shadow: 0 2px 12px rgba(93,64,55,0.3);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.nav-brand {
-  font-size: 22px;
-  font-weight: bold;
-  color: #EEC492;
-  margin-right: 48px;
-  letter-spacing: 3px;
-}
-.nav-tabs {
-  display: flex;
-  gap: 4px;
-  height: 100%;
-  align-items: stretch;
-}
-.nav-tab {
-  padding: 0 28px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #EFE2CA;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  border: none;
-  background: transparent;
-  border-bottom: 3px solid transparent;
-  transition: all 0.25s;
-  font-family: inherit;
-}
-.nav-tab:hover { color: #FFC000; border-bottom-color: #A3561D; }
-.nav-tab.active { color: #FFC000; border-bottom-color: #EEC492; }
-
-/* ========== Main Container ========== */
-.main-container {
-  flex: 1;
-  display: flex;
-  min-height: 0;
-}
-#modelView, #databaseView {
-  display: flex;
-  width: 100%;
-}
-#databaseView { display: none; }
-
-/* ========== Sidebar ========== */
-.sidebar {
-  width: 200px;
-  background: linear-gradient(180deg, #F2ECE5 0%, #EFE2CA 100%);
-  border-right: 1px solid #D7C4A8;
-  padding: 16px 0;
-  flex-shrink: 0;
-  overflow-y: auto;
-}
-.sidebar-title {
-  font-size: 14px;
-  font-weight: bold;
-  color: #5D4037;
-  padding: 0 16px 12px;
-  border-bottom: 1px solid #D7C4A8;
-  margin-bottom: 8px;
-  letter-spacing: 1px;
-}
-.cat-item {
-  padding: 13px 16px;
-  font-size: 15px;
-  font-weight: bold;
-  color: #7E4317;
-  cursor: pointer;
-  transition: all 0.2s;
-  border-left: 4px solid transparent;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.cat-item:hover { background: rgba(163,86,29,0.1); }
-.cat-item.active {
-  background: rgba(163,86,29,0.15);
-  border-left-color: #A3561D;
-  color: #5D4037;
-}
-.cat-count {
-  font-size: 12px;
-  color: #A67B5B;
-  background: #EFE2CA;
-  padding: 2px 8px;
-  border-radius: 10px;
-}
-
-/* ========== Content Area ========== */
-.content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 24px 32px;
-  overflow-y: auto;
-}
-.model-display {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.model-card {
-  background: #FFFFFF;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(93,64,55,0.12);
-  padding: 36px 40px;
-  max-width: 600px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  animation: fadeSlideIn 0.35s ease;
-  position: relative;
-  overflow: hidden;
-}
-.model-card::before {
-  content: '';
-  position: absolute;
-  top: -40px;
-  right: -40px;
-  width: 120px;
-  height: 120px;
-  background: linear-gradient(135deg, #EEC49233 0%, #A3561D22 100%);
-  border-radius: 50%;
-  pointer-events: none;
-}
-@keyframes fadeSlideIn {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.model-visual {
-  width: 320px;
-  height: 240px;
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  background: #F2ECE5;
-  border-radius: 12px;
-}
-.model-visual img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
-.model-visual img:hover { transform: scale(1.05); }
-
-/* Model info */
-.model-name {
-  font-size: 26px;
-  font-weight: bold;
-  color: #5D4037;
-  margin-bottom: 6px;
-  text-align: center;
-}
-.model-id {
-  font-size: 14px;
-  color: #A3561D;
-  margin-bottom: 16px;
-  background: #F5DCBE;
-  padding: 4px 16px;
-  border-radius: 12px;
-  font-weight: bold;
-}
-.model-desc {
-  font-size: 15px;
-  color: #525252;
-  line-height: 1.8;
-  text-align: center;
-  max-width: 440px;
-  font-weight: bold;
-}
-
-/* ========== Nav Arrows ========== */
-.arrow-nav {
-  display: flex;
-  gap: 20px;
-  margin-top: 16px;
-}
-.arrow-btn {
-  width: 44px; height: 44px;
-  border: 2px solid #A3561D;
-  background: #F5DCBE;
-  color: #5D4037;
-  border-radius: 50%;
-  font-size: 20px;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex; align-items: center; justify-content: center;
-}
-.arrow-btn:hover { background: #A3561D; color: #EFE2CA; }
-.arrow-btn:active { transform: scale(0.92); }
-.arrow-btn:disabled { opacity: 0.35; cursor: default; }
-
-/* ========== Thumbnail Strip ========== */
-.thumbnail-strip {
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.thumb-list {
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  padding: 6px 4px;
-  max-width: 580px;
-  scroll-behavior: smooth;
-}
-.thumb-list::-webkit-scrollbar { height: 4px; }
-.thumb-list::-webkit-scrollbar-thumb { background: #C9A87C; border-radius: 2px; }
-.thumb-item {
-  min-width: 72px; height: 72px;
-  border-radius: 10px;
-  background: #F5DCBE;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: bold;
-  color: #7E4317;
-  transition: all 0.2s;
-  border: 2px solid transparent;
-  text-align: center;
-  flex-shrink: 0;
-}
-.thumb-item.active { border-color: #A3561D; background: #EEC492; }
-.thumb-item:hover { border-color: #C9A87C; }
-.thumb-img {
-  width: 48px; height: 48px;
-  object-fit: contain;
-  margin-bottom: 3px;
-  border-radius: 6px;
-  background: #F2ECE5;
-}
-.thumb-label { line-height: 1.2; max-width: 60px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-/* ========== Database View ========== */
-.db-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  padding: 32px;
-  flex: 1;
-}
-.db-card {
-  background: #FFFFFF;
-  border-radius: 12px;
-  padding: 28px 24px;
-  box-shadow: 0 3px 16px rgba(93,64,55,0.1);
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.25s, box-shadow 0.25s;
-  border: 1px solid #E8D5C0;
-  display: flex;
-  flex-direction: column;
-}
-.db-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(93,64,55,0.18); }
-.db-card::before {
-  content: '';
-  position: absolute;
-  top: -16px; right: -16px;
-  width: 80px; height: 80px;
-  background: linear-gradient(135deg, #EEC49244 0%, #A3561D33 100%);
-  clip-path: polygon(100% 0, 100% 100%, 0 100%);
-}
-.db-name {
-  font-size: 20px;
-  font-weight: bold;
-  color: #5D4037;
-  margin-bottom: 8px;
-  line-height: 1.4;
-}
-.db-source {
-  font-size: 13px;
-  color: #A3561D;
-  font-weight: bold;
-  margin-bottom: 12px;
-  background: #F5DCBE;
-  display: inline-block;
-  padding: 3px 12px;
-  border-radius: 12px;
-  align-self: flex-start;
-}
-.db-desc {
-  font-size: 14px;
-  color: #525252;
-  line-height: 1.7;
-  flex: 1;
-}
-.db-detail-btn {
-  margin-top: 16px;
-  padding: 10px 24px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #FFFFFF;
-  background: #DEA200;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  align-self: center;
-  transition: all 0.25s;
-  font-family: inherit;
-  letter-spacing: 1px;
-}
-.db-detail-btn:hover {
-  background: #C58B00;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(222,162,0,0.35);
-}
-.db-detail-btn:active { transform: scale(0.96); }
-
-/* ========== Footer ========== */
-.footer {
-  background: linear-gradient(135deg, #5D4037 0%, #7E4317 100%);
-  padding: 20px 32px;
-  text-align: center;
-  color: #EEC492;
-  font-size: 14px;
-  font-weight: bold;
-  letter-spacing: 2px;
-}
-
-/* ========== Video Modal ========== */
-.video-modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(30, 20, 10, 0.72);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-.video-modal-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-.video-modal {
-  background: #F2ECE5;
-  border-radius: 16px;
-  width: min(960px, 92vw);
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: 0 12px 48px rgba(0,0,0,0.35);
-  animation: modalSlideIn 0.35s ease;
-  display: flex;
-  flex-direction: column;
-}
-@keyframes modalSlideIn {
-  from { opacity: 0; transform: translateY(30px) scale(0.96); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
-}
-.video-modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 28px;
-  border-bottom: 1px solid #D7C4A8;
-  flex-shrink: 0;
-}
-.video-modal-title {
-  font-size: 20px;
-  font-weight: bold;
-  color: #5D4037;
-  letter-spacing: 1px;
-}
-.video-modal-close {
-  width: 36px; height: 36px;
-  border: 2px solid #A3561D;
-  background: #F5DCBE;
-  color: #5D4037;
-  border-radius: 50%;
-  font-size: 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-  line-height: 1;
-}
-.video-modal-close:hover {
-  background: #A3561D;
-  color: #EFE2CA;
-}
-.video-modal-body {
-  padding: 28px;
-  flex: 1;
-  overflow-y: auto;
-}
-
-/* Video Player Area */
-.video-player-area {
-  display: none;
-  margin-bottom: 24px;
-}
-.video-player-area.active { display: block; }
-.video-player-area video {
-  width: 100%;
-  max-height: 480px;
-  border-radius: 12px;
-  background: #000;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-}
-.video-back-btn {
-  margin-top: 12px;
-  padding: 8px 20px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #5D4037;
-  background: #EFE2CA;
-  border: 2px solid #A3561D;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: inherit;
-}
-.video-back-btn:hover {
-  background: #A3561D;
-  color: #EFE2CA;
-}
-
-/* Video Grid */
-.video-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-.video-card {
-  background: #FFFFFF;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 3px 12px rgba(93,64,55,0.1);
-  cursor: pointer;
-  transition: transform 0.25s, box-shadow 0.25s;
-  border: 1px solid #E8D5C0;
-}
-.video-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 28px rgba(93,64,55,0.22);
-}
-.video-card-thumb {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: #3A2A1A;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-.video-card-thumb video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-}
-.video-card-thumb .play-icon {
-  position: absolute;
-  width: 48px;
-  height: 48px;
-  background: rgba(222,162,0,0.88);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #FFF;
-  font-size: 22px;
-  pointer-events: none;
-  transition: transform 0.25s;
-}
-.video-card:hover .play-icon {
-  transform: scale(1.15);
-}
-.video-card-info {
-  padding: 12px 14px;
-}
-.video-card-name {
-  font-size: 13px;
-  font-weight: bold;
-  color: #5D4037;
-  line-height: 1.4;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* ========== Responsive ========== */
-/* Tablet / Small Desktop (≤900px) */
-@media (max-width: 900px) {
-  .sidebar { width: 140px; }
-  .cat-item { font-size: 13px; padding: 10px 12px; }
-  .content { padding: 16px; }
-  .model-card { padding: 24px 20px; max-width: 500px; }
-  .model-visual { width: 240px; height: 180px; }
-  .db-grid { grid-template-columns: repeat(2, 1fr); padding: 20px; gap: 16px; }
-  .thumb-list { max-width: 460px; }
-  .video-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-/* Mobile (≤768px) */
-@media (max-width: 768px) {
-  /* Navbar */
-  .navbar {
-    padding: 0 12px;
-    height: 52px;
-  }
-  .nav-brand {
-    font-size: 15px;
-    margin-right: 12px;
-    letter-spacing: 1px;
-  }
-  .nav-tab {
-    padding: 0 14px;
-    font-size: 14px;
-  }
-
-  /* Stack layout */
-  .main-container {
-    flex-direction: column;
-  }
-  #modelView {
-    flex-direction: column;
-  }
-
-  /* Sidebar → horizontal scrollable tabs */
-  .sidebar {
-    width: 100%;
-    flex-shrink: 0;
-    border-right: none;
-    border-bottom: 1px solid #D7C4A8;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 6px 8px;
-    gap: 4px;
-    -webkit-overflow-scrolling: touch;
-    height: auto;
-    min-height: 52px;
-    align-items: center;
-  }
-  .sidebar::-webkit-scrollbar { height: 3px; }
-  .sidebar::-webkit-scrollbar-thumb { background: #C9A87C; border-radius: 2px; }
-  .sidebar-title { display: none; }
-  .cat-item {
-    flex-shrink: 0;
-    white-space: nowrap;
-    border-left: none;
-    border-bottom: 3px solid transparent;
-    padding: 10px 14px;
-    font-size: 14px;
-    border-radius: 4px 4px 0 0;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .cat-item.active {
-    border-left: none;
-    border-bottom-color: #A3561D;
-    background: rgba(163,86,29,0.12);
-  }
-  .cat-count {
-    font-size: 11px;
-    padding: 1px 7px;
-  }
-
-  /* Content area */
-  .content {
-    padding: 12px 10px;
-  }
-
-  /* Model card: full width, vertical layout */
-  .model-card {
-    max-width: 100%;
-    width: 100%;
-    padding: 20px 16px;
-    border-radius: 12px;
-  }
-  .model-card::before {
-    width: 80px; height: 80px;
-    top: -28px; right: -28px;
-  }
-
-  /* Model visual: responsive sizing */
-  .model-visual {
-    width: min(280px, 80vw);
-    height: min(210px, 55vw);
-    margin-bottom: 16px;
-    border-radius: 10px;
-  }
-
-  /* Model info */
-  .model-name {
-    font-size: 22px;
-    margin-bottom: 4px;
-  }
-  .model-id {
-    font-size: 13px;
-    margin-bottom: 10px;
-    padding: 3px 12px;
-  }
-  .model-desc {
-    font-size: 14px;
-    max-width: 100%;
-    line-height: 1.7;
-  }
-
-  /* Arrow nav: larger touch targets */
-  .arrow-nav {
-    gap: 16px;
-    margin-top: 12px;
-  }
-  .arrow-btn {
-    width: 48px; height: 48px;
-    font-size: 22px;
-    min-width: 48px; min-height: 48px;
-  }
-
-  /* Thumbnail strip → grid layout */
-  .thumbnail-strip {
-    margin-top: 14px;
-    width: 100%;
-  }
-  .thumb-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));
-    gap: 8px;
-    max-width: 100%;
-    overflow-x: visible;
-    padding: 4px 2px;
-  }
-  .thumb-item {
-    min-width: 0;
-    width: 100%;
-    height: 80px;
-    flex-shrink: unset;
-    border-radius: 8px;
-  }
-  .thumb-img {
-    width: 44px; height: 44px;
-    margin-bottom: 2px;
-  }
-  .thumb-label {
-    font-size: 10px;
-    max-width: 100%;
-  }
-
-  /* Database grid → single column */
-  .db-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-    padding: 14px 10px;
-  }
-  .db-card {
-    padding: 20px 18px;
-    border-radius: 10px;
-  }
-  .db-name { font-size: 17px; }
-  .db-desc { font-size: 13px; line-height: 1.6; }
-
-  /* Footer */
-  .footer {
-    padding: 14px 16px;
-    font-size: 12px;
-    letter-spacing: 1px;
-  }
-
-  /* Video Modal Mobile */
-  .video-modal {
-    width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
-    max-width: 100vw;
-    border-radius: 0;
-    overflow-y: auto;
-  }
-  .video-modal-header {
-    padding: 14px 16px;
-  }
-  .video-modal-title {
-    font-size: 17px;
-  }
-  .video-modal-body {
-    padding: 16px;
-  }
-  .video-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-  .video-card {
-    border-radius: 10px;
-  }
-  .video-card-thumb .play-icon {
-    width: 56px; height: 56px;
-    font-size: 26px;
-  }
-  .video-card-name {
-    font-size: 14px;
-  }
-  .video-back-btn {
-    padding: 10px 24px;
-    font-size: 15px;
-  }
-  .video-player-area video {
-    max-height: 240px;
-  }
-}
-
-/* ========== Tab extra style ========== */
-.tab-content { display: none; width: 100%; }
-.tab-content.active { display: flex; }
-#databaseView { flex-direction: column; }
-</style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>木语 · 榫卯 — 木作构件数字典藏</title>
+<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="app">
 
-<!-- Navbar -->
-<nav class="navbar">
-  <span class="nav-brand">模型展示 · 鲁班新声</span>
-  <div class="nav-tabs">
-    <button class="nav-tab active" data-tab="model">模型展示</button>
-    <button class="nav-tab" data-tab="database">数据库</button>
-  </div>
-</nav>
-
-<!-- Model View -->
-<div class="main-container">
-  <div id="modelView" class="tab-content active">
-    <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar"></aside>
-
-    <!-- Content -->
-    <section class="content">
-      <div class="model-display">
-        <div class="model-card" id="modelCard">
-          <div class="model-visual" id="modelVisual"></div>
-          <div class="model-name" id="modelName"></div>
-          <div class="model-id" id="modelId"></div>
-          <div class="model-desc" id="modelDesc"></div>
+    <!-- ============ 顶栏 ============ -->
+    <div class="hero">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-logo">木</span>
+          <span class="brand-text">
+            <span class="brand-name">木语 <em>· 榫卯</em></span>
+            <span class="brand-tag">客家围屋 · 木作技艺数字典藏</span>
+          </span>
         </div>
-        <div class="arrow-nav">
-          <button class="arrow-btn" id="prevBtn" title="上一个 (←)">◀</button>
-          <button class="arrow-btn" id="nextBtn" title="下一个 (→)">▶</button>
+        <button class="bell" aria-label="通知">🔔</button>
+      </header>
+    </div>
+
+    <!-- 搜索 -->
+    <div class="searchwrap">
+      <div class="search">
+        <span class="search-ico">🔍</span>
+        <input id="searchInput" type="search" placeholder="搜索你感兴趣的木作" autocomplete="off" />
+      </div>
+    </div>
+
+    <!-- ============ 分类图标(圆形) ============ -->
+    <nav class="cats" id="cats">
+      <button class="cat active" data-cat="全部"><span class="ring"><span class="ic">🈁</span></span><span class="cat-label">全部</span></button>
+      <button class="cat" data-cat="榫卯"><span class="ring"><span class="ic">🔩</span></span><span class="cat-label">榫卯</span></button>
+      <button class="cat" data-cat="家具"><span class="ring"><span class="ic">🪑</span></span><span class="cat-label">家具</span></button>
+      <button class="cat" data-cat="建筑"><span class="ring"><span class="ic">🏛️</span></span><span class="cat-label">建筑</span></button>
+      <button class="cat" data-cat="器具"><span class="ring"><span class="ic">🏺</span></span><span class="cat-label">器具</span></button>
+      <button class="cat" data-cat="文房"><span class="ring"><span class="ic">🖌️</span></span><span class="cat-label">文房</span></button>
+      <button class="cat" data-cat="乐器"><span class="ring"><span class="ic">🎼</span></span><span class="cat-label">乐器</span></button>
+      <button class="cat" data-cat="更多"><span class="ring"><span class="ic">⋯</span></span><span class="cat-label">更多</span></button>
+    </nav>
+
+    <!-- ============ 筛选行 ============ -->
+    <div class="filters">
+      <span class="chip" id="eraChip">全部年代 <b>›</b></span>
+      <span class="chip" id="shopChip">全部工坊 <b>⌄</b></span>
+      <span class="spacer"></span>
+      <span class="count" id="count"></span>
+      <button class="toggle3d on" id="tf3d">3D</button>
+    </div>
+
+    <div class="dropdown hidden" id="eraMenu">
+      <button data-era="全部年代" class="active">全部年代</button>
+      <button data-era="唐">唐</button><button data-era="宋">宋</button>
+      <button data-era="明">明</button><button data-era="清">清</button>
+      <button data-era="近现代">近现代</button>
+    </div>
+    <div class="dropdown hidden" id="shopMenu">
+      <button data-shop="全部工坊" class="active">全部工坊</button>
+      <button data-shop="客家围屋工坊">客家围屋工坊</button>
+      <button data-shop="赣南围屋工坊">赣南围屋工坊</button>
+      <button data-shop="江西木作">江西木作</button>
+      <button data-shop="苏作">苏作</button><button data-shop="徽作">徽作</button>
+      <button data-shop="东阳木雕">东阳木雕</button><button data-shop="广东木作">广东木作</button>
+    </div>
+
+    <!-- ============ 卡片网格(真实图片) ============ -->
+    <main class="grid" id="grid"></main>
+    <div class="empty hidden" id="empty">没有找到匹配的构件，换个关键词试试</div>
+
+    <!-- ============ 底部导航 ============ -->
+    <nav class="tabbar">
+      <button class="tab"><span>🏠</span>首页</button>
+      <button class="tab"><span>👥</span>社区</button>
+      <button class="tab active"><span>📦</span>典藏</button>
+      <button class="tab"><span>🛒</span>交易</button>
+      <button class="tab"><span>👤</span>我的</button>
+    </nav>
+  </div>
+
+  <!-- ============ 详情 + 教学实训 弹窗 ============ -->
+  <div class="overlay hidden" id="overlay">
+    <div class="sheet">
+      <button class="close" id="closeBtn">✕</button>
+
+      <div class="viewer">
+        <canvas id="viewCanvas"></canvas>
+        <div class="viewer-hint">拖动旋转 · 滚轮缩放 · 双指缩放</div>
+      </div>
+
+      <!-- 信息面板 -->
+      <div class="info" id="infoPanel">
+        <div class="titlerow">
+          <h1 class="title" id="dTitle">构件名称</h1>
+          <div class="badge" id="dBadge">非遗木作</div>
         </div>
-        <div class="thumbnail-strip">
-          <div class="thumb-list" id="thumbList"></div>
+        <div class="meta" id="dMeta">年代 · 工坊</div>
+        <div class="specs">
+          <div class="spec"><small>材质</small><b id="dMat">榉木</b></div>
+          <div class="spec"><small>尺寸</small><b id="dSize">—</b></div>
+          <div class="spec"><small>编号</small><b id="dNo">—</b></div>
+        </div>
+        <p class="desc" id="dDesc">描述文字…</p>
+        <div class="actions">
+          <button class="btn ghost" id="actFav">♡ 收藏</button>
+          <button class="btn ghost" id="actShare">↗ 分享</button>
+          <button class="btn solid" id="actLearn">🎓 教学实训</button>
         </div>
       </div>
-    </section>
+
+      <!-- 教学实训面板 -->
+      <div class="teach hidden" id="teachPanel">
+        <div class="teach-head">
+          <div>
+            <div class="teach-kicker" id="tKicker">榫卯拆解演示</div>
+            <div class="teach-name" id="tName">构件</div>
+          </div>
+          <button class="teach-back" id="teachBack">‹ 返回详情</button>
+        </div>
+        <div class="teach-stage" id="tStage">
+          <span class="step-ic" id="tIcon">🔩</span>
+          <div class="step-words">
+            <div class="step-label" id="tLabel">第 1 步</div>
+            <p class="teach-desc" id="tDesc">描述…</p>
+          </div>
+        </div>
+        <ol class="teach-steps" id="tSteps"></ol>
+        <div class="teach-controls">
+          <button class="cbtn" id="tPlay">▶ 自动拆解</button>
+          <input type="range" id="tRange" min="0" max="100" value="0" aria-label="拆解进度" />
+          <button class="cbtn" id="tMode">⤢ 拆开/合拢</button>
+        </div>
+        <div class="teach-note" id="tNote">拖动进度条可手动拆解/组装</div>
+      </div>
+    </div>
   </div>
 
-  <!-- Database View -->
-  <div id="databaseView" class="tab-content">
-    <div class="db-grid" id="dbGrid"></div>
-  </div>
-</div>
-
-<!-- Footer -->
-<footer class="footer">
-  鲁班新声 · 文化传承 科技赋能
-</footer>
-
-<!-- ========== Video Modal ========== -->
-<div class="video-modal-overlay" id="videoModalOverlay">
-  <div class="video-modal" id="videoModal">
-    <div class="video-modal-header">
-      <span class="video-modal-title">大师精选课程 · 视频资源</span>
-      <button class="video-modal-close" id="videoModalClose">&times;</button>
-    </div>
-    <div class="video-modal-body">
-      <div class="video-player-area" id="videoPlayerArea">
-        <video id="videoPlayer" controls playsinline></video>
-        <button class="video-back-btn" id="videoBackBtn">返回列表</button>
-      </div>
-      <div class="video-grid" id="videoGrid"></div>
-    </div>
-  </div>
-</div>
-
-<script>
-/* ========== DATA ========== */
-const categories = [
-  { id: 'nancheng_nuo_mask', name: '南城傩面具木刻', count: 5, icon: '🎭' },
-  { id: 'nanchang_dougong', name: '南昌古建筑斗拱与楼阁木作技艺', count: 5, icon: '🏯' },
-  { id: 'wuyuan_huizhou', name: '婺源徽派建筑木作技艺', count: 5, icon: '🏠' },
-  { id: 'ganzhong_bamboo', name: '赣中竹木雕与匾额制作', count: 4, icon: '🪵' },
-  { id: 'gannan_boat', name: '赣南传统木船技艺', count: 3, icon: '⛵' },
-  { id: 'gannan_ancestral', name: '赣南客家宗祠营造技艺', count: 5, icon: '🏛️' }
-];
-
-const models = {
-
-  nancheng_nuo_mask: [
-    { name:'傩面具木刻 一', image:'images2/木作技艺/南城傩面具木刻/屏幕截图 2026-07-11 154124.png', desc:'南城傩面具木刻技艺展示，传统雕刻工艺' },
-    { name:'傩面具木刻 二', image:'images2/木作技艺/南城傩面具木刻/屏幕截图 2026-07-11 154129.png', desc:'傩面具细节特写，繁复纹样雕刻' },
-    { name:'傩面具木刻 三', image:'images2/木作技艺/南城傩面具木刻/屏幕截图 2026-07-11 154136.png', desc:'傩面具侧面角度，立体层次感' },
-    { name:'傩面具木刻 四', image:'images2/木作技艺/南城傩面具木刻/屏幕截图 2026-07-11 154145.png', desc:'傩面具整体造型，色彩与纹理' },
-    { name:'傩面具木刻 五', image:'images2/木作技艺/南城傩面具木刻/屏幕截图 2026-07-11 154518.png', desc:'傩面具成品展示，传统非遗工艺' }
-  ],
-  nanchang_dougong: [
-    { name:'斗拱与楼阁木作 一', image:'images2/木作技艺/南昌古建筑斗拱与楼阁木作技艺/屏幕截图 2026-07-11 153826.png', desc:'南昌古建筑斗拱结构展示，传统木构工艺' },
-    { name:'斗拱与楼阁木作 二', image:'images2/木作技艺/南昌古建筑斗拱与楼阁木作技艺/屏幕截图 2026-07-11 153839.png', desc:'楼阁木作局部细节，榫卯咬合' },
-    { name:'斗拱与楼阁木作 三', image:'images2/木作技艺/南昌古建筑斗拱与楼阁木作技艺/屏幕截图 2026-07-11 153914.png', desc:'多层斗拱叠合，力学与美学统一' },
-    { name:'斗拱与楼阁木作 四', image:'images2/木作技艺/南昌古建筑斗拱与楼阁木作技艺/屏幕截图 2026-07-11 153926.png', desc:'斗拱仰视角度，展示承重结构' },
-    { name:'斗拱与楼阁木作 五', image:'images2/木作技艺/南昌古建筑斗拱与楼阁木作技艺/屏幕截图 2026-07-11 153936.png', desc:'楼阁整体木作，飞檐翘角传统' }
-  ],
-  wuyuan_huizhou: [
-    { name:'徽派建筑木作 一', image:'images2/木作技艺/婺源徽派建筑木作技艺/屏幕截图 2026-07-11 153143.png', desc:'婺源徽派建筑木雕门楼，精美繁复' },
-    { name:'徽派建筑木作 二', image:'images2/木作技艺/婺源徽派建筑木作技艺/屏幕截图 2026-07-11 153152.png', desc:'徽派梁柱木雕，人物故事题材' },
-    { name:'徽派建筑木作 三', image:'images2/木作技艺/婺源徽派建筑木作技艺/屏幕截图 2026-07-11 153204.png', desc:'窗棂木雕，几何纹样与花鸟图案' },
-    { name:'徽派建筑木作 四', image:'images2/木作技艺/婺源徽派建筑木作技艺/屏幕截图 2026-07-11 153212.png', desc:'雀替木雕特写，龙凤瑞兽题材' },
-    { name:'徽派建筑木作 五', image:'images2/木作技艺/婺源徽派建筑木作技艺/屏幕截图 2026-07-11 153236.png', desc:'徽派民居整体木构，粉墙黛瓦' }
-  ],
-  ganzhong_bamboo: [
-    { name:'竹木雕与匾额 一', image:'images2/木作技艺/赣中竹木雕与匾额制作/屏幕截图 2026-07-11 154725.png', desc:'赣中竹木雕工艺展示，刀法细腻' },
-    { name:'竹木雕与匾额 二', image:'images2/木作技艺/赣中竹木雕与匾额制作/屏幕截图 2026-07-11 154730.png', desc:'竹雕人物摆件，栩栩如生' },
-    { name:'竹木雕与匾额 三', image:'images2/木作技艺/赣中竹木雕与匾额制作/屏幕截图 2026-07-11 154737.png', desc:'传统匾额制作，书法与木刻结合' },
-    { name:'竹木雕与匾额 四', image:'images2/木作技艺/赣中竹木雕与匾额制作/屏幕截图 2026-07-11 154754.png', desc:'竹木雕成品展示，地方特色浓郁' }
-  ],
-  gannan_boat: [
-    { name:'传统木船 一', image:'images2/木作技艺/赣南传统木船技艺/屏幕截图 2026-07-11 155831.png', desc:'赣南传统木船结构展示，龙骨与船肋' },
-    { name:'传统木船 二', image:'images2/木作技艺/赣南传统木船技艺/屏幕截图 2026-07-11 155850.png', desc:'木船船体细节，传统捻缝工艺' },
-    { name:'传统木船 三', image:'images2/木作技艺/赣南传统木船技艺/屏幕截图 2026-07-11 155901.png', desc:'木船成品，赣南水系传统渔船' }
-  ],
-  gannan_ancestral: [
-    { name:'客家宗祠营造 一', image:'images2/木作技艺/赣南客家宗祠营造技艺/屏幕截图 2026-07-11 151614.png', desc:'赣南客家宗祠木构架，中轴对称布局' },
-    { name:'客家宗祠营造 二', image:'images2/木作技艺/赣南客家宗祠营造技艺/屏幕截图 2026-07-11 152647.png', desc:'宗祠梁架结构，穿斗与抬梁混合' },
-    { name:'客家宗祠营造 三', image:'images2/木作技艺/赣南客家宗祠营造技艺/屏幕截图 2026-07-11 152655.png', desc:'宗祠藻井木作，层层收束精美' },
-    { name:'客家宗祠营造 四', image:'images2/木作技艺/赣南客家宗祠营造技艺/屏幕截图 2026-07-11 152841.png', desc:'宗祠门楼木雕，客家文化符号' },
-    { name:'客家宗祠营造 五', image:'images2/木作技艺/赣南客家宗祠营造技艺/屏幕截图 2026-07-11 152848.png', desc:'宗祠整体外观，客家传统营造' }
-  ]
-};
-
-const databases = [
-  { name:'标准课程包 — 大师精选课程', source:'突破：新创意', desc:'三大系列大师精选课程，含教案、PPT、教具清单等标准化内容，助力木作技艺传承教学。', hasDetail: true },
-  { name:'木作技艺数字化标准数据库', source:'政策背景', desc:'传统木作全流程影像、工具、口述史料采集存储归档标准化；对高龄匠人优先影像记录，杜绝木作技艺资料断代失传。' },
-  { name:'文化遗产研究院数据库', source:'突破：更潮流', desc:'依托文化遗产研究院数据库，团队解析各大古建筑颜色数百种，支撑色卡开发。' },
-  { name:'中国木艺传统色卡集', source:'突破：更潮流', desc:'首创数百种色卡集，从古建筑中解析颜色，包含基底材质同源/上色工艺互通/颜料用料相通/防护原理一致四维体系。' },
-  { name:'木构匠人构件参数库', source:'突破：更高速', desc:'支撑自研APP的榫卯构件参数库，包含榫头卯槽装配结构锁定标记、拼接逻辑、尺寸公差，解析错误率＜1%。' },
-  { name:'在地匠人合作手册', source:'突破：新创意', desc:'筛选标准、培训流程、劳务协议模板、知识产权约定，激活在地匠人资源。' }
-];
-
-const videos = [
-  { name:'1605753843380', src:'videos/1605753843380.mp4' },
-  { name:'1605753858682', src:'videos/1605753858682.mp4' },
-  { name:'1605754774597', src:'videos/1605754774597.mp4' },
-  { name:'1605754836408', src:'videos/1605754836408.mp4' },
-  { name:'1605754915550', src:'videos/1605754915550.mp4' },
-  { name:'1605755081626', src:'videos/1605755081626.mp4' },
-  { name:'1605755088929', src:'videos/1605755088929.mp4' },
-  { name:'1605756779524', src:'videos/1605756779524.mp4' },
-  { name:'1605757185521', src:'videos/1605757185521.mp4' },
-  { name:'1605757274553', src:'videos/1605757274553.mp4' },
-  { name:'1605757698934', src:'videos/1605757698934.mp4' },
-  { name:'1605758250852', src:'videos/1605758250852.mp4' },
-  { name:'1605758977544', src:'videos/1605758977544.mp4' },
-  { name:'1605759105570', src:'videos/1605759105570.mp4' },
-  { name:'1605759115485', src:'videos/1605759115485.mp4' },
-  { name:'1605759131538', src:'videos/1605759131538.mp4' },
-  { name:'1605759149439', src:'videos/1605759149439.mp4' },
-  { name:'1605759482027', src:'videos/1605759482027.mp4' },
-  { name:'1605759753760', src:'videos/1605759753760.mp4' },
-  { name:'1605759795471', src:'videos/1605759795471.mp4' },
-  { name:'1605759885601', src:'videos/1605759885601.mp4' },
-  { name:'1605759924897', src:'videos/1605759924897.mp4' },
-  { name:'1605759940530', src:'videos/1605759940530.mp4' }
-];
-
-/* ========== STATE ========== */
-let currentCat = 'nancheng_nuo_mask';
-let currentIdx = 0;
-
-/* ========== DOM REFS ========== */
-const sidebar     = document.getElementById('sidebar');
-const modelVisual = document.getElementById('modelVisual');
-const modelName   = document.getElementById('modelName');
-const modelId     = document.getElementById('modelId');
-const modelDesc   = document.getElementById('modelDesc');
-const thumbList   = document.getElementById('thumbList');
-const prevBtn     = document.getElementById('prevBtn');
-const nextBtn     = document.getElementById('nextBtn');
-const modelView   = document.getElementById('modelView');
-const dbView      = document.getElementById('databaseView');
-const dbGrid      = document.getElementById('dbGrid');
-const modelCard   = document.getElementById('modelCard');
-
-/* ========== RENDER SIDEBAR ========== */
-function renderSidebar() {
-  sidebar.innerHTML = '<div class="sidebar-title">模型分类</div>' +
-    categories.map(c => `
-      <div class="cat-item${c.id === currentCat ? ' active' : ''}" data-cat="${c.id}">
-        <span>${c.name}</span><span class="cat-count">${c.count}</span>
-      </div>
-    `).join('');
-}
-
-/* ========== RENDER MODEL ========== */
-function renderModel() {
-  const list = models[currentCat];
-  const m = list[currentIdx];
-  modelVisual.innerHTML = `<img src="${m.image}" alt="${m.name}" loading="lazy">`;
-  modelName.textContent = m.name;
-  const catLabel = categories.find(c => c.id === currentCat).name;
-  modelId.textContent = catLabel + ' · 第' + (currentIdx + 1) + '/' + list.length + '件';
-  modelDesc.textContent = m.desc;
-  // animate
-  modelCard.style.animation = 'none';
-  modelCard.offsetHeight;
-  modelCard.style.animation = 'fadeSlideIn 0.35s ease';
-
-  renderThumbs();
-  updateArrows();
-}
-
-/* ========== RENDER THUMBNAILS ========== */
-function renderThumbs() {
-  const list = models[currentCat];
-  thumbList.innerHTML = list.map((m,i) => `
-    <div class="thumb-item${i === currentIdx ? ' active' : ''}" data-idx="${i}">
-      <img class="thumb-img" src="${m.image}" alt="${m.name}" loading="lazy">
-      <span class="thumb-label">${m.name.replace(/模型|飞机|桌子|动物|船只|人物/g,'')}</span>
-    </div>
-  `).join('');
-  // scroll active into view
-  const activeThumb = thumbList.querySelector('.thumb-item.active');
-  if (activeThumb) activeThumb.scrollIntoView({ behavior:'smooth', block:'nearest', inline:'center' });
-}
-
-function updateArrows() {
-  const list = models[currentCat];
-  prevBtn.disabled = currentIdx === 0;
-  nextBtn.disabled = currentIdx >= list.length - 1;
-}
-
-/* ========== RENDER DB VIEW ========== */
-function renderDB() {
-  dbGrid.innerHTML = databases.map(d => `
-    <div class="db-card">
-      <div class="db-name">${d.name}</div>
-      <span class="db-source">${d.source}</span>
-      <div class="db-desc">${d.desc}</div>
-      ${d.hasDetail ? '<button class="db-detail-btn" onclick="openVideoModal()">查看详情</button>' : ''}
-    </div>
-  `).join('');
-}
-
-/* ========== NAVIGATE ========== */
-function selectCat(catId) {
-  currentCat = catId;
-  currentIdx = 0;
-  renderSidebar();
-  renderModel();
-}
-
-function prevModel() {
-  if (currentIdx > 0) { currentIdx--; renderModel(); }
-}
-function nextModel() {
-  const list = models[currentCat];
-  if (currentIdx < list.length - 1) { currentIdx++; renderModel(); }
-}
-
-function selectModel(idx) {
-  currentIdx = idx;
-  renderModel();
-}
-
-/* ========== TAB SWITCH ========== */
-function switchTab(tabId) {
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
-  if (tabId === 'model') {
-    modelView.style.display = 'flex';
-    dbView.style.display = 'none';
-  } else {
-    modelView.style.display = 'none';
-    dbView.style.display = 'flex';
-    renderDB();
+  <!-- Three.js (多 CDN 回退) -->
+  <script>
+  function loadOne(urls, cb){
+    if(!urls.length){cb(false);return;}
+    var s=document.createElement("script");s.src=urls[0];
+    s.onload=function(){cb(true);};s.onerror=function(){s.remove();loadOne(urls.slice(1),cb);};
+    document.head.appendChild(s);
   }
-}
-
-/* ========== VIDEO MODAL ========== */
-const videoModalOverlay = document.getElementById('videoModalOverlay');
-const videoModalClose   = document.getElementById('videoModalClose');
-const videoGrid         = document.getElementById('videoGrid');
-const videoPlayerArea   = document.getElementById('videoPlayerArea');
-const videoPlayer       = document.getElementById('videoPlayer');
-const videoBackBtn      = document.getElementById('videoBackBtn');
-
-function openVideoModal() {
-  videoModalOverlay.classList.add('active');
-  renderVideoGrid();
-  videoPlayerArea.classList.remove('active');
-  // stop any playing video
-  videoPlayer.pause();
-  videoPlayer.src = '';
-  videoPlayer.load();
-}
-
-function closeVideoModal() {
-  videoModalOverlay.classList.remove('active');
-  videoPlayer.pause();
-  videoPlayer.src = '';
-  videoPlayer.load();
-  videoPlayerArea.classList.remove('active');
-}
-
-function renderVideoGrid() {
-  videoGrid.style.display = 'grid';
-  videoGrid.innerHTML = videos.map(v => `
-    <div class="video-card" onclick="playVideo('${v.src}', '${v.name}')">
-      <div class="video-card-thumb">
-        <video src="${v.src}" preload="metadata" muted></video>
-        <div class="play-icon">▶</div>
-      </div>
-      <div class="video-card-info">
-        <div class="video-card-name">${v.name}</div>
-      </div>
-    </div>
-  `).join('');
-}
-
-function playVideo(src, name) {
-  videoGrid.style.display = 'none';
-  videoPlayerArea.classList.add('active');
-  videoPlayer.src = src;
-  videoPlayer.load();
-  videoPlayer.play().catch(function(){});
-}
-
-function backToGrid() {
-  videoPlayer.pause();
-  videoPlayer.src = '';
-  videoPlayer.load();
-  videoPlayerArea.classList.remove('active');
-  videoGrid.style.display = 'grid';
-}
-
-videoModalClose.addEventListener('click', closeVideoModal);
-videoBackBtn.addEventListener('click', backToGrid);
-
-// Click overlay background to close
-videoModalOverlay.addEventListener('click', function(e) {
-  if (e.target === videoModalOverlay) {
-    closeVideoModal();
-  }
-});
-
-// Escape key to close
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape' && videoModalOverlay.classList.contains('active')) {
-    closeVideoModal();
-  }
-});
-
-/* ========== EVENT LISTENERS ========== */
-sidebar.addEventListener('click', e => {
-  const catItem = e.target.closest('.cat-item');
-  if (catItem) selectCat(catItem.dataset.cat);
-});
-
-thumbList.addEventListener('click', e => {
-  const thumbItem = e.target.closest('.thumb-item');
-  if (thumbItem) selectModel(parseInt(thumbItem.dataset.idx));
-});
-
-prevBtn.addEventListener('click', prevModel);
-nextBtn.addEventListener('click', nextModel);
-
-document.querySelectorAll('.nav-tab').forEach(tab => {
-  tab.addEventListener('click', () => switchTab(tab.dataset.tab));
-});
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowLeft') prevModel();
-  if (e.key === 'ArrowRight') nextModel();
-});
-
-/* ========== INIT ========== */
-renderSidebar();
-renderModel();
-</script>
-
+  var THREE_URLS=[
+    "https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js",
+    "https://unpkg.com/three@0.128.0/build/three.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"];
+  var CTRL_URLS=[
+    "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js",
+    "https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js",
+    "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/controls/OrbitControls.js"];
+  loadOne(THREE_URLS,function(){loadOne(CTRL_URLS,function(){var s=document.createElement("script");s.src="app.js";document.head.appendChild(s);});});
+  </script>
 </body>
 </html>
