@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+<meta name="theme-color" content="#a3561d" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="木语榫卯" />
+<link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="icon" href="icon-192.png" />
+<title>木语 · 榫卯 — 木作构件数字典藏</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="hero">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-logo">木</span>
+          <span class="brand-text">
+            <span class="brand-name">木语 <em>· 榫卯</em></span>
+            <span class="brand-tag">客家围屋 · 木作技艺数字典藏</span>
+          </span>
+        </div>
+        <button class="bell" aria-label="通知">🔔</button>
+      </header>
+    </div>
+
+    <div class="searchwrap">
+      <div class="search">
+        <span class="search-ico">🔍</span>
+        <input id="searchInput" type="search" placeholder="搜索你感兴趣的木作" autocomplete="off" />
+      </div>
+    </div>
+
+    <nav class="cats" id="cats">
+      <button class="cat active" data-cat="全部"><span class="ring"><span class="ic">🈁</span></span><span class="cat-label">全部</span></button>
+      <button class="cat" data-cat="榫卯"><span class="ring"><span class="ic">🔩</span></span><span class="cat-label">榫卯</span></button>
+      <button class="cat" data-cat="家具"><span class="ring"><span class="ic">🪑</span></span><span class="cat-label">家具</span></button>
+      <button class="cat" data-cat="建筑"><span class="ring"><span class="ic">🏛️</span></span><span class="cat-label">建筑</span></button>
+      <button class="cat" data-cat="器具"><span class="ring"><span class="ic">🏺</span></span><span class="cat-label">器具</span></button>
+      <button class="cat" data-cat="文房"><span class="ring"><span class="ic">🖌️</span></span><span class="cat-label">文房</span></button>
+      <button class="cat" data-cat="乐器"><span class="ring"><span class="ic">🎼</span></span><span class="cat-label">乐器</span></button>
+      <button class="cat" data-cat="更多"><span class="ring"><span class="ic">⋯</span></span><span class="cat-label">更多</span></button>
+    </nav>
+
+    <div class="filters">
+      <span class="chip" id="eraChip">全部年代 <b>›</b></span>
+      <span class="chip" id="shopChip">全部工坊 <b>⌄</b></span>
+      <span class="spacer"></span>
+      <span class="count" id="count"></span>
+      <button class="toggle3d on" id="tf3d">3D</button>
+    </div>
+
+    <div class="dropdown hidden" id="eraMenu">
+      <button data-era="全部年代" class="active">全部年代</button>
+      <button data-era="唐">唐</button><button data-era="宋">宋</button>
+      <button data-era="明">明</button><button data-era="清">清</button>
+      <button data-era="近现代">近现代</button>
+    </div>
+    <div class="dropdown hidden" id="shopMenu">
+      <button data-shop="全部工坊" class="active">全部工坊</button>
+      <button data-shop="客家围屋工坊">客家围屋工坊</button>
+      <button data-shop="赣南围屋工坊">赣南围屋工坊</button>
+      <button data-shop="江西木作">江西木作</button>
+      <button data-shop="苏作">苏作</button><button data-shop="徽作">徽作</button>
+      <button data-shop="东阳木雕">东阳木雕</button><button data-shop="广东木作">广东木作</button>
+    </div>
+
+    <main class="grid" id="grid"></main>
+    <div class="empty hidden" id="empty">没有找到匹配的构件，换个关键词试试</div>
+
+    <nav class="tabbar">
+      <button class="tab"><span>🏠</span>首页</button>
+      <button class="tab"><span>👥</span>社区</button>
+      <button class="tab active"><span>📦</span>典藏</button>
+      <button class="tab"><span>🛒</span>交易</button>
+      <button class="tab"><span>👤</span>我的</button>
+    </nav>
+  </div>
+
+  <div class="overlay hidden" id="overlay">
+    <div class="sheet">
+      <button class="close" id="closeBtn">✕</button>
+      <div class="viewer">
+        <canvas id="viewCanvas"></canvas>
+        <div class="viewer-hint">拖动旋转 · 滚轮缩放 · 双指缩放</div>
+      </div>
+      <div class="info" id="infoPanel">
+        <div class="titlerow">
+          <h1 class="title" id="dTitle">构件名称</h1>
+          <div class="badge" id="dBadge">非遗木作</div>
+        </div>
+        <div class="meta" id="dMeta">年代 · 工坊</div>
+        <div class="specs">
+          <div class="spec"><small>材质</small><b id="dMat">榉木</b></div>
+          <div class="spec"><small>尺寸</small><b id="dSize">—</b></div>
+          <div class="spec"><small>编号</small><b id="dNo">—</b></div>
+        </div>
+        <p class="desc" id="dDesc">描述文字…</p>
+        <div class="actions">
+          <button class="btn ghost" id="actFav">♡ 收藏</button>
+          <button class="btn ghost" id="actShare">↗ 分享</button>
+          <button class="btn solid" id="actLearn">🎓 教学实训</button>
+        </div>
+      </div>
+      <div class="teach hidden" id="teachPanel">
+        <div class="teach-head">
+          <div>
+            <div class="teach-kicker" id="tKicker">榫卯拆解演示</div>
+            <div class="teach-name" id="tName">构件</div>
+          </div>
+          <button class="teach-back" id="teachBack">‹ 返回详情</button>
+        </div>
+        <div class="teach-stage" id="tStage">
+          <span class="step-ic" id="tIcon">🔩</span>
+          <div class="step-words">
+            <div class="step-label" id="tLabel">第 1 步</div>
+            <p class="teach-desc" id="tDesc">描述…</p>
+          </div>
+        </div>
+        <ol class="teach-steps" id="tSteps"></ol>
+        <div class="teach-controls">
+          <button class="cbtn" id="tPlay">▶ 自动拆解</button>
+          <input type="range" id="tRange" min="0" max="100" value="0" aria-label="拆解进度" />
+          <button class="cbtn" id="tMode">⤢ 拆开/合拢</button>
+        </div>
+        <div class="teach-note" id="tNote">拖动进度条可手动拆解/组装</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Three.js:优先本地(离线),无则回退在线CDN -->
+  <script>
+  function loadOne(urls, cb){
+    if(!urls.length){cb(false);return;}
+    var s=document.createElement("script");s.src=urls[0];s.async=false;
+    s.onload=function(){cb(true);};s.onerror=function(){s.remove();loadOne(urls.slice(1),cb);};
+    document.head.appendChild(s);
+  }
+  var THREE_URLS=["./three.min.js",
+    "https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js",
+    "https://unpkg.com/three@0.128.0/build/three.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"];
+  var CTRL_URLS=["./OrbitControls.js",
+    "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js",
+    "https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js",
+    "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/controls/OrbitControls.js"];
+  loadOne(THREE_URLS,function(){loadOne(CTRL_URLS,function(){var s=document.createElement("script");s.src="app.js";document.head.appendChild(s);});});
+  // 注册离线缓存(在 https/localhost 上生效;file:// 打开则自动跳过)
+  if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').catch(function(){});});}
+  </script>
+</body>
+</html>

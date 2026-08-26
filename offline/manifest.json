@@ -1,0 +1,16 @@
+{
+  "name": "木语·榫卯 — 木作数字典藏",
+  "short_name": "木语榫卯",
+  "description": "客家围屋·中式木作构件数字典藏,可旋转3D与拆解教学",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fdfaf6",
+  "theme_color": "#a3561d",
+  "icons": [
+    {"src":"icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"},
+    {"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"maskable"}
+  ]
+}
