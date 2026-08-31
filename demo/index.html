@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>木语 · 榫卯 — 木作构件数字典藏</title>
+<title>鲁班木语 · 榫卯 — 木作技艺数字典藏</title>
+<link rel="icon" href="mark.png" />
+<link rel="apple-touch-icon" href="mark.png" />
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -13,10 +15,10 @@
     <div class="hero">
       <header class="topbar">
         <div class="brand">
-          <span class="brand-logo">木</span>
+          <img class="brand-logo" src="mark.png" alt="鲁班新声" />
           <span class="brand-text">
-            <span class="brand-name">木语 <em>· 榫卯</em></span>
-            <span class="brand-tag">客家围屋 · 木作技艺数字典藏</span>
+            <span class="brand-name">鲁班木语 <em>· 榫卯</em></span>
+            <span class="brand-tag">木作技艺 · 数字典藏</span>
           </span>
         </div>
         <button class="bell" aria-label="通知">🔔</button>
@@ -36,10 +38,11 @@
       <button class="cat active" data-cat="全部"><span class="ring"><span class="ic">🈁</span></span><span class="cat-label">全部</span></button>
       <button class="cat" data-cat="榫卯"><span class="ring"><span class="ic">🔩</span></span><span class="cat-label">榫卯</span></button>
       <button class="cat" data-cat="家具"><span class="ring"><span class="ic">🪑</span></span><span class="cat-label">家具</span></button>
-      <button class="cat" data-cat="建筑"><span class="ring"><span class="ic">🏛️</span></span><span class="cat-label">建筑</span></button>
-      <button class="cat" data-cat="器具"><span class="ring"><span class="ic">🏺</span></span><span class="cat-label">器具</span></button>
-      <button class="cat" data-cat="文房"><span class="ring"><span class="ic">🖌️</span></span><span class="cat-label">文房</span></button>
-      <button class="cat" data-cat="乐器"><span class="ring"><span class="ic">🎼</span></span><span class="cat-label">乐器</span></button>
+      <button class="cat" data-cat="围屋木作"><span class="ring"><span class="ic">🏛️</span></span><span class="cat-label">围屋木作</span></button>
+      <button class="cat" data-cat="赣南木器"><span class="ring"><span class="ic">🪵</span></span><span class="cat-label">赣南木器</span></button>
+      <button class="cat" data-cat="江西木艺"><span class="ring"><span class="ic">🍃</span></span><span class="cat-label">江西木艺</span></button>
+      <button class="cat" data-cat="广东木艺"><span class="ring"><span class="ic">🌊</span></span><span class="cat-label">广东木艺</span></button>
+      <button class="cat" data-cat="湖南木艺"><span class="ring"><span class="ic">🌿</span></span><span class="cat-label">湖南木艺</span></button>
       <button class="cat" data-cat="更多"><span class="ring"><span class="ic">⋯</span></span><span class="cat-label">更多</span></button>
     </nav>
 
@@ -60,11 +63,12 @@
     </div>
     <div class="dropdown hidden" id="shopMenu">
       <button data-shop="全部工坊" class="active">全部工坊</button>
-      <button data-shop="客家围屋工坊">客家围屋工坊</button>
-      <button data-shop="赣南围屋工坊">赣南围屋工坊</button>
+      <button data-shop="赣南·南康">赣南·南康</button>
+      <button data-shop="赣南·龙南">赣南·龙南</button>
       <button data-shop="江西木作">江西木作</button>
+      <button data-shop="广东木作">广东木作</button>
+      <button data-shop="湖南木作">湖南木作</button>
       <button data-shop="苏作">苏作</button><button data-shop="徽作">徽作</button>
-      <button data-shop="东阳木雕">东阳木雕</button><button data-shop="广东木作">广东木作</button>
     </div>
 
     <!-- ============ 卡片网格(真实图片) ============ -->
@@ -88,7 +92,8 @@
 
       <div class="viewer">
         <canvas id="viewCanvas"></canvas>
-        <div class="viewer-hint">拖动旋转 · 滚轮缩放 · 双指缩放</div>
+        <img id="viewImg" class="viewer-img hidden" alt="构件实物" />
+        <div class="viewer-hint" id="viewHint">拖动旋转 · 滚轮缩放 · 双指缩放</div>
       </div>
 
       <!-- 信息面板 -->
@@ -138,23 +143,23 @@
     </div>
   </div>
 
-  <!-- Three.js (多 CDN 回退) -->
+  <!-- Three.js (优先本地,再国内CDN,最后境外;自带旋转,无需OrbitControls) -->
   <script>
   function loadOne(urls, cb){
     if(!urls.length){cb(false);return;}
-    var s=document.createElement("script");s.src=urls[0];
+    var s=document.createElement("script");s.src=urls[0];s.async=false;
     s.onload=function(){cb(true);};s.onerror=function(){s.remove();loadOne(urls.slice(1),cb);};
     document.head.appendChild(s);
   }
   var THREE_URLS=[
+    "./three.min.js",
+    "https://cdn.bootcdn.net/ajax/libs/three.js/r128/three.min.js",
+    "https://cdn.staticfile.org/three.js/r128/three.min.js",
     "https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js",
     "https://unpkg.com/three@0.128.0/build/three.min.js",
     "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"];
-  var CTRL_URLS=[
-    "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js",
-    "https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js",
-    "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/controls/OrbitControls.js"];
-  loadOne(THREE_URLS,function(){loadOne(CTRL_URLS,function(){var s=document.createElement("script");s.src="app.js";document.head.appendChild(s);});});
+  loadOne(THREE_URLS,function(){var s=document.createElement("script");s.src="app.js";document.head.appendChild(s);});
+  if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').catch(function(){});});}
   </script>
 </body>
 </html>

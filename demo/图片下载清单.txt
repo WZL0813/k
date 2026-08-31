@@ -1,0 +1,72 @@
+木语·榫卯 —— 80 件真实图片下载清单
+====================================================
+
+说明：
+- 网站会读取 ""demo/images/"" 文件夹里的本机图片（本地图 100% 显示，不依赖网络）。
+- 你只需下载下面 31 张【各不相同的】真实图片，按文件名保存到 ""demo/images/"" 即可。
+  网站会自动把这 31 张图复用到 80 张卡片上（同一类的构件复用同款图）。
+- 每个文件给了一个"首选链接"（Wikimedia，中国大陆可能打不开）。
+  如果打不开：请直接用【百度图片】搜索该行的"物品名称"，右键另存为，另存为下表同名的文件即可。
+  （实在懒得找，也可以点开链接另存为同名文件。）
+
+──────────────────────────────
+【榫卯】(存成 sm1.jpg / sm2.jpg)
+──────────────────────────────
+sm1.jpg   一斗三升斗拱(太和殿)     https://commons.wikimedia.org/wiki/Special:FilePath/%E5%A4%AA%E5%92%8C%E6%AE%BF%E6%96%97%E6%8B%B1.JPG?width=800
+sm2.jpg   榫卯/柱头榫接            https://commons.wikimedia.org/wiki/Special:FilePath/%E5%A4%AA%E5%92%8C%E6%AE%BF%E8%BD%89%E8%A7%92%E6%9F%B1%E9%A0%AD%E6%A6%AB%E5%8D%AF.JPG?width=800
+
+──────────────────────────────
+【家具】(存成 jj1.jpg ... jj12.jpg)
+──────────────────────────────
+jj1.jpg   交椅式圈椅(上海博物馆)    https://commons.wikimedia.org/wiki/Special:FilePath/Folding_Armchair_with_Curved_Rest_in_Shanghai_Museum_2014-07.JPG?width=800
+jj2.jpg   广式黑金漆扶手椅         https://commons.wikimedia.org/wiki/Special:FilePath/Chinese_%28probably_Canton%29_armchair%2C_c._1830-1840%2C_wood%2C_black_and_gold_lacquer_decoration_with_cane_seat%2C_HAA.JPG?width=800
+jj3.jpg   清式侧椅                https://commons.wikimedia.org/wiki/Special:FilePath/Chinese_sidechair_in_English_style%2C_c._1740%2C_HAA.JPG?width=800
+jj4.jpg   黄花梨明式家具           https://commons.wikimedia.org/wiki/Special:FilePath/Huanghuali_wood_furniture%2C_China%2C_-_Nelson-Atkins_Museum_of_Art_-_DSC09138.JPG?width=800
+jj5.jpg   黄花梨架子床(明)         https://commons.wikimedia.org/wiki/Special:FilePath/Testered_Bed_with_Alcove%2C_Ming_Dynasty%2C_15th-16_century%2C_huanghuali_wood_-_Nelson-Atkins_Museum_of_Art_-_DSC09140.JPG?width=800
+jj6.jpg   明式家具(上海博物馆)     https://commons.wikimedia.org/wiki/Special:FilePath/%E4%B8%8A%E6%B5%B7%E5%8D%9A%E7%89%A9%E9%A6%86%E8%97%8F%E6%98%8E%E5%BC%8F%E5%AE%B6%E5%85%B7.JPG?width=800
+jj7.jpg   明式榻(上海博物馆)       https://commons.wikimedia.org/wiki/Special:FilePath/%E4%B8%8A%E6%B5%B7%E5%8D%9A%E7%89%A9%E9%A6%86%E8%97%8F%E6%98%8E%E5%BC%8F%E6%A6%BB.JPG?width=800
+jj8.jpg   黄花梨侧桌(清康熙)       https://commons.wikimedia.org/wiki/Special:FilePath/Chinese_side_table%2C_Qing_dynasty%2C_Kangxi_period%2C_huanghuali_wood%2C_HAA.JPG?width=800
+jj9.jpg   红木长凳(清)            https://commons.wikimedia.org/wiki/Special:FilePath/Chinese_bench_%28ban_deng%29%2C_Qing_dynasty%2C_late_17th_century%2C_hongmu_wood%2C_HAA.JPG?width=800
+jj10.jpg  螺钿衣柜(明)            https://commons.wikimedia.org/wiki/Special:FilePath/Wooden_wardrobe_with_mother-of-pearl%2C_amber%2C_glass_and_ivory%2C_Ming_Dynasty.JPG?width=800
+jj11.jpg  中式山水屏风            https://commons.wikimedia.org/wiki/Special:FilePath/Chinese_landscape_screen.jpg?width=800
+jj12.jpg  清宫中式屏风            https://commons.wikimedia.org/wiki/Special:FilePath/Hofmobiliendepot_-_Chinesischer_Paravent.jpg?width=800
+
+──────────────────────────────
+【围屋木作】(存成 ww1.jpg ... ww7.jpg)
+──────────────────────────────
+ww1.jpg   关西新围·西昌围          https://commons.wikimedia.org/wiki/Special:FilePath/%E4%BB%8E%E5%85%B3%E8%A5%BF%E6%96%B0%E5%9B%B4%E7%9C%BA%E6%9C%9B%E8%A5%BF%E6%98%8C%E5%9B%B4.JPG?width=800
+ww2.jpg   关西新围府第正门         https://commons.wikimedia.org/wiki/Special:FilePath/%E5%85%B3%E8%A5%BF%E6%96%B0%E5%9B%B4%E5%BA%9C%E7%AC%AC%E6%AD%A3%E9%97%A81.JPG?width=800
+ww3.jpg   木柱(太和殿金柱)         https://commons.wikimedia.org/wiki/Special:FilePath/%E5%A4%AA%E5%92%8C%E6%AE%BF%E9%87%91%E6%9F%B1%E4%B9%8B%E4%B8%80.JPG?width=800
+ww4.jpg   雕花格子门(苏州)         https://commons.wikimedia.org/wiki/Special:FilePath/%E8%8B%8F%E5%B7%9E%E4%B8%9C%E5%B1%B1%E9%95%87%E9%9B%95%E8%8A%B1%E6%A5%BC%E6%A0%BC%E5%AD%90%E9%97%A8.JPG?width=800
+ww5.jpg   匾额(碧云寺)            https://commons.wikimedia.org/wiki/Special:FilePath/%E7%A2%A7%E4%BA%91%E5%AF%BA%E5%8C%BE%E9%A2%9D.JPG?width=800
+ww6.jpg   南禅寺大殿(五台)         https://commons.wikimedia.org/wiki/Special:FilePath/%E6%97%A9%E6%99%A8%E7%9A%84%E5%8D%97%E7%A6%85%E5%AF%BA%E5%A4%A7%E6%AE%BF.JPG?width=800
+ww7.jpg   何氏宗祠(香港)          https://commons.wikimedia.org/wiki/Special:FilePath/HK_HoChung_ChanAncestralHall.JPG?width=800
+
+──────────────────────────────
+【赣南木器】(存成 gn1.jpg / gn2.jpg / gn3.jpg)
+──────────────────────────────
+gn1.jpg   黑漆木箱                 https://commons.wikimedia.org/wiki/Special:FilePath/Black%20lacquer%20box%20from%20China%2C%20lacquer%20on%20wood%20with%20silver%2C%2020th%20century%2C%20East-West%20Center.JPG?width=800
+gn2.jpg   木胎香炉                 https://commons.wikimedia.org/wiki/Special:FilePath/Chinese%20incense%20burner-MHS%202004-IMG%209936.JPG?width=800
+gn3.jpg   土地神牌位               https://commons.wikimedia.org/wiki/Special:FilePath/Spirit%20tablet%20for%20the%20earth%20god%20in%20Macau.JPG?width=800
+
+──────────────────────────────
+【江西木艺】(存成 jx1.jpg ... jx4.jpg)
+──────────────────────────────
+jx1.jpg   木雕罗汉像(明)          https://commons.wikimedia.org/wiki/Special:FilePath/Arhat%20from%20China%2C%20Ming%2C%20wood%20with%20traces%20of%20color%2C%20Honolulu%20Museum%20of%20Art%2C%203836.1.JPG?width=800
+jx2.jpg   文殊菩萨木雕像           https://commons.wikimedia.org/wiki/Special:FilePath/Wooden%20Manjusri%20statue%202%20CAC.JPG?width=800
+jx3.jpg   涅槃释迦牟尼木像         https://commons.wikimedia.org/wiki/Special:FilePath/Wooden%20reclining%20Shakyamuni%202%20CAC.JPG?width=800
+jx4.jpg   便携式佛龛(明)          https://commons.wikimedia.org/wiki/Special:FilePath/Chinese%20-%20Portable%20Buddhist%20Shrine%20-%20Walters%2061266%20-%20Front%20Closed.jpg?width=800
+
+──────────────────────────────
+【广东木艺】(存成 gd1.jpg;并复用已下载的 jj2 / jj4)
+──────────────────────────────
+gd1.jpg   潮州金漆木雕             https://commons.wikimedia.org/wiki/Special:FilePath/Pigment%20of%20chaozhou%20woodcarving.JPG?width=800
+
+──────────────────────────────
+【湖南木艺】(存成 hn1.jpg / hn2.jpg)
+──────────────────────────────
+hn1.jpg   木鱼(广化寺)            https://commons.wikimedia.org/wiki/Special:FilePath/Guanghuasi%20muyu.JPG?width=800
+hn2.jpg   祖先牌位                 https://commons.wikimedia.org/wiki/Special:FilePath/Ancestor%20worship003.JPG?width=800
+
+====================================================
+合计 31 张。全部放进 ""demo/images/"" 后,刷新网站即可看到真实图片。
