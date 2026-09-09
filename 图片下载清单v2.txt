@@ -1,0 +1,126 @@
+木语·榫卯 —— 80 件真实图片下载/替换清单(v2)
+=============================================================
+
+【怎么用】
+1. 网站已改成"优先读 demo/images/<编号>.jpg；没有就回退到现有图"。
+2. 你只要把下面每个编号的真实图片，下载后【另存为】 demo/images/<编号>.jpg（比如 SM-100.jpg、WG-106.jpg……），刷新网站，这张图就会替换上去。
+3. 已替换的就不再重复；没替换的继续用现有图，不会空白。
+
+【搜图方法】每个编号给了"关键词"，任选一种：
+ · Wikimedia（免费、可直链，但大陆可能慢/打不开）：把下面链接里的"关键词"填进：
+   https://commons.wikimedia.org/w/index.php?search=关键词&title=Special:MediaSearch&type=image
+ · 百度图片（大陆好开）：https://image.baidu.com/search/index?tn=baiduimage&word=关键词
+ · 也可以到 故宫博物院/国家博物馆/艺术博物馆 官网搜到对应器型后存图。
+
+【建议】找"看起来老、高大上"的实拍图，竖版或方图更好。
+
+═══════════════
+一、榫卯（6）
+═══════════════
+SM-100 | 一斗三升斗拱 | 榫卯 | 关键词: 斗拱 | commons: https://commons.wikimedia.org/w/index.php?search=Dougong&title=Special:MediaSearch&type=image
+SM-101 | 燕尾榫连接件 | 榫卯 | 关键词: 燕尾榫 木构件 | commons: https://commons.wikimedia.org/w/index.php?search=wooden%20tenon&title=Special:MediaSearch&type=image
+SM-102 | 十字榫方木 | 榫卯 | 关键词: 十字榫 | commons: https://commons.wikimedia.org/w/index.php?search=joinery%20wood&title=Special:MediaSearch&type=image
+SM-103 | 井字榫木架 | 榫卯 | 关键词: 井字榫 | commons: https://commons.wikimedia.org/w/index.php?search=timber%20frame&title=Special:MediaSearch&type=image
+SM-104 | 鲁班锁 | 榫卯 | 关键词: 鲁班锁 孔明锁 | commons: https://commons.wikimedia.org/w/index.php?search=luban%20lock&title=Special:MediaSearch&type=image
+SM-105 | 企口拼板 | 榫卯 | 关键词: 企口 拼板 | commons: https://commons.wikimedia.org/w/index.php?search=woodworking%20joint&title=Special:MediaSearch&type=image
+
+═══════════════
+二、家具（16）
+═══════════════
+WG-106 | 南康实木餐桌 | 家具 | 关键词: 南康 实木餐桌 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20dining%20table&title=Special:MediaSearch&type=image
+WG-107 | 南康实木大床 | 家具 | 关键词: 实木大床 架子床 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20canopy%20bed&title=Special:MediaSearch&type=image
+WG-108 | 黄花梨圈椅 | 家具 | 关键词: 黄花梨圈椅 | commons: https://commons.wikimedia.org/w/index.php?search=huanghuali%20chair&title=Special:MediaSearch&type=image
+WG-109 | 官帽椅 | 家具 | 关键词: 官帽椅 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20official%20hat%20chair&title=Special:MediaSearch&type=image
+WG-110 | 罗汉床 | 家具 | 关键词: 罗汉床 | commons: https://commons.wikimedia.org/w/index.php?search=luohan%20bed&title=Special:MediaSearch&type=image
+WG-111 | 八仙桌 | 家具 | 关键词: 八仙桌 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20square%20table&title=Special:MediaSearch&type=image
+WG-112 | 条案 | 家具 | 关键词: 条案 条几 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20altar%20table&title=Special:MediaSearch&type=image
+WG-113 | 太师椅 | 家具 | 关键词: 太师椅 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20armchair&title=Special:MediaSearch&type=image
+WG-114 | 顶箱柜 | 家具 | 关键词: 顶箱柜 四件柜 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20wardrobe%20cabinet&title=Special:MediaSearch&type=image
+WG-115 | 南康书桌 | 家具 | 关键词: 中式书桌 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20writing%20desk&title=Special:MediaSearch&type=image
+WG-116 | 博古架 | 家具 | 关键词: 博古架 多宝格 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20display%20shelf&title=Special:MediaSearch&type=image
+WG-117 | 折叠屏风 | 家具 | 关键词: 中式屏风 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20folding%20screen&title=Special:MediaSearch&type=image
+WG-118 | 平头长凳 | 家具 | 关键词: 长凳 板凳 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20bench&title=Special:MediaSearch&type=image
+WG-119 | 实木摇椅 | 家具 | 关键词: 摇椅 木椅 | commons: https://commons.wikimedia.org/w/index.php?search=wooden%20rocking%20chair&title=Special:MediaSearch&type=image
+WG-120 | 圆鼓凳 | 家具 | 关键词: 鼓凳 绣墩 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20barrel%20stool&title=Special:MediaSearch&type=image
+WG-121 | 多格斗柜 | 家具 | 关键词: 斗柜 多屉柜 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20chest%20of%20drawers&title=Special:MediaSearch&type=image
+
+═══════════════
+三、围屋木作（12）
+═══════════════
+WG-122 | 关西新围格栅窗 | 围屋木作 | 关键词: 关西新围 格栅窗 | commons: https://commons.wikimedia.org/w/index.php?search=关西新围&title=Special:MediaSearch&type=image
+WG-123 | 燕翼围木柱础 | 围屋木作 | 关键词: 燕翼围 柱础 | commons: https://commons.wikimedia.org/w/index.php?search=Hakka%20walled%20village&title=Special:MediaSearch&type=image
+WG-124 | 客家围屋斗拱 | 围屋木作 | 关键词: 围屋 斗拱 | commons: https://commons.wikimedia.org/w/index.php?search=Hakka%20dougong&title=Special:MediaSearch&type=image
+WG-125 | 垂花门簪 | 围屋木作 | 关键词: 垂花门 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20gate%20ornament&title=Special:MediaSearch&type=image
+WG-126 | 雀替 | 围屋木作 | 关键词: 雀替 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20bracket&title=Special:MediaSearch&type=image
+WG-127 | 月梁 | 围屋木作 | 关键词: 月梁 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20beam&title=Special:MediaSearch&type=image
+WG-128 | 门楣匾额 | 围屋木作 | 关键词: 匾额 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20plaque%20inscription&title=Special:MediaSearch&type=image
+WG-129 | 宗祠穿枋 | 围屋木作 | 关键词: 宗祠 木构 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20ancestral%20hall%20wood&title=Special:MediaSearch&type=image
+WG-130 | 天井格栅 | 围屋木作 | 关键词: 天井 格栅 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20lattice%20window&title=Special:MediaSearch&type=image
+WG-131 | 檐下斜撑 | 围屋木作 | 关键词: 檐下 斜撑 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20eave%20bracket&title=Special:MediaSearch&type=image
+WG-132 | 围屋木门扇 | 围屋木作 | 关键词: 木门扇 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20wooden%20door&title=Special:MediaSearch&type=image
+WG-133 | 祠堂梁架 | 围屋木作 | 关键词: 祠堂 梁架 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20timber%20frame&title=Special:MediaSearch&type=image
+
+═══════════════
+四、赣南木器（14）
+═══════════════
+WG-134 | 南康樟木箱 | 赣南木器 | 关键词: 樟木箱 | commons: https://commons.wikimedia.org/w/index.php?search=camphor%20wood%20chest&title=Special:MediaSearch&type=image
+WG-135 | 茶水木桶 | 赣南木器 | 关键词: 木桶 | commons: https://commons.wikimedia.org/w/index.php?search=wooden%20bucket&title=Special:MediaSearch&type=image
+WG-136 | 木洗脸盆架 | 赣南木器 | 关键词: 脸盆架 木架 | commons: https://commons.wikimedia.org/w/index.php?search=washstand%20wood&title=Special:MediaSearch&type=image
+WG-137 | 木摇篮 | 赣南木器 | 关键词: 木摇篮 | commons: https://commons.wikimedia.org/w/index.php?search=wooden%20cradle&title=Special:MediaSearch&type=image
+WG-138 | 竹编木框篮 | 赣南木器 | 关键词: 竹编篮 木框 | commons: https://commons.wikimedia.org/w/index.php?search=bamboo%20basket&title=Special:MediaSearch&type=image
+WG-139 | 米缸木盖 | 赣南木器 | 关键词: 米缸 木盖 | commons: https://commons.wikimedia.org/w/index.php?search=wooden%20lid%20jar&title=Special:MediaSearch&type=image
+WG-140 | 木砧板 | 赣南木器 | 关键词: 木砧板 | commons: https://commons.wikimedia.org/w/index.php?search=wooden%20cutting%20board&title=Special:MediaSearch&type=image
+WG-141 | 木蒸笼 | 赣南木器 | 关键词: 木蒸笼 | commons: https://commons.wikimedia.org/w/index.php?search=bamboo%20steamer&title=Special:MediaSearch&type=image
+WG-142 | 木提盒 | 赣南木器 | 关键词: 提盒 食盒 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20food%20box&title=Special:MediaSearch&type=image
+WG-143 | 木鞋楦 | 赣南木器 | 关键词: 鞋楦 | commons: https://commons.wikimedia.org/w/index.php?search=shoe%20last%20wood&title=Special:MediaSearch&type=image
+WG-144 | 木扁担 | 赣南木器 | 关键词: 扁担 | commons: https://commons.wikimedia.org/w/index.php?search=shoulder%20pole%20wood&title=Special:MediaSearch&type=image
+WG-145 | 木水瓢 | 赣南木器 | 关键词: 木瓢 水瓢 | commons: https://commons.wikimedia.org/w/index.php?search=wooden%20ladle&title=Special:MediaSearch&type=image
+WG-146 | 实木矮凳 | 赣南木器 | 关键词: 矮凳 木凳 | commons: https://commons.wikimedia.org/w/index.php?search=wooden%20stool&title=Special:MediaSearch&type=image
+WG-147 | 木马扎 | 赣南木器 | 关键词: 马扎 折叠凳 | commons: https://commons.wikimedia.org/w/index.php?search=folding%20stool%20wood&title=Special:MediaSearch&type=image
+
+═══════════════
+五、江西木艺（10）
+═══════════════
+WG-148 | 婺源木雕屏风 | 江西木艺 | 关键词: 婺源 木雕 屏风 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20wood%20carving%20screen&title=Special:MediaSearch&type=image
+WG-149 | 木胎食盒 | 江西木艺 | 关键词: 食盒 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20food%20carrier&title=Special:MediaSearch&type=image
+WG-150 | 庐山木刻笔筒 | 江西木艺 | 关键词: 木笔筒 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20brush%20pot%20wood&title=Special:MediaSearch&type=image
+WG-151 | 井冈竹木器 | 江西木艺 | 关键词: 竹木器 竹编 | commons: https://commons.wikimedia.org/w/index.php?search=bamboo%20wood%20craft&title=Special:MediaSearch&type=image
+WG-152 | 樟树木箱 | 江西木艺 | 关键词: 樟木 木箱 | commons: https://commons.wikimedia.org/w/index.php?search=camphor%20chest&title=Special:MediaSearch&type=image
+WG-153 | 赣南木刻面具 | 江西木艺 | 关键词: 木刻面具 傩面 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20wooden%20mask&title=Special:MediaSearch&type=image
+WG-154 | 万载木偶 | 江西木艺 | 关键词: 木偶 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20wooden%20puppet&title=Special:MediaSearch&type=image
+WG-155 | 南昌木梳 | 江西木艺 | 关键词: 木梳 | commons: https://commons.wikimedia.org/w/index.php?search=wooden%20comb&title=Special:MediaSearch&type=image
+WG-156 | 萍乡木凳 | 江西木艺 | 关键词: 木凳 | commons: https://commons.wikimedia.org/w/index.php?search=wooden%20bench&title=Special:MediaSearch&type=image
+WG-157 | 吉安木刻匾 | 江西木艺 | 关键词: 木刻匾 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20carved%20plaque&title=Special:MediaSearch&type=image
+
+═══════════════
+六、广东木艺（12）
+═══════════════
+WG-158 | 潮州金漆木雕挂屏 | 广东木艺 | 关键词: 潮州木雕 挂屏 | commons: https://commons.wikimedia.org/w/index.php?search=Chaozhou%20wood%20carving&title=Special:MediaSearch&type=image
+WG-159 | 广式酸枝圈椅 | 广东木艺 | 关键词: 广式家具 酸枝 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20rosewood%20chair&title=Special:MediaSearch&type=image
+WG-160 | 潮州镂空花板 | 广东木艺 | 关键词: 潮州 镂空 花板 | commons: https://commons.wikimedia.org/w/index.php?search=Chaozhou%20carved%20panel&title=Special:MediaSearch&type=image
+WG-161 | 广式螺钿柜 | 广东木艺 | 关键词: 螺钿 家具 | commons: https://commons.wikimedia.org/w/index.php?search=mother%20of%20pearl%20cabinet%20China&title=Special:MediaSearch&type=image
+WG-162 | 潮州木雕门楣 | 广东木艺 | 关键词: 潮州 门楣 木雕 | commons: https://commons.wikimedia.org/w/index.php?search=Chaozhou%20lintel%20carving&title=Special:MediaSearch&type=image
+WG-163 | 广东红木茶盘 | 广东木艺 | 关键词: 红木茶盘 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20tea%20tray%20wood&title=Special:MediaSearch&type=image
+WG-164 | 岭南木雕摆件 | 广东木艺 | 关键词: 岭南 木雕 | commons: https://commons.wikimedia.org/w/index.php?search=Lingnan%20wood%20carving&title=Special:MediaSearch&type=image
+WG-165 | 酸枝八仙桌 | 广东木艺 | 关键词: 八仙桌 酸枝 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20mahogany%20table&title=Special:MediaSearch&type=image
+WG-166 | 潮州栋梁雕 | 广东木艺 | 关键词: 潮州 栋梁 雕 | commons: https://commons.wikimedia.org/w/index.php?search=Chaozhou%20beam%20carving&title=Special:MediaSearch&type=image
+WG-167 | 广式梳妆台 | 广东木艺 | 关键词: 梳妆台 广式 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20dressing%20table&title=Special:MediaSearch&type=image
+WG-168 | 潮州木雕屏风 | 广东木艺 | 关键词: 潮州 木雕 屏风 | commons: https://commons.wikimedia.org/w/index.php?search=Chaozhou%20screen&title=Special:MediaSearch&type=image
+WG-169 | 广式条案 | 广东木艺 | 关键词: 条案 广式 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20long%20table&title=Special:MediaSearch&type=image
+
+═══════════════
+七、湖南木艺（10）
+═══════════════
+WG-170 | 湘西竹木雕 | 湖南木艺 | 关键词: 湘西 竹木雕 | commons: https://commons.wikimedia.org/w/index.php?search=Xiangxi%20wood%20carving&title=Special:MediaSearch&type=image
+WG-171 | 常德木雕屏风 | 湖南木艺 | 关键词: 常德 木雕 屏风 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20carved%20screen&title=Special:MediaSearch&type=image
+WG-172 | 湘西木桶 | 湖南木艺 | 关键词: 木桶 | commons: https://commons.wikimedia.org/w/index.php?search=wooden%20bucket&title=Special:MediaSearch&type=image
+WG-173 | 湖南竹编盒 | 湖南木艺 | 关键词: 竹编盒 | commons: https://commons.wikimedia.org/w/index.php?search=bamboo%20box&title=Special:MediaSearch&type=image
+WG-174 | 湘南木箱 | 湖南木艺 | 关键词: 木箱 | commons: https://commons.wikimedia.org/w/index.php?search=wooden%20chest&title=Special:MediaSearch&type=image
+WG-175 | 湘潭木梳 | 湖南木艺 | 关键词: 木梳 | commons: https://commons.wikimedia.org/w/index.php?search=wooden%20comb&title=Special:MediaSearch&type=image
+WG-176 | 湘西鱼形木雕 | 湖南木艺 | 关键词: 鱼形木雕 | commons: https://commons.wikimedia.org/w/index.php?search=fish%20wood%20carving&title=Special:MediaSearch&type=image
+WG-177 | 湖南木蒸笼 | 湖南木艺 | 关键词: 竹木蒸笼 | commons: https://commons.wikimedia.org/w/index.php?search=wooden%20steamer&title=Special:MediaSearch&type=image
+WG-178 | 湘西木雕箱 | 湖南木艺 | 关键词: 木雕箱 | commons: https://commons.wikimedia.org/w/index.php?search=Chinese%20carved%20box&title=Special:MediaSearch&type=image
+WG-179 | 湘西木雕摆件 | 湖南木艺 | 关键词: 木雕摆件 | commons: https://commons.wikimedia.org/w/index.php?search=wood%20carving%20ornament&title=Special:MediaSearch&type=image
+
+=============================================================
+合计 80 个编号。下载到 demo/images/<编号>.jpg 即自动替换。

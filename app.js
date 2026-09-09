@@ -68,13 +68,13 @@
   function bPlaque(c){var g=new THREE.Group(),m=mat(c);put(g,box(1.8,0.7,0.14,m),0,0,0);put(g,box(1.6,0.5,0.44,m),0,0,0);return {root:g,r:1};}
   function bBeam(c){var g=new THREE.Group(),m=mat(c);put(g,box(2.4,0.4,0.4,m),0,0,0);put(g,box(0.5,0.2,0.5,m),-0.9,-0.3,0);put(g,box(0.5,0.2,0.5,m),0.9,-0.3,0);return {root:g,r:1};}
   // 木器
-  function wBowl(c){var g=new THREE.Group(),m=mat(c);g.add(latheMesh([[0,-0.34],[0.20,-0.34],[0.18,-0.28],[0.24,-0.16],[0.50,0.10],[0.60,0.26],[0.60,0.28],[0.48,0.20],[0.30,0.02],[0.18,-0.12],[0,-0.14]],44,m));return {root:g,r:1};}
-  function wJar(c){var g=new THREE.Group(),m=mat(c);g.add(latheMesh([[0,-0.5],[0.32,-0.5],[0.30,-0.42],[0.24,-0.16],[0.42,0.16],[0.38,0.30],[0.20,0.34],[0,0.34]],44,m));return {root:g,r:1};}
-  function wVessel(c){var g=new THREE.Group(),m=mat(c);g.add(latheMesh([[0,-0.5],[0.32,-0.5],[0.36,-0.30],[0.36,0.30],[0.32,0.5],[0.28,0.5],[0,0.5]],40,m));return {root:g,r:1};}
+  function wBowl(c){var g=new THREE.Group(),m=mat(c);g.add(latheMesh([[0,-0.34],[0.20,-0.34],[0.18,-0.28],[0.24,-0.16],[0.50,0.10],[0.60,0.26],[0.60,0.28],[0.48,0.20],[0.30,0.02],[0.18,-0.12],[0,-0.14]],44,m));put(g,cyl(0.17,0.13,0.07,24,m),0,-0.30,0);return {root:g,r:1};}
+  function wJar(c){var g=new THREE.Group(),m=mat(c);g.add(latheMesh([[0,-0.5],[0.32,-0.5],[0.30,-0.42],[0.24,-0.16],[0.42,0.16],[0.38,0.30],[0.20,0.34],[0,0.34]],44,m));put(g,cyl(0.26,0.22,0.08,24,m),0,-0.52,0);put(g,cyl(0.20,0.16,0.08,24,m),0,0.36,0);return {root:g,r:1};}
+  function wVessel(c){var g=new THREE.Group(),m=mat(c);g.add(latheMesh([[0,-0.5],[0.32,-0.5],[0.36,-0.30],[0.36,0.30],[0.32,0.5],[0.28,0.5],[0,0.5]],40,m));put(g,cyl(0.30,0.26,0.08,24,m),0,-0.52,0);return {root:g,r:1};}
   function wBox(c){var g=new THREE.Group(),m=mat(c);put(g,box(1.4,0.7,0.9,m),0,0,0);put(g,box(1.5,0.16,1.0,m),0,0.42,0);put(g,sph(0.08,m),0,0.5,0);put(g,box(1.2,0.1,0.6,m),0,-0.3,0);return {root:g,r:1};}
   function wTray(c){var g=new THREE.Group(),m=mat(c);put(g,box(1.8,0.1,1.2,m),0,0,0);put(g,box(1.8,0.14,0.1,m),0,0.08,-0.55);put(g,box(1.8,0.14,0.1,m),0,0.08,0.55);put(g,box(0.1,0.14,1.2,m),-0.85,0.08,0);put(g,box(0.1,0.14,1.2,m),0.85,0.08,0);return {root:g,r:1};}
-  function wVase(c){var g=new THREE.Group(),m=mat(c);g.add(latheMesh([[0,-0.5],[0.28,-0.5],[0.30,-0.42],[0.22,-0.20],[0.16,0.10],[0.26,0.30],[0.32,0.46],[0.28,0.54],[0.14,0.54],[0,0.44]],44,m));return {root:g,r:1};}
-  function wCup(c){var g=new THREE.Group(),m=mat(c);g.add(latheMesh([[0,-0.30],[0.22,-0.30],[0.22,-0.24],[0.18,0.10],[0.22,0.26],[0.24,0.30],[0.20,0.30],[0.12,0.06],[0,-0.06]],36,m));return {root:g,r:1};}
+  function wVase(c){var g=new THREE.Group(),m=mat(c);g.add(latheMesh([[0,-0.5],[0.28,-0.5],[0.30,-0.42],[0.22,-0.20],[0.16,0.10],[0.26,0.30],[0.32,0.46],[0.28,0.54],[0.14,0.54],[0,0.44]],44,m));put(g,cyl(0.24,0.19,0.08,24,m),0,-0.52,0);put(g,cyl(0.14,0.11,0.08,24,m),0,0.56,0);return {root:g,r:1};}
+  function wCup(c){var g=new THREE.Group(),m=mat(c);g.add(latheMesh([[0,-0.30],[0.22,-0.30],[0.22,-0.24],[0.18,0.10],[0.22,0.26],[0.24,0.30],[0.20,0.30],[0.12,0.06],[0,-0.06]],36,m));put(g,cyl(0.16,0.12,0.06,20,m),0,-0.27,0);return {root:g,r:1};}
   function wPanel(c){var g=new THREE.Group(),m=mat(c);put(g,box(1.6,0.12,0.12,m),0,0.8,0);put(g,box(1.6,0.12,0.12,m),0,-0.8,0);put(g,box(0.12,1.6,0.12,m),-0.8,0,0);put(g,box(0.12,1.6,0.12,m),0.8,0,0);put(g,box(1.5,1.5,0.06,m),0,0,0);return {root:g,r:1};}
 
   function addLights(sc){sc.add(new THREE.HemisphereLight(0xfff6ea,0x8a6b4a,0.8));var k=new THREE.DirectionalLight(0xffffff,1.15);k.position.set(4,6,5);sc.add(k);var rim=new THREE.DirectionalLight(0xffc9a0,0.6);rim.position.set(-4,3,-5);sc.add(rim);var f=new THREE.DirectionalLight(0xa8c0ff,0.22);f.position.set(0,-2,-3);sc.add(f);}
@@ -88,6 +88,16 @@
     dom.addEventListener("touchmove",function(e){if(e.touches.length===1&&t0){az-=(e.touches[0].clientX-t0.x)*0.01;pol-=(e.touches[0].clientY-t0.y)*0.01;pol=Math.max(0.12,Math.min(Math.PI-0.12,pol));t0={x:e.touches[0].clientX,y:e.touches[0].clientY};apply();}},{passive:true});
     dom.addEventListener("touchend",function(){t0=null;});
     apply();return {update:function(){},dispose:function(){}};}
+  // 通用拆解:把模型所有直接子件沿中心向外分开(配合手柄/拆解按钮)
+  function autoExplode(g,sep){
+    var kids=g.children.slice(),box=new THREE.Box3().setFromObject(g),c=box.getCenter(new THREE.Vector3()),
+        homes=kids.map(function(k){return k.position.clone();});
+    g.userData.explode=function(t){
+      kids.forEach(function(k,i){
+        var d=homes[i].clone().sub(c);k.position.copy(homes[i]).add(d.multiplyScalar(t*sep));
+      });
+    };
+  }
 
   /* ============ 本地真实图片(封面,已无宗教图) ============ */
   var IMGS={
@@ -107,7 +117,7 @@
   /* ============ 数据(无宗教,80件,均配3D模型) ============ */
   var COLORS=[0xb8864a,0xc98a4b,0x8a5a2f,0xa9723f,0xd6a55c,0x7a4632,0xc59a63,0xb0713a,0x9c6b3c,0xa2592f];
   function genData(){
-    var out=[],SEQ={},ERAS=["明","清","明","清","民国","近现代","宋","清","明","现代"];
+    var out=[],SEQ={},gi=0,ERAS=["明","清","明","清","民国","近现代","宋","清","明","现代"];
     var CATS=[
       {cat:"榫卯",shop:"赣南·龙南",wood:["楠木","榉木","樟木","杉木"],badge:true,join:true,
         names:[["一斗三升斗拱","dougong"],["燕尾榫连接件","yanwei"],["十字榫方木","cross"],["井字榫木架","well"],["鲁班锁","luban"],["企口拼板","tongue"]],
@@ -134,11 +144,11 @@
     CATS.forEach(function(c){
       c.names.forEach(function(nm,i){
         if(!SEQ[c.cat])SEQ[c.cat]=0;
-        var id=(c.cat==="榫卯"?"SM":"WG")+"-"+(100+i),pool=IMGS[c.cat]||[];
+        var id=(c.cat==="榫卯"?"SM":"WG")+"-"+(100+(gi++)),pool=IMGS[c.cat]||[];
         var isJoin=!!c.join, key=isJoin?nm[1]:"";var build=isJoin?c.builders[key]:c.builders[i%c.builders.length];
         var multi=isJoin, steps=isJoin?JOIN_STEPS[key]:CRAFT, col=COLORS[SEQ[c.cat]++ % COLORS.length];
         out.push({id:id,name:isJoin?nm[0]:nm,cat:c.cat,era:ERAS[(SEQ[c.cat])%ERAS.length],shop:c.shop,wood:c.wood[i%c.wood.length],
-          size:(24+((i*7)%70))+"×"+((14+((i*5)%50)))+"×"+((10+((i*3)%30)))+" cm",no:id,img:pool[i%pool.length]||"",
+          size:(24+((i*7)%70))+"×"+((14+((i*5)%50)))+"×"+((10+((i*3)%30)))+" cm",no:id,img:"images/"+id+".jpg",fallback:pool[i%pool.length]||"",
           desc:(isJoin?nm[0]:nm)+"。"+(c.bio||""),badge:c.badge?"非遗木作":"",hasModel:true,build:build,bcolor:col,multiPart:multi,steps:steps});
       });
     });
@@ -160,7 +170,7 @@
     if(!list.length){emptyEl.classList.remove("hidden");return;}emptyEl.classList.add("hidden");
     list.forEach(function(a){
       var card=document.createElement("article");card.className="card";card.setAttribute("data-id",a.id);
-      card.innerHTML='<div class="thumb"><div class="ph">'+a.name.charAt(0)+'</div>'+((a.img)?'<img class="thumb-img" src="'+a.img+'" alt="'+a.name+'" loading="lazy" onerror="this.style.display=\'none\'">':'')+'<span class="v">3D</span></div>'+'<div class="card-body">'+(a.badge?'<span class="badge">'+a.badge+'</span>':'')+'<h3 class="name">'+a.name+'</h3><div class="sub">'+a.era+' ｜ '+a.shop+'</div></div>';
+      card.innerHTML='<div class="thumb"><div class="ph">'+a.name.charAt(0)+'</div><img class="thumb-img" src="'+a.img+'" data-f="'+a.fallback+'" alt="'+a.name+'" loading="lazy" onerror="this.onerror=null;if(this.dataset.f){this.src=this.dataset.f}else{this.style.display=\'none\'}"><span class="v">3D</span></div>'+'<div class="card-body">'+(a.badge?'<span class="badge">'+a.badge+'</span>':'')+'<h3 class="name">'+a.name+'</h3><div class="sub">'+a.era+' ｜ '+a.shop+'</div></div>';
       card.addEventListener("click",function(){openDetail(a);});grid.appendChild(card);
     });
   }
@@ -174,11 +184,12 @@
       canvas.classList.remove("hidden");imgE.classList.add("hidden");hint.style.display="";
       var renderer=makeRenderer(canvas),scene=new THREE.Scene();addLights(scene);
       var built=a.build(a.bcolor);
+      if(!built.root.userData.explode)autoExplode(built.root,1.0);
       var bx=new THREE.Box3().setFromObject(built.root),ctr=bx.getCenter(new THREE.Vector3());built.root.position.set(-ctr.x,-ctr.y,-ctr.z);
       var rr=bx.getBoundingSphere(new THREE.Sphere()).radius||1;built.r=rr;scene.add(built.root);addGround(scene,rr);
       var w=canvas.clientWidth||320,h=canvas.clientHeight||320,camera=new THREE.PerspectiveCamera(42,w/h,0.01,100);camera.position.set(rr*1.7,rr*1.45,rr*1.9);
       var controls=orbit(camera,renderer.domElement,rr);renderer.setSize(w,h,false);
-      detail={renderer:renderer,scene:scene,camera:camera,controls:controls,built:built,canvas:canvas,multiPart:!!a.multiPart,steps:a.steps,t:0,play:false,mode:"info",stepIdx:0,hasExplode:!!a.multiPart};
+      detail={renderer:renderer,scene:scene,camera:camera,controls:controls,built:built,canvas:canvas,multiPart:!!a.multiPart,steps:a.steps,t:0,play:false,mode:"info",stepIdx:0,hasExplode:true};
     } else {
       canvas.classList.add("hidden");hint.style.display="none";imgE.classList.remove("hidden");if(a.img){imgE.src=a.img;imgE.style.display="";}else{imgE.style.display="none";}
       detail={mode:"info",steps:a.steps,t:0,play:false,stepIdx:0,multiPart:false,hasExplode:false};
@@ -187,7 +198,7 @@
   function closeDetailScene(){if(!detail||!detail.renderer)return;try{detail.controls&&detail.controls.dispose();}catch(e){}try{detail.renderer.dispose();}catch(e){}detail=null;}
   function closeDetail(){el("overlay").classList.add("hidden");document.body.style.overflow="";closeDetailScene();}
   function showPanel(which){el("infoPanel").classList.toggle("hidden",which!=="info");el("teachPanel").classList.toggle("hidden",which!=="teach");if(detail){detail.mode=which;if(which==="info"){detail.play=false;detail.t=0;}}}
-  function openTeach(){if(!detail)return;showPanel("teach");detail.play=false;detail.t=0;detail.stepIdx=0;el("tKicker").textContent=detail.multiPart?"榫卯拆解演示":"工艺步骤演示";el("tName").textContent=el("dTitle").textContent;el("tNote").textContent=detail.multiPart?"拖动进度条或点『自动』,看着构件逐步拆解/组装":"拖动进度条或点『自动』,按工序讲解制作步骤";renderStepList(0);setPlayBtn(false);updateTeach();}
+  function openTeach(){if(!detail)return;showPanel("teach");detail.play=false;detail.t=0;detail.stepIdx=0;el("tKicker").textContent=detail.multiPart?"榫卯拆解演示":"结构拆解演示";el("tName").textContent=el("dTitle").textContent;el("tNote").textContent=detail.multiPart?"拖动进度条或点『自动』,看着构件逐步拆解/组装":"拖动进度条或点『自动』,看构件逐步拆开/合拢";renderStepList(0);setPlayBtn(false);updateTeach();}
   function renderStepList(idx){var ol=el("tSteps");ol.innerHTML="";detail.steps.forEach(function(s,i){var li=document.createElement("li");li.className=i===idx?"active":"";li.innerHTML='<span class="n">'+(i+1)+'</span><span class="tl">'+s.icon+' '+s.label+'</span>';ol.appendChild(li);});}
   function updateTeach(){if(!detail||detail.mode!=="teach")return;var n=detail.steps.length;var idx=detail.multiPart?Math.min(n-1,Math.floor(detail.t*n)):Math.min(n-1,Math.round(detail.t*(n-1)));if(idx!==detail.stepIdx){detail.stepIdx=idx;renderStepList(idx);}var s=detail.steps[idx];el("tIcon").textContent=s.icon;el("tLabel").textContent=s.label;el("tDesc").textContent=s.desc;el("tRange").value=Math.round(detail.t*100);if(detail.hasExplode)detail.target=detail.t;else detail.target=0;}
   function setPlayBtn(p){el("tPlay").textContent=p?"⏸ 暂停":"▶ 自动拆解";}function togglePlay(){if(!detail)return;detail.play=!detail.play;setPlayBtn(detail.play);}
@@ -207,5 +218,33 @@
   el("tRange").addEventListener("input",function(e){if(!detail)return;detail.play=false;setPlayBtn(false);detail.t=e.target.value/100;updateTeach();});
   el("tMode").addEventListener("click",function(){if(!detail)return;detail.play=false;setPlayBtn(false);detail.t=detail.t<0.5?1:0;updateTeach();});
   window.addEventListener("resize",sizeDetail);document.addEventListener("keydown",function(e){if(e.key==="Escape")closeDetail();});
+
+  /* ---- 底部导航切换 ---- */
+  function switchPage(name){document.querySelectorAll(".page").forEach(function(s){s.classList.toggle("hidden",s.id!=="page-"+name);});document.querySelectorAll(".tab").forEach(function(t){t.classList.toggle("active",t.getAttribute("data-page")===name);});}
+  document.querySelectorAll(".tab").forEach(function(t){t.addEventListener("click",function(){switchPage(t.getAttribute("data-page"));});});
+  document.querySelectorAll("[data-go]").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();switchPage(a.getAttribute("data-go"));});});
+  var imgTag=function(a){return '<img class="thumb-img" src="'+a.img+'" data-f="'+a.fallback+'" loading="lazy" onerror="this.onerror=null;this.src=this.dataset.f">';};
+  // 首页热门
+  (function(){var hot=DATA.slice(0,4),box=el("homeHot");if(box){box.innerHTML=hot.map(function(a){return '<div class="mini"><div class="thumb"><div class="ph">'+a.name.charAt(0)+'</div>'+imgTag(a)+'</div><span>'+a.name+'</span></div>';}).join("");box.querySelectorAll(".mini").forEach(function(c,i){c.addEventListener("click",function(){openDetail(hot[i]);});});}var st=el("stTotal");if(st)st.textContent=DATA.length;})();
+  // 社区
+  (function(){var posts=[["南康·实木家具","今天带学生观摩了榫卯方桌的组装，严丝合缝。"],["围屋修缮","关西新围的木柱础，一凿一线都是岁月的痕迹。"],["潮州金漆木雕","广式家具的髹饰工艺，金漆之美令人叹服。"],["湘西竹木","山野取材，刀法浑厚，竹木相生别有韵味。"]];var box=el("posts");if(box){box.innerHTML=posts.map(function(p){return '<div class="post"><div class="post-h"><span class="post-av">'+p[0].charAt(0)+'</span><div><b>'+p[0]+'</b><small>· 木作研习</small></div></div><p>'+p[1]+'</p></div>';}).join("");}})();
+  // 交易
+  (function(){var t=DATA.filter(function(a,i){return i%2===0;}).slice(0,8),box=el("tradeGrid");if(box){box.innerHTML=t.map(function(a){return '<article class="card"><div class="thumb"><div class="ph">'+a.name.charAt(0)+'</div>'+imgTag(a)+'<span class="v">3D</span></div><div class="card-body"><h3 class="name">'+a.name+'</h3><div class="sub">'+a.era+' ｜ ¥'+(128+((a.no.charCodeAt(1)*7)%260))+'</div></div></article>';}).join("");box.querySelectorAll(".card").forEach(function(c,i){c.addEventListener("click",function(){openDetail(t[i]);});});}})();
+
+  /* ---- 视觉排序:贴合"中式木艺"的放最上/最下,不贴合的居中下,弱化突兀感 ---- */
+  var RELEV={ "SM-100":2,"SM-101":0,"SM-102":0,"SM-103":0,"SM-104":2,"SM-105":2,
+    "WG-106":0,"WG-107":2,"WG-108":2,"WG-109":2,"WG-110":2,"WG-111":2,"WG-112":2,"WG-113":2,"WG-114":2,"WG-115":2,"WG-116":1,"WG-117":2,"WG-118":2,"WG-119":1,"WG-120":2,"WG-121":2,
+    "WG-122":2,"WG-123":2,"WG-124":2,"WG-125":2,"WG-126":1,"WG-127":0,"WG-128":2,"WG-129":2,"WG-130":2,"WG-131":1,"WG-132":2,"WG-133":2,
+    "WG-134":0,"WG-135":1,"WG-136":1,"WG-137":2,"WG-138":1,"WG-139":1,"WG-140":1,"WG-141":1,"WG-142":1,"WG-143":0,"WG-144":0,"WG-145":0,"WG-146":1,"WG-147":0,
+    "WG-148":2,"WG-149":1,"WG-150":2,"WG-151":2,"WG-152":0,"WG-153":2,"WG-154":2,"WG-155":1,"WG-156":0,"WG-157":2,"WG-158":1,"WG-159":2,"WG-160":2,"WG-161":2,"WG-162":0,"WG-163":0,"WG-164":0,"WG-165":0,"WG-166":0,"WG-167":1,"WG-168":2,"WG-169":0,"WG-170":2,"WG-171":1,"WG-172":0,"WG-173":2,"WG-174":2,"WG-175":0,"WG-176":1,"WG-177":0,"WG-178":2,"WG-179":1 };
+  (function(){
+    function sc(a){ return RELEV[a.id]!==undefined?RELEV[a.id]:1; }
+    var good=[],bad=[];
+    DATA.forEach(function(a){ (sc(a)<=0)?bad.push(a):good.push(a); });
+    good.sort(function(a,b){ return sc(b)-sc(a); });
+    var topN=Math.floor(good.length*0.58);
+    DATA=good.slice(0,topN).concat(bad.concat(good.slice(topN)));
+  })();
+
   renderGrid();tick();
 })();

@@ -25,6 +25,8 @@
       </header>
     </div>
 
+    <!-- ============ 典藏页(搜索/分类/筛选/网格) ============ -->
+    <section class="page" id="page-collect">
     <!-- 搜索 -->
     <div class="searchwrap">
       <div class="search">
@@ -74,14 +76,55 @@
     <!-- ============ 卡片网格(真实图片) ============ -->
     <main class="grid" id="grid"></main>
     <div class="empty hidden" id="empty">没有找到匹配的构件，换个关键词试试</div>
+    </section>
+
+    <!-- ============ 首页 ============ -->
+    <section class="page hidden" id="page-home">
+      <div class="herocard">
+        <div class="hc-badge">数字非遗 · 木作技艺</div>
+        <h2>让老木作 <em>开口说话</em></h2>
+        <p>以三维数字化复原客家围屋与南康家具的木作构件，榫卯可拆解、可旋转、可教学。</p>
+        <div class="hc-stats"><div><b id="stTotal">80</b><small>藏品</small></div><div><b id="stRegion">3</b><small>省份调研</small></div><div><b id="stTech">3D</b><small>数字化</small></div></div>
+        <a class="hc-cta" href="#" data-go="collect">进入典藏 →</a>
+      </div>
+      <h3 class="sec-title">热门构件</h3>
+      <div class="minirow" id="homeHot"></div>
+    </section>
+
+    <!-- ============ 社区 ============ -->
+    <section class="page hidden" id="page-community">
+      <h3 class="sec-title">木艺社区</h3>
+      <div class="posts" id="posts"></div>
+    </section>
+
+    <!-- ============ 交易 ============ -->
+    <section class="page hidden" id="page-trade">
+      <h3 class="sec-title">木艺交易 · 匠心好物</h3>
+      <div class="grid" id="tradeGrid"></div>
+    </section>
+
+    <!-- ============ 我的 ============ -->
+    <section class="page hidden" id="page-me">
+      <div class="profile">
+        <div class="pf-avatar">鲁</div>
+        <div><div class="pf-name">木语匠人</div><div class="pf-sub">赣南 · 南康 ｜ 非遗木作研学</div></div>
+      </div>
+      <div class="pf-stats"><div><b>80</b><small>藏品</small></div><div><b>12</b><small>收藏</small></div><div><b>6</b><small>教程</small></div></div>
+      <div class="list">
+        <a class="row" href="#" data-go="collect">📦 我的典藏</a>
+        <a class="row" href="#" data-go="community">💬 我的帖子</a>
+        <a class="row" href="#" data-go="trade">🛒 我的订单</a>
+        <a class="row" href="#">⚙️ 设置</a>
+      </div>
+    </section>
 
     <!-- ============ 底部导航 ============ -->
     <nav class="tabbar">
-      <button class="tab"><span>🏠</span>首页</button>
-      <button class="tab"><span>👥</span>社区</button>
-      <button class="tab active"><span>📦</span>典藏</button>
-      <button class="tab"><span>🛒</span>交易</button>
-      <button class="tab"><span>👤</span>我的</button>
+      <button class="tab" data-page="home"><span>🏠</span>首页</button>
+      <button class="tab" data-page="community"><span>👥</span>社区</button>
+      <button class="tab active" data-page="collect"><span>📦</span>典藏</button>
+      <button class="tab" data-page="trade"><span>🛒</span>交易</button>
+      <button class="tab" data-page="me"><span>👤</span>我的</button>
     </nav>
   </div>
 
