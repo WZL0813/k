@@ -25,8 +25,37 @@
       </header>
     </div>
 
-    <!-- ============ 典藏页(搜索/分类/筛选/网格) ============ -->
+    <!-- ============ 展品页:精品大斗拱 + 搜索/分类/筛选/网格 ============ -->
     <section class="page" id="page-collect">
+
+    <!-- 精品展品:逐件可拆装的高清斗拱(辽金转角铺作) -->
+    <div class="feature" id="feature">
+      <div class="feature-head">
+        <span class="f-badge">精品展品 · 三维数字复原</span>
+        <h2 id="dgModelName">辽金转角铺作 <em>斗拱</em></h2>
+        <p>依《营造法式》铺作做法逐件建模：柱础、木柱、普拍枋、栌斗、驼峰、泥道拱、华拱、角拱、交互斗、瓜子拱、慢拱、齐心斗、散斗、下昂、角昂、令拱、耍头、撩檐枋，共 <b>46 件</b>。<b>点任一构件即可取出、再点装回；也可直接拖动构件把它拉出来</b>。下面可一键切换<b>转角铺作（斜·默认）</b>与<b>柱头铺作（直）</b>。</p>
+      </div>
+      <div class="feature-viewer">
+        <canvas id="dgCanvas"></canvas>
+        <div class="dg-hint">点构件＝取出 / 再点装回 · 拖动构件＝拉出 · 空白处拖动＝旋转 · 滚轮＝缩放</div>
+        <div class="dg-label" id="dgLabel"></div>
+        <div class="dg-nums" id="dgNums">0 / 46 件已拆出</div>
+      </div>
+      <div class="feature-controls">
+        <button class="cbtn" id="dgAuto">▶ 逐步装配</button>
+        <button class="cbtn" id="dgAll">⇱ 全部拆出</button>
+        <button class="cbtn" id="dgReset">↺ 全部还原</button>
+        <button class="cbtn" id="dgModel">⇄ 切成转角铺作</button>
+      </div>
+      <ol class="dg-steps" id="dgSteps"></ol>
+    </div>
+
+    <!-- 自动拆解 · 正确示例 -->
+    <div class="dg-demo">
+      <div class="dg-demo-head"><span class="dg-demo-dot"></span>自动拆解 · <em>正确示例</em></div>
+      <div class="dg-demo-view"><canvas id="dgDemo"></canvas></div>
+    </div>
+
     <!-- 搜索 -->
     <div class="searchwrap">
       <div class="search">
@@ -85,8 +114,18 @@
         <h2>让老木作 <em>开口说话</em></h2>
         <p>以三维数字化复原客家围屋与南康家具的木作构件，榫卯可拆解、可旋转、可教学。</p>
         <div class="hc-stats"><div><b id="stTotal">80</b><small>藏品</small></div><div><b id="stRegion">3</b><small>省份调研</small></div><div><b id="stTech">3D</b><small>数字化</small></div></div>
-        <a class="hc-cta" href="#" data-go="collect">进入典藏 →</a>
+        <a class="hc-cta" href="#" data-go="collect">进入展品 →</a>
       </div>
+      <h3 class="sec-title">精品展品</h3>
+      <a class="cover-card" href="#" data-go="collect">
+        <img src="images/cover_dougong.jpg" alt="辽金转角铺作斗拱" loading="lazy" />
+        <span class="cover-mask">
+          <span class="cover-tag">辽金转角铺作 · 可拆解三维模型</span>
+          <b class="cover-title">斗拱 · 柱上开花</b>
+          <small class="cover-sub">点开可拖动逐层拆解 · 七层构件</small>
+          <span class="cover-go">进入展品 →</span>
+        </span>
+      </a>
       <h3 class="sec-title">热门构件</h3>
       <div class="minirow" id="homeHot"></div>
     </section>
@@ -97,12 +136,6 @@
       <div class="posts" id="posts"></div>
     </section>
 
-    <!-- ============ 交易 ============ -->
-    <section class="page hidden" id="page-trade">
-      <h3 class="sec-title">木艺交易 · 匠心好物</h3>
-      <div class="grid" id="tradeGrid"></div>
-    </section>
-
     <!-- ============ 我的 ============ -->
     <section class="page hidden" id="page-me">
       <div class="profile">
@@ -111,9 +144,9 @@
       </div>
       <div class="pf-stats"><div><b>80</b><small>藏品</small></div><div><b>12</b><small>收藏</small></div><div><b>6</b><small>教程</small></div></div>
       <div class="list">
-        <a class="row" href="#" data-go="collect">📦 我的典藏</a>
+        <a class="row" href="#" data-go="collect">🏛️ 我的展品</a>
         <a class="row" href="#" data-go="community">💬 我的帖子</a>
-        <a class="row" href="#" data-go="trade">🛒 我的订单</a>
+        <a class="row" href="#">♡ 我的收藏</a>
         <a class="row" href="#">⚙️ 设置</a>
       </div>
     </section>
@@ -122,8 +155,7 @@
     <nav class="tabbar">
       <button class="tab" data-page="home"><span>🏠</span>首页</button>
       <button class="tab" data-page="community"><span>👥</span>社区</button>
-      <button class="tab active" data-page="collect"><span>📦</span>典藏</button>
-      <button class="tab" data-page="trade"><span>🛒</span>交易</button>
+      <button class="tab active" data-page="collect"><span>🏛️</span>展品</button>
       <button class="tab" data-page="me"><span>👤</span>我的</button>
     </nav>
   </div>
@@ -201,7 +233,11 @@
     "https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js",
     "https://unpkg.com/three@0.128.0/build/three.min.js",
     "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"];
-  loadOne(THREE_URLS,function(){var s=document.createElement("script");s.src="app.js";document.head.appendChild(s);});
+  loadOne(THREE_URLS,function(){
+    var s=document.createElement("script");s.src="app.js";
+    s.onload=function(){var d=document.createElement("script");d.src="dougong.js";document.head.appendChild(d);};
+    document.head.appendChild(s);
+  });
   if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').catch(function(){});});}
   </script>
 </body>
