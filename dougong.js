@@ -417,12 +417,15 @@
       renderer.render(scene, camera);
     }
 
-    if (opts.demo) {   // 正确示例: 循环演示逐件装配
+    if (opts.demo) {   // 正确示例: 循环演示逐件装配 + 实时字幕/进度
       var di = 0, dPhase = 0, dHold = 40;
+      var capEl = document.getElementById("dgDemoCap");
+      var stepEl = document.getElementById("dgDemoStep");
+      var barEl = document.getElementById("dgDemoBar");
       parts.forEach(function (p) { p.out = p.outMax; p.target = p.outMax; });
       setInterval(function () {
-        if (dHold > 0) { dHold--; return; }
-        if (dPhase === 0) {
+        if (dHold > 0) { dHold--; }
+        else if (dPhase === 0) {
           if (di < parts.length) {
             var p = parts[di];
             p.target = p.target > 0.02 ? p.target * 0.8 : 0;
@@ -432,6 +435,14 @@
           parts.forEach(function (p) { p.target = p.outMax; });
           if (parts[parts.length - 1].out > parts[parts.length - 1].outMax * 0.9) { dPhase = 0; di = 0; dHold = 40; }
         }
+        if (capEl) {
+          if (dPhase === 0) {
+            var cur = parts[Math.min(di, parts.length - 1)];
+            capEl.textContent = "装配：" + (cur ? cur.name : "") + "（第 " + Math.min(di + 1, parts.length) + " 件）";
+          } else { capEl.textContent = "装配完成 · 准备拆解复位"; }
+        }
+        if (stepEl) { stepEl.textContent = (dPhase === 0 ? "装配 " + Math.min(di, parts.length) : "完成 " + parts.length) + " / " + parts.length; }
+        if (barEl) { barEl.style.width = (dPhase === 0 ? (di / parts.length * 100) : 100) + "%"; }
       }, 26);
     }
 

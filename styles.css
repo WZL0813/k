@@ -218,6 +218,11 @@ body{font-family:"PingFang SC","Microsoft YaHei","HarmonyOS Sans SC",system-ui,s
 .dg-demo-dot{width:7px;height:7px;border-radius:50%;background:#e0a052;box-shadow:0 0 0 4px rgba(224,160,82,.18)}
 .dg-demo-view{border-radius:13px;overflow:hidden;background:radial-gradient(120% 100% at 50% 0%,rgba(255,214,150,.12),rgba(0,0,0,0) 70%);border:1px solid rgba(255,255,255,.06)}
 #dgDemo{display:block;width:100%;height:172px}
+.dg-demo-head .dg-demo-step{margin-left:auto;font-size:11px;font-weight:600;color:#b79a72;letter-spacing:.5px}
+.dg-demo-view{position:relative}
+.dg-demo-cap{position:absolute;left:10px;bottom:14px;font-size:12px;font-weight:700;color:#ffe7bf;background:rgba(40,24,10,.72);border:1px solid rgba(255,214,150,.28);border-radius:9px;padding:4px 10px;pointer-events:none;max-width:78%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.dg-demo-bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.08)}
+.dg-demo-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#e0a052,#f6e0b6)}
 @media(min-width:521px){#dgDemo{height:214px}}
 
 

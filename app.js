@@ -150,17 +150,29 @@
     put(g,box(1.9,0.08,0.08,m),0,1.86,0.62);put(g,box(0.08,0.08,1.3,m),0.9,1.86,0);
     [-1,1].forEach(function(sx){[-1,1].forEach(function(sz){hoof(g,m,sx*0.9,-0.4,sz*0.62,1);});});
     return {root:g,r:1};}
-  function fRoundChair(c){var g=new THREE.Group(),m=mat(c);
+  function fRoundChair(c,v){v=(v||0)%2;var g=new THREE.Group(),m=mat(c);
     put(g,box(1.16,0.1,1.0,m),0,0.62,0);put(g,box(1.22,0.05,1.06,m),0,0.69,0);
     [[-0.5,-0.4],[0.5,-0.4],[-0.5,0.4],[0.5,0.4]].forEach(function(p){put(g,cyl(0.05,0.062,0.6,14,m),p[0],0.31,p[1]);});
     put(g,box(1.0,0.12,0.05,m),0,0.52,-0.4);put(g,box(0.05,0.12,0.8,m),-0.5,0.52,0);put(g,box(0.05,0.12,0.8,m),0.5,0.52,0);
     put(g,box(1.06,0.07,0.07,m),0,0.2,0.4);put(g,box(0.92,0.06,0.06,m),0,0.32,-0.4);
     put(g,cyl(0.045,0.045,0.44,10,m),-0.5,0.87,0.4);put(g,cyl(0.045,0.045,0.44,10,m),0.5,0.87,0.4);
     put(g,box(1.02,0.07,0.1,m),0,1.08,0.4);
-    put(g,box(0.62,0.52,0.06,m),0,0.99,-0.4);
-    put(g,cyl(0.028,0.028,0.44,8,m),-0.24,0.92,-0.4);put(g,cyl(0.028,0.028,0.44,8,m),0.24,0.92,-0.4);
-    arcRow(g,m,0,0.86,-0.4,0.6,Math.PI,2*Math.PI,10,0.055,null,0.15);
-    put(g,box(0.5,0.06,0.06,m),0,1.16,-0.4);
+    if(v===0){
+      put(g,box(0.62,0.52,0.06,m),0,0.99,-0.4);
+      put(g,cyl(0.028,0.028,0.44,8,m),-0.24,0.92,-0.4);put(g,cyl(0.028,0.028,0.44,8,m),0.24,0.92,-0.4);
+      arcRow(g,m,0,0.86,-0.4,0.6,Math.PI,2*Math.PI,10,0.055,null,0.15);
+      put(g,box(0.5,0.06,0.06,m),0,1.16,-0.4);
+    } else { // 变体: 方背太师椅式 + 雕花靠背 + 扶手
+      put(g,cyl(0.05,0.05,1.02,10,m),-0.46,1.14,-0.4);put(g,cyl(0.05,0.05,1.02,10,m),0.46,1.14,-0.4);
+      put(g,box(1.12,0.09,0.3,m),0,1.66,-0.4);
+      put(g,box(0.72,0.62,0.07,m),0,1.12,-0.4);
+      put(g,cyl(0.19,0.19,0.05,18,m),0,1.22,-0.34).rotation.x=Math.PI/2;
+      put(g,cyl(0.19,0.19,0.05,18,m),0,1.0,-0.34).rotation.x=Math.PI/2;
+      for(var i=0;i<8;i++){var a=i/8*Math.PI*2;put(g,box(0.07,0.07,0.06,m),Math.cos(a)*0.23,1.22+Math.sin(a)*0.23,-0.32).rotation.z=a;}
+      put(g,box(0.98,0.07,0.1,m),0,0.96,0.4);
+      put(g,cyl(0.04,0.04,0.34,10,m),-0.5,0.78,0.4);put(g,cyl(0.04,0.04,0.34,10,m),0.5,0.78,0.4);
+    }
+    hoof(g,m,-0.5,-0.02,-0.4,0.9);hoof(g,m,0.5,-0.02,-0.4,0.9);
     return {root:g,r:1};}
   function fHatChair(c){var g=new THREE.Group(),m=mat(c);
     put(g,box(1.12,0.1,0.96,m),0,0.6,0);put(g,box(1.18,0.05,1.02,m),0,0.67,0);
@@ -182,13 +194,22 @@
     for(var i=0;i<6;i++){put(g,cyl(0.03,0.03,0.42,8,m),-0.7+i*0.28,0.9,-0.6);}
     put(g,box(2.1,0.08,0.12,m),0,1.1,-0.6);
     return {root:g,r:1};}
-  function fSquareTable(c){var g=new THREE.Group(),m=mat(c);
+  function fSquareTable(c,v){v=(v||0)%2;var g=new THREE.Group(),m=mat(c);
     put(g,box(1.46,0.1,1.46,m),0,0.8,0);put(g,box(1.52,0.05,1.52,m),0,0.86,0);
-    [[-0.58,-0.58],[0.58,-0.58],[-0.58,0.58],[0.58,0.58]].forEach(function(p){put(g,cyl(0.07,0.095,0.74,14,m),p[0],0.37,p[1]);});
-    [-1,1].forEach(function(s){put(g,box(1.2,0.13,0.06,m),0,0.66,s*0.58);put(g,box(0.06,0.13,1.2,m),s*0.58,0.66,0);put(g,box(0.44,0.09,0.05,m),0,0.6,s*0.58);put(g,box(0.05,0.09,0.44,m),s*0.58,0.6,0);});
-    put(g,box(1.1,0.07,0.06,m),0,0.26,-0.58);put(g,box(1.1,0.07,0.06,m),0,0.26,0.58);
-    put(g,box(0.06,0.07,1.1,m),-0.58,0.26,0);put(g,box(0.06,0.07,1.1,m),0.58,0.26,0);
-    put(g,box(0.9,0.05,0.05,m),0,0.13,0);
+    if(v===1){put(g,box(1.36,0.13,1.36,m),0,0.7,0);}
+    [[-0.58,-0.58],[0.58,-0.58],[-0.58,0.58],[0.58,0.58]].forEach(function(p){
+      if(v===1){put(g,cyl(0.06,0.092,0.66,12,m),p[0],0.34,p[1]);hoof(g,m,p[0],-0.02,p[1],0.9);}
+      else{put(g,cyl(0.07,0.095,0.74,14,m),p[0],0.37,p[1]);}});
+    [-1,1].forEach(function(s){put(g,box(1.2,0.13,0.06,m),0,v===1?0.62:0.66,s*0.58);put(g,box(0.06,0.13,1.2,m),s*0.58,v===1?0.62:0.66,0);
+      put(g,box(0.44,0.09,0.05,m),0,v===1?0.56:0.6,s*0.58);put(g,box(0.05,0.09,0.44,m),s*0.58,v===1?0.56:0.6,0);});
+    if(v===1){
+      put(g,box(0.66,0.1,0.06,m),0,0.4,-0.58);put(g,box(0.66,0.1,0.06,m),0,0.4,0.58);
+      put(g,box(0.06,0.1,0.66,m),-0.58,0.4,0);put(g,box(0.06,0.1,0.66,m),0.58,0.4,0);
+    } else {
+      put(g,box(1.1,0.07,0.06,m),0,0.26,-0.58);put(g,box(1.1,0.07,0.06,m),0,0.26,0.58);
+      put(g,box(0.06,0.07,1.1,m),-0.58,0.26,0);put(g,box(0.06,0.07,1.1,m),0.58,0.26,0);
+      put(g,box(0.9,0.05,0.05,m),0,0.13,0);
+    }
     return {root:g,r:1};}
   function fAltarTable(c){var g=new THREE.Group(),m=mat(c);
     put(g,box(2.3,0.1,0.58,m),0,0.8,0);put(g,box(2.44,0.09,0.5,m),0,0.9,-0.06);
@@ -208,14 +229,22 @@
     put(g,box(0.11,0.32,0.98,m),-0.55,0.86,0);put(g,box(0.11,0.32,0.98,m),0.55,0.86,0);
     put(g,box(0.86,0.06,0.06,m),0,0.2,0.4);put(g,box(0.86,0.06,0.06,m),0,0.34,-0.4);
     return {root:g,r:1};}
-  function fWardrobe(c){var g=new THREE.Group(),m=mat(c);
-    put(g,box(1.5,1.96,0.62,m),0,0.48,0);
-    put(g,box(1.56,0.1,0.68,m),0,1.5,0);put(g,box(1.56,0.1,0.68,m),0,-0.52,0);
-    put(g,box(0.68,1.34,0.05,m),-0.36,0.5,0.33);put(g,box(0.68,1.34,0.05,m),0.36,0.5,0.33);
-    [-1,1].forEach(function(s){put(g,box(0.1,0.16,0.03,br()),s*0.06,0.5,0.36);put(g,box(0.06,0.1,0.03,br()),s*0.2,0.5,0.36);});
-    put(g,box(1.6,0.46,0.68,m),0,1.72,0);put(g,box(0.72,0.36,0.05,m),-0.39,1.72,0.36);put(g,box(0.72,0.36,0.05,m),0.39,1.72,0.36);
-    put(g,box(1.64,0.07,0.72,m),0,1.96,0);
-    put(g,box(0.6,0.1,0.5,m),0,0.1,0);
+  function fWardrobe(c,v){v=(v||0)%2;var g=new THREE.Group(),m=mat(c);
+    if(v===1){ // 变体: 圆角双门柜 + 铜合页
+      put(g,box(1.4,1.9,0.62,m),0,0.44,0);
+      put(g,cyl(0.31,0.31,1.4,20,m),0,1.39,0).rotation.z=Math.PI/2;
+      put(g,box(0.66,1.72,0.05,m),-0.35,0.42,0.33);put(g,box(0.66,1.72,0.05,m),0.35,0.42,0.33);
+      [-1,1].forEach(function(s){put(g,box(0.06,0.1,0.03,br()),s*0.24,0.9,0.36);put(g,box(0.06,0.1,0.03,br()),s*0.24,0.2,0.36);});
+      put(g,box(0.9,0.06,0.5,m),0,-0.52,0);
+    } else {
+      put(g,box(1.5,1.96,0.62,m),0,0.48,0);
+      put(g,box(1.56,0.1,0.68,m),0,1.5,0);put(g,box(1.56,0.1,0.68,m),0,-0.52,0);
+      put(g,box(0.68,1.34,0.05,m),-0.36,0.5,0.33);put(g,box(0.68,1.34,0.05,m),0.36,0.5,0.33);
+      [-1,1].forEach(function(s){put(g,box(0.1,0.16,0.03,br()),s*0.06,0.5,0.36);put(g,box(0.06,0.1,0.03,br()),s*0.2,0.5,0.36);});
+      put(g,box(1.6,0.46,0.68,m),0,1.72,0);put(g,box(0.72,0.36,0.05,m),-0.39,1.72,0.36);put(g,box(0.72,0.36,0.05,m),0.39,1.72,0.36);
+      put(g,box(1.64,0.07,0.72,m),0,1.96,0);
+      put(g,box(0.6,0.1,0.5,m),0,0.1,0);
+    }
     return {root:g,r:1};}
   function fDesk(c){var g=new THREE.Group(),m=mat(c);
     put(g,box(1.84,0.1,0.9,m),0,0.82,0);put(g,box(1.9,0.05,0.96,m),0,0.88,0);
@@ -287,13 +316,21 @@
     [[-0.5,-0.24],[0.5,-0.24],[-0.5,0.24],[0.5,0.24]].forEach(function(p){hoof(g,m,p[0],-1.0,p[1],1);});
     return {root:g,r:1};}
   // ---------- 围屋 / 建筑 ----------
-  function bWindow(c){var g=new THREE.Group(),m=mat(c);
+  function bWindow(c,v){v=(v||0)%2;var g=new THREE.Group(),m=mat(c);
     put(g,box(1.74,0.14,0.18,m),0,0.86,0);put(g,box(1.74,0.14,0.18,m),0,-0.86,0);
     put(g,box(0.15,1.86,0.18,m),-0.8,0,0);put(g,box(0.15,1.86,0.18,m),0.8,0,0);
     put(g,box(1.6,0.09,0.12,m),0,0,0.01);put(g,box(0.09,1.7,0.12,m),0,0,0.01);
-    for(var i=0;i<7;i++){put(g,box(0.045,1.6,0.07,m),-0.63+i*0.21,0,0);}
-    for(i=0;i<7;i++){put(g,box(1.6,0.045,0.07,m),0,-0.63+i*0.21,-0.01);}
-    for(i=0;i<3;i++){put(g,box(0.3,0.3,0.07,m),-0.42+i*0.42,0.42,0.02);put(g,box(0.3,0.3,0.07,m),-0.42+i*0.42,-0.42,0.02);}
+    var i,a;
+    if(v===0){
+      for(i=0;i<7;i++){put(g,box(0.045,1.6,0.07,m),-0.63+i*0.21,0,0);}
+      for(i=0;i<7;i++){put(g,box(1.6,0.045,0.07,m),0,-0.63+i*0.21,-0.01);}
+      for(i=0;i<3;i++){put(g,box(0.3,0.3,0.07,m),-0.42+i*0.42,0.42,0.02);put(g,box(0.3,0.3,0.07,m),-0.42+i*0.42,-0.42,0.02);}
+    } else { // 变体: 菱格(斜棂) + 花心
+      for(i=0;i<6;i++){put(g,box(0.045,1.7,0.07,m),-0.6+i*0.24,0,0).rotation.z=0.42;
+        put(g,box(0.045,1.7,0.07,m),-0.6+i*0.24,0,0.005).rotation.z=-0.42;}
+      put(g,cyl(0.3,0.3,0.08,20,m),0,0,0.03).rotation.x=Math.PI/2;
+      for(i=0;i<8;i++){a=i/8*Math.PI*2;put(g,box(0.1,0.1,0.08,m),0,0,0.04);put(g,sph(0.04,m),Math.cos(a)*0.4,Math.sin(a)*0.4,0.03);}
+    }
     put(g,box(1.8,0.09,0.22,m),0,0.96,0);put(g,box(1.8,0.07,0.22,m),0,-0.96,0);
     return {root:g,r:1};}
   function bBase(c){var g=new THREE.Group(),m=mat(c);
@@ -312,7 +349,7 @@
     put(g,cyl(0.1,0.1,0.2,12,m),0,-0.14,0);put(g,sph(0.09,m),0,-0.26,0);
     put(g,box(0.44,0.3,0.06,m),0,0.6,0.2);
     return {root:g,r:1};}
-  function bBracket(c){var g=new THREE.Group(),m=mat(c);
+  function bBracket(c,v){v=(v||0)%2;var g=new THREE.Group(),m=mat(c);
     put(g,box(1.8,0.2,0.26,m),0,0.66,0);put(g,box(1.9,0.08,0.3,m),0,0.8,0);
     put(g,box(0.24,1.1,0.26,m),-0.78,0.06,0);
     put(g,box(0.9,0.18,0.24,m),-0.42,0.16,0);
@@ -322,6 +359,12 @@
     put(g,box(0.5,0.16,0.22,m),0.26,0.44,0);
     for(var i=0;i<5;i++){put(g,box(0.12,0.12,0.18,m),-0.46+i*0.16,0.32,0).rotation.z=(i%2?0.4:-0.4);}
     put(g,box(0.3,0.24,0.2,m),0.62,0.3,0).rotation.z=-0.3;
+    if(v===1){ // 变体: 加卷草纹 + 加长拱头, 左右镜像
+      put(g,cyl(0.09,0.09,0.5,10,m),-0.5,-0.2,0).rotation.z=-0.5;
+      put(g,sph(0.08,m),-0.68,-0.42,0);
+      for(i=0;i<4;i++){put(g,box(0.16,0.09,0.2,m),-0.2+i*0.2,-0.34,0).rotation.z=(i%2?-0.3:0.3);}
+      g.scale.x=-1;
+    }
     return {root:g,r:1};}
   function bBeam(c){var g=new THREE.Group(),m=mat(c);
     arcRow(g,m,0,-0.36,0,0.34,Math.PI,0,10,0.26,null,0.28);
@@ -447,14 +490,21 @@
     put(g,cyl(R-0.22,R-0.16,0.16,22,m),0,ty+0.2,0);
     if(v===2){put(g,cyl(0.06,0.06,0.08,12,br()),0,ty+0.32,0);}
     return {root:g,r:1};}
-  function wFoodBox(c){var g=new THREE.Group(),m=mat(c);
-    [-0.4,0,0.4].forEach(function(y,i){var s=i===2?0.94:1;put(g,box(1.0*s,0.32,0.7*s,m),0,y,0);
+  function wFoodBox(c,v){v=(v||0)%2;var g=new THREE.Group(),m=mat(c);
+    var tiers=v===0?[-0.4,0,0.4]:[-0.22,0.22];
+    tiers.forEach(function(y,i){var s=(v===0&&i===2)?0.94:1;
+      put(g,box(1.0*s,0.32,0.7*s,m),0,y,0);
       put(g,box(1.06*s,0.05,0.76*s,m),0,y+0.18,0);
+      if(v===1){for(var q=0;q<5;q++){put(g,box(1.02*s,0.03,0.72*s,m),0,y-0.12+q*0.06,0);}}
       [-1,1].forEach(function(k){put(g,box(0.05,0.32,0.05,br()),k*0.48*s,y,0.34*s);put(g,box(1.0*s,0.05,0.05,br()),0,y+0.05,k*0.34*s);});});
-    put(g,box(1.08,0.08,0.78,m),0,0.6,0);
-    arcRow(g,m,0,0.32,0,0.4,0,Math.PI,12,0.05);
-    put(g,box(0.36,0.05,0.05,m),0,0.62,0);
-    put(g,box(0.2,0.16,0.03,br()),0,0.05,0.37);put(g,box(0.12,0.1,0.04,br()),0,0.05,0.39);
+    if(v===1){
+      put(g,box(1.14,0.1,0.84,m),0,0.46,0);put(g,box(1.02,0.08,0.72,m),0,0.55,0);
+      put(g,box(0.34,0.06,0.06,m),0,0.61,0);
+    } else {
+      put(g,box(1.08,0.08,0.78,m),0,0.6,0);
+      put(g,box(0.2,0.16,0.03,br()),0,0.05,0.37);put(g,box(0.12,0.1,0.04,br()),0,0.05,0.39);
+    }
+    arcRow(g,m,0,v===1?0.3:0.32,0,0.4,0,Math.PI,12,0.05);
     return {root:g,r:1};}
   function wShoeTree(c){var g=new THREE.Group(),m=mat(c);
     g.add(latheMesh([[0,-0.5],[0.24,-0.48],[0.3,-0.3],[0.28,-0.05],[0.2,0.24],[0.13,0.42],[0.06,0.5],[0,0.44]],38,m));
@@ -598,17 +648,40 @@
     dom.addEventListener("touchstart",function(e){if(e.touches.length===1){t0={x:e.touches[0].clientX,y:e.touches[0].clientY};}},{passive:true});
     dom.addEventListener("touchmove",function(e){if(e.touches.length===1&&t0){az-=(e.touches[0].clientX-t0.x)*0.01;pol-=(e.touches[0].clientY-t0.y)*0.01;pol=Math.max(0.12,Math.min(Math.PI-0.12,pol));t0={x:e.touches[0].clientX,y:e.touches[0].clientY};apply();}},{passive:true});
     dom.addEventListener("touchend",function(){t0=null;});
-    apply();return {update:function(){},dispose:function(){}};}
-  // 通用拆解:把模型所有直接子件沿中心向外分开(配合手柄/拆解按钮)
+    apply();return {spin:function(d){if(down)return;az+=d;apply();},reset:function(){az=Math.PI/4;pol=Math.PI/2.5;dist=r*2.7;apply();},dispose:function(){}};}
+  // 精细拆解: 每件按"合理方向 + 逐件错开 + 缓入缓出"分离, 而不是一起散开
+  var _EX_N=0;
   function autoExplode(g,sep){
-    var kids=g.children.slice(),box=new THREE.Box3().setFromObject(g),c=box.getCenter(new THREE.Vector3()),
-        homes=kids.map(function(k){return k.position.clone();});
+    var kids=g.children.slice();
+    if(!kids.length){g.userData.explode=function(){};return;}
+    var box=new THREE.Box3().setFromObject(g), c=box.getCenter(new THREE.Vector3());
+    var homes=kids.map(function(k){return k.position.clone();});
+    var sizes=kids.map(function(k){var b=new THREE.Box3().setFromObject(k);return b.getSize(new THREE.Vector3()).length();});
+    var dirs=kids.map(function(k,i){
+      var d=homes[i].clone().sub(c), v=new THREE.Vector3();
+      var ax=Math.abs(d.x),ay=Math.abs(d.y),az=Math.abs(d.z);
+      if(d.length()<0.10){ v.set(0,1,0); }                       // 正中件 → 上提
+      else if(ay>=ax&&ay>=az){ v.set(d.x*0.30,1,d.z*0.30); }      // 上下层 → 主要上提
+      else if(ax>=az){ v.set(d.x>0?1:-1,0.18,0); }               // 横向件 → 侧抽
+      else { v.set(0,0.18,d.z>0?1:-1); }
+      return v.normalize();
+    });
+    // 按高度排序, 越高的越先拆开
+    var order=kids.map(function(k,i){return i;}).sort(function(a,b){return homes[b].y-homes[a].y;});
+    var rank={}; order.forEach(function(idx,r){rank[idx]=r;});
+    var n=kids.length;
     g.userData.explode=function(t){
       kids.forEach(function(k,i){
-        var d=homes[i].clone().sub(c);k.position.copy(homes[i]).add(d.multiplyScalar(t*sep));
+        var s=n>1?(rank[i]/(n*2.4)):0;          // 起始时刻(错开)
+        var u=Math.max(0,Math.min(1,(t-s)/Math.max(0.15,1-s)));
+        u=u*u*(3-2*u);                           // 平滑
+        var dist=sep*(0.55+0.85*((i%4)/3))*(1+Math.min(0.6,sizes[i]*0.25));
+        k.position.copy(homes[i]).addScaledVector(dirs[i],u*dist);
       });
     };
   }
+  // 装配过程: 逐步把构件"补"回去(0=散, 1=装好)
+  function autoAssemble(g){ /* 复用 explode: 传入 1-t 即为合拢 */ }
 
   /* ============ 本地真实图片(封面,已无宗教图) ============ */
   var IMGS={
@@ -705,7 +778,7 @@
       canvas.classList.remove("hidden");imgE.classList.add("hidden");hint.style.display="";
       var renderer=makeRenderer(canvas),scene=new THREE.Scene();addLights(scene);
       var built=a.build(a.bcolor);
-      if(!built.root.userData.explode)autoExplode(built.root,1.0);
+      if(!built.root.userData.explode)autoExplode(built.root,1.75);
       var bx=new THREE.Box3().setFromObject(built.root),ctr=bx.getCenter(new THREE.Vector3());built.root.position.set(-ctr.x,-ctr.y,-ctr.z);
       var rr=bx.getBoundingSphere(new THREE.Sphere()).radius||1;built.r=rr;scene.add(built.root);addGround(scene,rr);
       var w=canvas.clientWidth||320,h=canvas.clientHeight||320,camera=new THREE.PerspectiveCamera(42,w/h,0.01,100);camera.position.set(rr*1.7,rr*1.45,rr*1.9);
@@ -723,7 +796,13 @@
   function renderStepList(idx){var ol=el("tSteps");ol.innerHTML="";detail.steps.forEach(function(s,i){var li=document.createElement("li");li.className=i===idx?"active":"";li.innerHTML='<span class="n">'+(i+1)+'</span><span class="tl">'+s.icon+' '+s.label+'</span>';ol.appendChild(li);});}
   function updateTeach(){if(!detail||detail.mode!=="teach")return;var n=detail.steps.length;var idx=detail.multiPart?Math.min(n-1,Math.floor(detail.t*n)):Math.min(n-1,Math.round(detail.t*(n-1)));if(idx!==detail.stepIdx){detail.stepIdx=idx;renderStepList(idx);}var s=detail.steps[idx];el("tIcon").textContent=s.icon;el("tLabel").textContent=s.label;el("tDesc").textContent=s.desc;el("tRange").value=Math.round(detail.t*100);if(detail.hasExplode)detail.target=detail.t;else detail.target=0;}
   function setPlayBtn(p){el("tPlay").textContent=p?"⏸ 暂停":"▶ 自动拆解";}function togglePlay(){if(!detail)return;detail.play=!detail.play;setPlayBtn(detail.play);}
-  function tick(){requestAnimationFrame(tick);if(detail&&detail.renderer){if(detail.mode==="teach"&&detail.play){detail.t+=0.006;if(detail.t>=1){detail.t=1;detail.play=false;setPlayBtn(false);}updateTeach();}if(detail.hasExplode)detail.target=detail.mode==="teach"?detail.t:0;detail.explode=(detail.explode||0)+((detail.target||0)-(detail.explode||0))*0.12;if(detail.built.root.userData.explode)detail.built.root.userData.explode(detail.explode);detail.renderer.render(detail.scene,detail.camera);}}
+  function tick(){requestAnimationFrame(tick);if(detail&&detail.renderer){
+    if(detail.mode==="teach"&&detail.play){detail.t+=0.0055;if(detail.t>=1){detail.t=1;detail.play=false;setPlayBtn(false);}updateTeach();}
+    if(detail.mode==="teach"&&detail.controls&&detail.controls.spin)detail.controls.spin(0.0035);
+    if(detail.hasExplode)detail.target=detail.mode==="teach"?detail.t:0;
+    detail.explode=(detail.explode||0)+((detail.target||0)-(detail.explode||0))*0.10;
+    if(detail.built.root.userData.explode)detail.built.root.userData.explode(detail.explode);
+    detail.renderer.render(detail.scene,detail.camera);}}
   function sizeDetail(){if(!detail||!detail.renderer)return;var w=detail.canvas.clientWidth||300,h=detail.canvas.clientHeight||300;detail.renderer.setSize(w,h,false);detail.camera.aspect=w/h;detail.camera.updateProjectionMatrix();}
   var grid=el("grid"),emptyEl=el("empty");
   document.querySelectorAll(".cat").forEach(function(btn){btn.addEventListener("click",function(){document.querySelectorAll(".cat").forEach(function(x){x.classList.remove("active");});btn.classList.add("active");state.cat=btn.getAttribute("data-cat");renderGrid();});});
