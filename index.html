@@ -28,37 +28,6 @@
     <!-- ============ 展品页:精品大斗拱 + 搜索/分类/筛选/网格 ============ -->
     <section class="page" id="page-collect">
 
-    <!-- 精品展品:逐件可拆装的高清斗拱(辽金转角铺作) -->
-    <div class="feature" id="feature">
-      <div class="feature-head">
-        <span class="f-badge">精品展品 · 三维数字复原</span>
-        <h2 id="dgModelName">辽金转角铺作 <em>斗拱</em></h2>
-        <p>依《营造法式》铺作做法逐件建模：柱础、木柱、普拍枋、栌斗、驼峰、泥道拱、华拱、角拱、交互斗、瓜子拱、慢拱、齐心斗、散斗、下昂、角昂、令拱、耍头、撩檐枋，共 <b>46 件</b>。<b>点任一构件即可取出、再点装回；也可直接拖动构件把它拉出来</b>。下面可一键切换<b>转角铺作（斜·默认）</b>与<b>柱头铺作（直）</b>。</p>
-      </div>
-      <div class="feature-viewer">
-        <canvas id="dgCanvas"></canvas>
-        <div class="dg-hint">点构件＝取出 / 再点装回 · 拖动构件＝拉出 · 空白处拖动＝旋转 · 滚轮＝缩放</div>
-        <div class="dg-label" id="dgLabel"></div>
-        <div class="dg-nums" id="dgNums">0 / 46 件已拆出</div>
-      </div>
-      <div class="feature-controls">
-        <button class="cbtn" id="dgAuto">▶ 逐步装配</button>
-        <button class="cbtn" id="dgAll">⇱ 全部拆出</button>
-        <button class="cbtn" id="dgReset">↺ 全部还原</button>
-        <button class="cbtn" id="dgModel">⇄ 切成转角铺作</button>
-      </div>
-      <ol class="dg-steps" id="dgSteps"></ol>
-    </div>
-
-    <!-- 自动拆解 · 正确示例 -->
-    <div class="dg-demo">
-      <div class="dg-demo-head"><span class="dg-demo-dot"></span>自动拆解 · <em>正确示例</em><span class="dg-demo-step" id="dgDemoStep">装配 0 / 0</span></div>
-      <div class="dg-demo-view"><canvas id="dgDemo"></canvas>
-        <div class="dg-demo-cap" id="dgDemoCap">待装配…</div>
-        <div class="dg-demo-bar"><i id="dgDemoBar"></i></div>
-      </div>
-    </div>
-
     <!-- 搜索 -->
     <div class="searchwrap">
       <div class="search">
@@ -129,6 +98,15 @@
           <span class="cover-go">进入展品 →</span>
         </span>
       </a>
+      <h3 class="sec-title">可拆解榫卯模型</h3>
+      <a class="cover-card plain" href="#" data-go="joint">
+        <span class="cover-mask">
+          <span class="cover-tag">榫卯模型 · 5 件各自独立</span>
+          <b class="cover-title">榫卯 · 一榫一卯</b>
+          <small class="cover-sub">十字搭接 · 粽角榫 · 燕尾榫 · 两件斗拱</small>
+          <span class="cover-go">进入榫卯 →</span>
+        </span>
+      </a>
       <h3 class="sec-title">热门构件</h3>
       <div class="minirow" id="homeHot"></div>
     </section>
@@ -154,10 +132,34 @@
       </div>
     </section>
 
+    <!-- ============ 榫卯模型（5 件各自独立，不与图片卡片同页） ============ -->
+    <section class="page hidden" id="page-joint">
+      <div class="jg-head">
+        <div class="jg-kicker">三维数字复原 · 逐件可拆</div>
+        <h2>榫卯模型 <em>5 件</em></h2>
+        <p>五件模型各自独立，不用点开详情页 —— <b>就在这一页直接转、直接拆</b>。每张卡都会自己慢慢转；<b>点构件＝取出/装回，按住构件拖动＝拉出，空白处拖动＝旋转，滚轮＝缩放</b>；也可以用卡片下方的「逐步装配 / 全部拆出 / 全部还原」。拆卸方向按真实榫卯的咬合关系设定。</p>
+        <div class="jg-legend">
+          <span><b>斗拱</b> 转角铺作 · 柱头铺作</span>
+          <span><b>榫卯</b> 十字搭接 · 粽角榫 · 燕尾榫</span>
+        </div>
+      </div>
+
+      <div class="jg-grid" id="jgGrid"></div>
+
+      <div class="dg-demo">
+        <div class="dg-demo-head"><span class="dg-demo-dot"></span>自动拆解 · <em>正确示例</em><span class="dg-demo-step" id="jgDemoStep">装配 0 / 0</span></div>
+        <div class="dg-demo-view"><canvas id="jgDemo"></canvas>
+          <div class="dg-demo-cap" id="jgDemoCap">待装配…</div>
+          <div class="dg-demo-bar"><i id="jgDemoBar"></i></div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ 底部导航 ============ -->
     <nav class="tabbar">
       <button class="tab" data-page="home"><span>🏠</span>首页</button>
       <button class="tab" data-page="community"><span>👥</span>社区</button>
+      <button class="tab" data-page="joint"><span>🔩</span>榫卯</button>
       <button class="tab active" data-page="collect"><span>🏛️</span>展品</button>
       <button class="tab" data-page="me"><span>👤</span>我的</button>
     </nav>
@@ -237,11 +239,27 @@
     "https://unpkg.com/three@0.128.0/build/three.min.js",
     "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"];
   loadOne(THREE_URLS,function(){
-    var s=document.createElement("script");s.src="app.js";
-    s.onload=function(){var d=document.createElement("script");d.src="dougong.js";document.head.appendChild(d);};
-    document.head.appendChild(s);
+    var q=document.createElement("script");q.src="soft3d.js";
+    q.onload=function(){
+      var s=document.createElement("script");s.src="app.js";
+      s.onload=function(){var d=document.createElement("script");d.src="dougong.js";document.head.appendChild(d);};
+      document.head.appendChild(s);
+    };
+    q.onerror=function(){
+      var s=document.createElement("script");s.src="app.js";
+      s.onload=function(){var d=document.createElement("script");d.src="dougong.js";document.head.appendChild(d);};
+      document.head.appendChild(s);
+    };
+    document.head.appendChild(q);
   });
-  if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').catch(function(){});});}
+  /* 旧版本曾注册过 service worker,会把旧的 js/css 一直喂给浏览器 —— 这里主动注销并清缓存,
+     保证每次打开都是服务器上的最新文件(改了文件却看不到变化,多半就是它)。 */
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.getRegistrations().then(function(rs){ rs.forEach(function(r){ r.unregister(); }); }).catch(function(){});
+  }
+  if(window.caches && caches.keys){
+    caches.keys().then(function(ks){ ks.forEach(function(k){ caches.delete(k); }); }).catch(function(){});
+  }
   </script>
 </body>
 </html>

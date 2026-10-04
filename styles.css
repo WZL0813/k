@@ -225,4 +225,73 @@ body{font-family:"PingFang SC","Microsoft YaHei","HarmonyOS Sans SC",system-ui,s
 .dg-demo-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#e0a052,#f6e0b6)}
 @media(min-width:521px){#dgDemo{height:214px}}
 
+/* ================= 榫卯模型页（5 件独立展品） ================= */
+.jg-head{margin:6px 0 12px;background:linear-gradient(150deg,#2a1d12 0%,#3e2b18 55%,#221610 100%);border:1px solid #4a3320;border-radius:20px;padding:16px 15px;box-shadow:var(--shadow)}
+.jg-head h2{font-size:19px;margin:2px 0 7px;color:#f6e7cd;letter-spacing:1px}
+.jg-head h2 em{font-style:normal;color:#e6b463}
+.jg-head p{font-size:12px;line-height:1.75;color:#c8ac86;margin:0}
+.jg-kicker{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.6px;color:#ffe7bf;background:rgba(255,255,255,.10);border:1px solid rgba(255,214,150,.26);border-radius:999px;padding:3px 10px;margin-bottom:8px}
+.jg-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}
+.jg-legend span{font-size:11px;color:#c8ac86;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:4px 9px}
+.jg-legend b{color:#e6b463}
+
+.jg-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:10px}
+.jg-card{position:relative;background:linear-gradient(160deg,#fffaf1,#f6ead8);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 6px 18px rgba(90,58,26,.10)}
+.jg-cover{position:relative;background:radial-gradient(130% 110% at 50% 0%,#3d2a19,#241811 72%);border-bottom:1px solid rgba(0,0,0,.10)}
+.jg-cover canvas,.jg-cover .jg-shot{display:block;width:100%;height:300px;object-fit:cover;touch-action:none;cursor:grab}
+.jg-cover canvas:active{cursor:grabbing}
+.jg-badge{position:absolute;right:10px;top:10px;font-size:10.5px;font-weight:700;color:#ffe7bf;background:rgba(34,20,8,.62);border:1px solid rgba(255,214,150,.26);border-radius:999px;padding:3px 9px;pointer-events:none}
+.jg-live{position:absolute;left:10px;top:10px;font-size:10px;color:#e9cfa6;background:rgba(34,20,8,.5);border-radius:999px;padding:3px 8px;pointer-events:none;opacity:.85}
+.jg-meta{padding:10px 13px 2px}
+.jg-name{font-size:15.5px;font-weight:800;color:#3b2a18;letter-spacing:.4px}
+.jg-tag{margin-top:3px;font-size:11.5px;color:#9a7d5c}
+.jg-meta .jg-nums{margin-top:7px;font-size:11.5px;font-weight:700;color:#a8752f}
+.jg-btns{display:flex;flex-wrap:wrap;gap:7px;padding:10px 13px 12px}
+.jg-btns .cbtn{flex:1 1 29%;padding:9px 6px;font-size:12px}
+.jg-go{padding:8px 13px 12px;font-size:12px;font-weight:700;color:var(--wood)}
+
+/* 首页入口卡（无图版） */
+.cover-card.plain{background:linear-gradient(150deg,#3a2818,#241811 62%,#4a3020)}
+.cover-card.plain .cover-mask{position:static;background:none;padding:20px 15px 16px}
+
+/* 全屏逐件拆解层 */
+.jg-overlay{position:fixed;inset:0;z-index:55;display:none;background:rgba(24,16,9,.62);backdrop-filter:blur(4px);padding:14px;overflow-y:auto}
+.jg-overlay.on{display:block}
+.jg-sheet{position:relative;max-width:520px;margin:0 auto;background:linear-gradient(160deg,#2a1d12,#1d140d);border:1px solid #4a3320;border-radius:20px;padding:12px;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.jg-close{position:absolute;right:10px;top:10px;z-index:5;width:32px;height:32px;border-radius:50%;border:none;background:rgba(255,255,255,.14);color:#ffe7bf;font-size:15px;cursor:pointer}
+.jg-viewer{position:relative;border-radius:16px;overflow:hidden;background:radial-gradient(120% 100% at 50% 0%,rgba(255,214,150,.13),rgba(0,0,0,0) 70%);border:1px solid rgba(255,255,255,.06)}
+#jgCanvas{display:block;width:100%;height:332px;touch-action:none;cursor:grab}
+#jgCanvas:active{cursor:grabbing}
+.jg-nums{font-size:12px;font-weight:800;color:#a8752f}
+.jg-info{padding:12px 4px 0}
+.jg-kicker2{font-size:10.5px;font-weight:700;letter-spacing:.6px;color:#e6b463}
+.jg-info h3{margin:4px 0 3px;font-size:18px;color:#f6e7cd;letter-spacing:.6px}
+.jg-sub{font-size:11.5px;color:#b79a72}
+.jg-info p{margin:7px 0 0;font-size:12px;line-height:1.75;color:#c8ac86}
+.jg-controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.jg-controls .cbtn{flex:1 1 29%;padding:10px 8px;font-size:12.5px}
+.jg-sheet .dg-steps{margin-top:12px;max-height:132px}
+#jgDemo{display:block;width:100%;height:172px}
+@media(min-width:521px){.jg-cover canvas,.jg-cover .jg-shot{height:400px}#jgCanvas{height:380px}#jgDemo{height:214px}}
+
+/* WebGL 不可用时的兜底提示 */
+.gl-fail{display:flex;align-items:center;justify-content:center;height:100%;min-height:120px;padding:12px;text-align:center;font-size:12px;color:#d8b98d;background:rgba(255,214,150,.06);border-radius:14px}
+.gl-failed{min-height:120px}
+.jg-cover.gl-failed canvas{display:none}
+
+/* 2D 兼容模式角标（浏览器禁用 WebGL 时自动启用） */
+.gl-soft{position:absolute;right:8px;bottom:8px;z-index:3;padding:2px 7px;border-radius:8px;font-size:10px;letter-spacing:.5px;color:#ffe0b0;background:rgba(60,32,10,.55);border:1px solid rgba(255,210,150,.35);pointer-events:none}
+.jg-card .jg-cover,.sheet .viewer{position:relative}
+.gl-soft{cursor:pointer;pointer-events:auto}
+#glDiagBox{position:fixed;inset:0;z-index:99;background:rgba(20,12,6,.66);display:flex;align-items:center;justify-content:center;padding:18px}
+.gl-diag-card{background:#fffaf1;border-radius:16px;max-width:520px;width:100%;max-height:82vh;overflow:auto;padding:18px 18px 14px;box-shadow:0 18px 50px rgba(40,22,6,.45);font-size:13px;line-height:1.7;color:#3a2a18}
+.gl-diag-card h4{margin:0 0 8px;font-size:15.5px;color:#8a4a12}
+.gl-diag-card p{margin:0 0 9px}
+.gl-diag-card pre{margin:0 0 10px;background:#fdf3e3;border:1px solid #eddcc4;border-radius:10px;padding:10px;font-size:11.5px;line-height:1.75;white-space:pre-wrap;word-break:break-all;color:#5a4022}
+.gl-diag-tip{color:#6b5a44;font-size:12px}
+.gl-diag-card code{background:#f3e6d2;border-radius:4px;padding:1px 5px;font-size:11.5px}
+.gl-diag-close{display:block;width:100%;margin-top:6px;padding:11px;border:0;border-radius:11px;background:linear-gradient(135deg,#b8762f,#8a4a12);color:#fff;font-size:14px;font-weight:700;cursor:pointer}
+
+
+
 

@@ -18,7 +18,7 @@
     var cb=document.createElement("canvas");cb.width=cb.height=size;var xb=cb.getContext("2d");xb.fillStyle="#808080";xb.fillRect(0,0,size,size);
     for(i=0;i<95;i++){grainLine(xb,size,0.18+Math.random()*0.24,"rgba(255,255,255,");}
     var bump=new THREE.CanvasTexture(cb);bump.wrapS=bump.wrapT=THREE.RepeatWrapping;return {map:map,bump:bump};}
-  function mat(base){var t=makeWoodTex(base);var m=new THREE.MeshStandardMaterial({map:t.map,bumpMap:t.bump,bumpScale:0.02,roughness:0.6,metalness:0.02});m.side=THREE.DoubleSide;return m;}
+  function mat(base){var t=makeWoodTex(base);var m=new THREE.MeshStandardMaterial({map:t.map,bumpMap:t.bump,bumpScale:0.02,roughness:0.6,metalness:0.02});m.side=THREE.DoubleSide;m.userData.hex=base;return m;}
   function box(w,h,d,m){return new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);}
   function cyl(rt,rb,h,seg,m){return new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,seg),m);}
   function sph(r,m){return new THREE.Mesh(new THREE.SphereGeometry(r,24,18),m);}
@@ -640,7 +640,18 @@
 
   function addLights(sc){sc.add(new THREE.HemisphereLight(0xfff6ea,0x8a6b4a,0.8));var k=new THREE.DirectionalLight(0xffffff,1.15);k.position.set(4,6,5);sc.add(k);var rim=new THREE.DirectionalLight(0xffc9a0,0.6);rim.position.set(-4,3,-5);sc.add(rim);var f=new THREE.DirectionalLight(0xa8c0ff,0.22);f.position.set(0,-2,-3);sc.add(f);}
   function addGround(sc,r){var c=document.createElement("canvas");c.width=c.height=128;var x=c.getContext("2d");var gr=x.createRadialGradient(64,64,6,64,64,64);gr.addColorStop(0,"rgba(60,32,12,0.5)");gr.addColorStop(1,"rgba(60,32,12,0)");x.fillStyle=gr;x.fillRect(0,0,128,128);var m=new THREE.Mesh(new THREE.PlaneGeometry(r*2.4,r*2.4),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(c),transparent:true,depthWrite:false}));m.rotation.x=-Math.PI/2;m.position.y=-r*1.04;sc.add(m);}
-  function makeRenderer(canvas,px){var r=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});r.setPixelRatio(px||Math.min(window.devicePixelRatio||1,2));r.setClearColor(0x000000,0);r.outputEncoding=THREE.sRGBEncoding;r.toneMapping=THREE.ACESFilmicToneMapping;r.toneMappingExposure=1.05;return r;}
+  /* 无 WebGL 时的 Canvas2D 兜底渲染器：接口与 WebGLRenderer 兼容的子集 */
+  function SoftRenderer(canvas){var c=canvas,W=2,H=2,ctx=null;this.soft=true;this.domElement=c;
+    this.setPixelRatio=function(){};this.setClearColor=function(){};this.setViewport=function(){};this.setScissor=function(){};this.setScissorTest=function(){};this.setClearAlpha=function(){};
+    this.setSize=function(w,h){W=Math.max(2,Math.round(w||2));H=Math.max(2,Math.round(h||2));if(c.width!==W)c.width=W;if(c.height!==H)c.height=H;try{ctx=c.getContext("2d");}catch(e){}};
+    this.clear=function(){if(ctx)ctx.clearRect(0,0,W,H);};
+    this.render=function(sc,cam){if(!ctx){try{ctx=c.getContext("2d");}catch(e){return;}}if(window.SOFT3D)window.SOFT3D.render(ctx,W,H,sc,cam);};
+    this.dispose=function(){};}
+  function makeRenderer(canvas,px){
+    var r=null,i,opts=[{antialias:true,alpha:true},{antialias:false,alpha:true},{antialias:false,alpha:true,powerPreference:"low-power"}];
+    for(i=0;i<opts.length&&!r;i++){try{r=new THREE.WebGLRenderer({canvas:canvas,antialias:opts[i].antialias,alpha:true,powerPreference:opts[i].powerPreference});}catch(e){r=null;}}
+    if(!r){return new SoftRenderer(canvas);}
+    r.setPixelRatio(px||Math.min(window.devicePixelRatio||1,2));r.setClearColor(0x000000,0);r.outputEncoding=THREE.sRGBEncoding;r.toneMapping=THREE.ACESFilmicToneMapping;r.toneMappingExposure=1.05;return r;}
   function orbit(cam,dom,r){var az=Math.PI/4,pol=Math.PI/2.5,dist=r*2.7,down=false,px=0,py=0,t0=null;
     function apply(){cam.position.set(dist*Math.sin(pol)*Math.sin(az),dist*Math.cos(pol),dist*Math.sin(pol)*Math.cos(az));cam.lookAt(0,0,0);}
     dom.addEventListener("mousedown",function(e){down=true;px=e.clientX;py=e.clientY;});window.addEventListener("mousemove",function(e){if(!down)return;az-=(e.clientX-px)*0.01;pol-=(e.clientY-py)*0.01;pol=Math.max(0.12,Math.min(Math.PI-0.12,pol));px=e.clientX;py=e.clientY;apply();});window.addEventListener("mouseup",function(){down=false;});
